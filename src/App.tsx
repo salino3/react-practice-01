@@ -1,16 +1,13 @@
-
-import { HomeLayout } from './layouts'
-import './App.scss'
+import { HomeLayout } from "./layouts";
+import "./App.scss";
 // npx json-server db.json
 
 function App() {
-
   return (
-    
-      <>
-   <HomeLayout />
+    <>
+      <HomeLayout />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
