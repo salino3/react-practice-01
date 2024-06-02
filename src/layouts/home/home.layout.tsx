@@ -1,13 +1,11 @@
-import { HomePage } from '../../pods';
-import './home.styles.scss';
+import React from "react";
+import { HomePage } from "../../pods";
+import "./home.styles.scss";
 
-export const HomeLayout = () => {
-
-    return (
-        <main>
-            <h1>Home</h1>
-            <p>This is the home page</p>
-            <HomePage /> 
-        </main>
-    )
-}
+export const HomeLayout: React.FC = () => {
+  return (
+    <main className="rootHomeLayout">
+      <HomePage />
+    </main>
+  );
+};

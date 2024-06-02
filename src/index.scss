@@ -4,10 +4,16 @@
 }
 
 html,
-#root {
-  background-color: #777dff;
-  width: 100%;
-  height: 100vh;
+#root,
+body {
   padding: 0;
   margin: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: #777dff;
 }
