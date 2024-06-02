@@ -1,6 +1,5 @@
 import { HomeLayout } from "./layouts";
 import "./App.scss";
-// npx json-server db.json
 
 function App() {
   return (
