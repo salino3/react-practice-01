@@ -25,7 +25,7 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="rootHomePage">
-      <h1>Home</h1>
+      <h1>Home Page</h1>
       <p>This is the home page</p>
       <div className="listhomePage">
         {data &&
