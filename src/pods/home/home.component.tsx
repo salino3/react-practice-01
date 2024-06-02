@@ -32,6 +32,11 @@ export const HomePage: React.FC = () => {
           data?.length > 0 &&
           data.map((item) => <p key={item?.id}>{item?.name}</p>)}
       </div>
+      {/* <div className="listhomePage">
+        {data &&
+          data?.length > 0 &&
+          data.map((item) => <p key={item?.id}>{item?.name}</p>)}
+      </div> */}
     </div>
   );
 };
