@@ -26,7 +26,8 @@ export const HomePage: React.FC = () => {
   return (
     <div className="rootHomePage">
       <h1>Home Page</h1>
-      <p>This is the home page</p>
+      {/*  */}
+      <h3>This is the list of home page</h3>
       <div className="listhomePage">
         {data &&
           data?.length > 0 &&
