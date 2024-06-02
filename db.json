@@ -1,0 +1,46 @@
+{
+    "products": [
+      {
+        "name": "name company test",
+        "code": "XYZ456",
+        "price": 19.99,
+        "quantity": 5,
+        "company": "Fannilo",
+        "id": "30c5f37f-ff5d-4e75-bd99-305a881bf8ee"
+      },
+      {
+        "id": "7d514816-0ff2-40d3-ac81-a2a257d27410",
+        "name": "SeguTercerndo producto",
+        "code": "ABXX23",
+        "price": 20,
+        "quantity": 50,
+        "company": "Jannone"
+      },
+      {
+        "id": "95417217-8a60-4d75-bff7-73480e0a2161",
+        "name": "Tercer producto",
+        "code": "AZZZ23",
+        "price": 20,
+        "quantity": 50,
+        "company": "Zanulo"
+      }
+    ],
+    "users": [
+      {
+        "id": "30c5f37f-ff5d-4e75-bd99-305a881bX8ee",
+        "name": "Joe",
+        "email": "joe@mail.com",
+        "phone": 98729394951,
+        "gender": "male",
+        "age": 20
+      },
+      {
+        "id": "30c5f37f-xx5d-4e75-bd99-305a881bX8ee",
+        "name": "Mario",
+        "email": "mario@mail.com",
+        "phone": 94529394951,
+        "gender": "prefer_not_say",
+        "age": 25
+      }
+    ]
+  }
