@@ -24,9 +24,7 @@
     position: relative;
     border-radius: 12px;
     overflow: hidden;
-    border: solid;
     height: min-content;
-    border-top: red 2px solid;
 
     .containerIcon {
       display: none;
@@ -55,7 +53,20 @@
 
     img {
       max-width: 400px;
+      min-width: 400px;
       border-radius: 12px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .rootRotateImage {
+    .container {
+      img {
+        max-width: 280px;
+        min-width: 280px;
+        border-radius: 12px;
+      }
     }
   }
 }
