@@ -1,0 +1,72 @@
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.rootRotateImage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10rem;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    height: min-content;
+
+    .containerIcon {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      background-color: hsla(213, 100%, 50%, 0.7);
+      padding: 0.5rem;
+      width: 100%;
+      box-sizing: border-box;
+      top: 0;
+      border-radius: 12px 12px 0 0;
+      z-index: 10;
+
+      .iconImg {
+        cursor: pointer;
+        font-size: 2rem;
+      }
+    }
+
+    &:hover .containerIcon {
+      display: flex;
+      animation: slideDown 1s forwards;
+    }
+
+    img {
+      max-width: 400px;
+      min-width: 400px;
+      border-radius: 12px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .rootRotateImage {
+    .container {
+      img {
+        max-width: 280px;
+        min-width: 280px;
+        border-radius: 12px;
+      }
+    }
+  }
+}

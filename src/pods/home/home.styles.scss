@@ -1,22 +1,47 @@
 .rootHomePage {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
-  border: solid;
-  border-width: 1px;
-  padding: 1rem 2rem 5rem;
-  position: absolute;
   top: 2rem;
-  min-width: 400px;
-  .listhomePage {
+  width: 100%;
+  padding-top: 2rem;
+
+  .containerHome {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
-    border: solid 2px var(--color-two);
-    padding: 1rem;
-    border-radius: 1rem;
-    text-decoration: underline;
+    border: solid;
+    border-width: 1px;
+    padding: 1rem 2rem 5rem;
+    width: 500px;
+    .listhomePage {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+      border: solid 2px var(--color-two);
+      padding: 1rem;
+      border-radius: 1rem;
+      text-decoration: underline;
+    }
+
+    .containerRotate {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .rootHomePage {
+    margin: 1rem;
+    .containerHome {
+      padding: 1rem;
+      width: calc(90% - 1rem);
+    }
   }
 }
