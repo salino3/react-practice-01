@@ -1,3 +1,14 @@
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .rootRotateImage {
   display: flex;
   flex-direction: column;
@@ -12,8 +23,10 @@
     gap: 10rem;
     position: relative;
     border-radius: 12px;
+    overflow: hidden;
+
     .containerIcon {
-      display: flex;
+      display: none;
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -24,12 +37,19 @@
       box-sizing: border-box;
       top: 0;
       border-radius: 12px 12px 0 0;
-
       z-index: 10;
+      //   animation: animate__backInDown;
+      animation-duration: 1s;
+
       .iconImg {
         cursor: pointer;
         font-size: 2rem;
       }
+    }
+
+    &:hover .containerIcon {
+      display: flex;
+      animation: slideDown 1s forwards;
     }
 
     img {
