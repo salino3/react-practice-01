@@ -62,7 +62,7 @@ export const RotateImage: React.FC = () => {
         <div className="containerIcon ">
           <i onClick={handleRotate} className="fas fa-sync-alt iconImg"></i>
         </div>
-        <img src="/public/random-image-02.jpg" alt="Random Image" />
+        <img src="/assets/random-image-02.jpg" alt="Random Image" />
       </div>
     </div>
   );
