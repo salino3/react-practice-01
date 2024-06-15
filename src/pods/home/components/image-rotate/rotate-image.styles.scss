@@ -24,6 +24,9 @@
     position: relative;
     border-radius: 12px;
     overflow: hidden;
+    border: solid;
+    height: min-content;
+    border-top: red 2px solid;
 
     .containerIcon {
       display: none;
@@ -31,15 +34,13 @@
       justify-content: center;
       align-items: center;
       position: absolute;
-      background-color: aqua;
+      background-color: hsla(213, 100%, 50%, 0.7);
       padding: 0.5rem;
-      min-width: 100%;
+      width: 100%;
       box-sizing: border-box;
       top: 0;
       border-radius: 12px 12px 0 0;
       z-index: 10;
-      //   animation: animate__backInDown;
-      animation-duration: 1s;
 
       .iconImg {
         cursor: pointer;
