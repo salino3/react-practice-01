@@ -42,7 +42,9 @@ export const CustomTooltip: React.FC = () => {
               <th scope="col">#</th>
               <th scope="col">Name</th>
               <th scope="col">City</th>
-              <th scope="col">Email</th>
+              <th className="lastThTitle" scope="col">
+                Email
+              </th>
             </tr>
           </thead>
           <tbody>

@@ -7,23 +7,32 @@
   margin-top: 0.5rem;
 
   .containerTable {
-    thead tr,
-    thead th,
-    thead td {
-      background-color: var(--color-four);
-      // opacity: ;
-      color: var(--color-two);
-      width: 200px;
-    }
-    tbody tr,
-    tbody th,
-    tbody td {
-      background-color: var(--color-three);
-      color: var(--color-two);
-      width: 200px;
-    }
-    .trTable:hover th {
-      background-color: var(--color-five);
+    .table {
+      thead th:first-child {
+        border-radius: 12px 0 0 0 !important;
+      }
+
+      thead tr,
+      thead th,
+      thead td {
+        background-color: var(--color-four);
+        color: var(--color-two);
+        width: 200px;
+      }
+
+      thead tr th:last-child {
+        border-radius: 0 12px 0 0 !important;
+      }
+      tbody tr,
+      tbody th,
+      tbody td {
+        background-color: var(--color-three);
+        color: var(--color-two);
+        width: 200px;
+      }
+      .trTable:hover th {
+        background-color: var(--color-five);
+      }
     }
   }
 }
