@@ -7,11 +7,11 @@
 
   .containerInput {
     position: relative;
-    width: 100%;
+    width: 50%;
 
     .inputText {
       border-radius: 0.5rem;
-      padding: 1rem 0.5rem 0.5rem 1rem; // Ajusted padding to provide enough space
+      padding: 1rem 0.5rem 0.5rem 1rem;
       box-shadow: var(--color-two) 0px 0px 16px;
       width: 100%;
       outline: none;
