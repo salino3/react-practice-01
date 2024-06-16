@@ -35,9 +35,18 @@ export const HomePage: React.FC = () => {
           data?.length > 0 &&
           data.map((item) => <p key={item?.id}>{item?.name}</p>)}
       </div> */}
-        <div className="containerRotate">
-          <RotateImage />
-        </div>
+        <details>
+          <summary>Rotate Image</summary>
+          <div className="containerRotate">
+            <RotateImage />
+          </div>
+        </details>
+        <details>
+          <summary>Input Styles</summary>
+          <div className="containerInput">
+            <RotateImage />
+          </div>
+        </details>
       </div>
     </div>
   );

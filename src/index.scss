@@ -1,6 +1,7 @@
 :root {
   --color-one: #fafafa;
-  --color-two: #4f56ec;
+  --color-two: #112a46;
+  --color-three: #acc8e5;
 }
 
 html,
@@ -15,5 +16,6 @@ html {
 }
 
 body {
-  background-color: #777dff;
+  color: var(--color-two);
+  background-color: var(--color-three);
 }
