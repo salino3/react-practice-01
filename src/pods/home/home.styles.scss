@@ -16,6 +16,16 @@
     border-width: 1px;
     padding: 1rem 2rem 5rem;
     width: 500px;
+    gap: 2rem;
+
+    details {
+      width: 100%;
+      summary {
+        cursor: pointer;
+        width: fit-content;
+      }
+    }
+
     .listhomePage {
       display: flex;
       flex-direction: column;
