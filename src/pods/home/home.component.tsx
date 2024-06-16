@@ -28,7 +28,6 @@ export const HomePage: React.FC = () => {
     <div className="rootHomePage">
       <div className="containerHome">
         <h1>Home Page</h1>
-        {/*  */}
         {/* <h3>This is the list of home page</h3>
       <div className="listhomePage">
         {data &&
