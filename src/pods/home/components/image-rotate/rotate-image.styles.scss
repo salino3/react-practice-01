@@ -27,6 +27,7 @@
     overflow: hidden;
     height: min-content;
     max-width: 400px;
+    box-sizing: border-box;
 
     .containerIcon {
       display: none;
@@ -35,7 +36,7 @@
       align-items: center;
       position: absolute;
       background-color: hsla(213, 100%, 50%, 0.7);
-      padding: 0.5rem;
+      height: 2.8rem;
       width: 100%;
       max-width: 400px;
       box-sizing: border-box;
@@ -65,6 +66,11 @@
 @media screen and (max-width: 500px) {
   .rootRotateImage {
     .container {
+      max-width: 280px;
+      .containerIcon {
+        max-width: 280px;
+      }
+
       img {
         max-width: 280px;
         min-width: 280px;
