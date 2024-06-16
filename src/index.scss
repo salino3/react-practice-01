@@ -1,7 +1,10 @@
+:host,
 :root {
   --color-one: #fafafa;
   --color-two: #112a46;
   --color-three: #acc8e5;
+  --color-four: #82a5ca;
+  --color-five: #5caafd;
 }
 
 html,
@@ -18,4 +21,5 @@ html {
 body {
   color: var(--color-two);
   background-color: var(--color-three);
+  font-family: "Times New Roman", Times, serif !important;
 }
