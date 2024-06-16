@@ -1,5 +1,5 @@
 import React from "react";
-import { RotateImage } from "./components";
+import { CustomInputText, RotateImage } from "./components";
 import "./home.styles.scss";
 
 export const HomePage: React.FC = () => {
@@ -42,9 +42,9 @@ export const HomePage: React.FC = () => {
           </div>
         </details>
         <details>
-          <summary>Input Styles</summary>
+          <summary>Custom Text Input Styles</summary>
           <div className="containerInput">
-            <RotateImage />
+            <CustomInputText />
           </div>
         </details>
       </div>
