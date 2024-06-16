@@ -7,12 +7,23 @@
   margin-top: 0.5rem;
 
   .containerTable {
-    tr,
-    th,
-    td {
+    thead tr,
+    thead th,
+    thead td {
+      background-color: var(--color-four);
+      // opacity: ;
+      color: var(--color-two);
+      width: 200px;
+    }
+    tbody tr,
+    tbody th,
+    tbody td {
       background-color: var(--color-three);
       color: var(--color-two);
       width: 200px;
+    }
+    .trTable:hover th {
+      background-color: var(--color-five);
     }
   }
 }

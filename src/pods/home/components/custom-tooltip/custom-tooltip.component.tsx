@@ -49,7 +49,7 @@ export const CustomTooltip: React.FC = () => {
             {mockTableData &&
               mockTableData?.length > 0 &&
               mockTableData.map((item) => (
-                <tr key={item?.id}>
+                <tr className="trTable" key={item?.id}>
                   <th scope="row">{item?.id}</th>
                   <th scope="row">{item?.name}</th>
                   <th scope="row">{item?.city}</th>
