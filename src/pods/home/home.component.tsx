@@ -3,27 +3,6 @@ import { CustomInputText, CustomTooltip, RotateImage } from "./components";
 import "./home.styles.scss";
 
 export const HomePage: React.FC = () => {
-  // interface Products {
-  //   id: string;
-  //   name: string;
-  //   code: string;
-  //   price: number;
-  //   quantity: number;
-  //   company: string;
-  // }
-
-  // const [data, setData] = useState<Products[]>([]);
-
-  // async function apiCall() {
-  //   const response = await fetch("http://localhost:3000/products");
-  //   setData(await response.json());
-  //   console.log(data);
-  // }
-
-  // useEffect(() => {
-  //   apiCall();
-  // }, []);
-
   return (
     <div className="rootHomePage">
       <div className="containerHome">
@@ -39,7 +18,7 @@ export const HomePage: React.FC = () => {
           <div className="containerInput">
             <CustomInputText />
           </div>
-        </details>{" "}
+        </details>
         <details>
           <summary>Custom Tooltip</summary>
           <div className="containerInput">
