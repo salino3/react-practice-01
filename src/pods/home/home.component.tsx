@@ -1,5 +1,5 @@
 import React from "react";
-import { CustomInputText, RotateImage } from "./components";
+import { CustomInputText, CustomTooltip, RotateImage } from "./components";
 import "./home.styles.scss";
 
 export const HomePage: React.FC = () => {
@@ -45,6 +45,12 @@ export const HomePage: React.FC = () => {
           <summary>Custom Text Input Styles</summary>
           <div className="containerInput">
             <CustomInputText />
+          </div>
+        </details>{" "}
+        <details>
+          <summary>Custom Tooltip</summary>
+          <div className="containerInput">
+            <CustomTooltip />
           </div>
         </details>
       </div>

@@ -1,3 +1,4 @@
+:host,
 :root {
   --color-one: #fafafa;
   --color-two: #112a46;
@@ -18,4 +19,5 @@ html {
 body {
   color: var(--color-two);
   background-color: var(--color-three);
+  font-family: "Times New Roman", Times, serif !important;
 }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./input-text.styles.scss";
 
 export const CustomInputText: React.FC = () => {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState<string>("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
