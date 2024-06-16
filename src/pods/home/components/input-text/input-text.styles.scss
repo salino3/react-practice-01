@@ -6,13 +6,35 @@
   gap: 1rem;
 
   .containerInput {
+    position: relative;
+    width: 100%;
+
     .inputText {
       border-radius: 0.5rem;
-      padding: 0.5rem;
+      padding: 1rem 0.5rem 0.5rem 1rem; // Ajusted padding to provide enough space
       box-shadow: var(--color-two) 0px 0px 16px;
       width: 100%;
       outline: none;
       border: 0.5px solid;
+    }
+
+    .inputLabel {
+      position: absolute;
+      top: 50%;
+      left: 1rem;
+      transform: translateY(-50%);
+      transition: all 0.3s ease;
+      pointer-events: none;
+      color: #999;
+    }
+
+    .inputText:focus + .inputLabel,
+    .shrink {
+      top: 0;
+      left: 1rem;
+      font-size: 0.8rem;
+      transform: translateY(-110%);
+      color: black;
     }
 
     .inputText:focus {

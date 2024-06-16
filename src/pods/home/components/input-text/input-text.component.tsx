@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import "./input-text.styles.scss";
 
 export const CustomInputText: React.FC = () => {
+  const [inputValue, setInputValue] = useState("");
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
+
   return (
     <div className="rootCustomInputText">
       <div className="containerTitle">
@@ -11,10 +17,17 @@ export const CustomInputText: React.FC = () => {
         <input
           type="text"
           id="city"
-          placeholder="What city  do you live?"
           className="inputText"
           name="city"
+          value={inputValue}
+          onChange={handleChange}
         />
+        <label
+          htmlFor="city"
+          className={`inputLabel ${inputValue ? "shrink" : ""}`}
+        >
+          What city do you live?
+        </label>
       </div>
     </div>
   );
