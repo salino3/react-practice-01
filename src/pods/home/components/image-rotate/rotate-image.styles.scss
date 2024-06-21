@@ -9,6 +9,17 @@
   }
 }
 
+@keyframes slideUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
 .rootRotateImage {
   display: flex;
   flex-direction: column;
@@ -30,7 +41,8 @@
     box-sizing: border-box;
 
     .containerIcon {
-      display: none;
+      opacity: 0;
+      display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -53,6 +65,11 @@
     &:hover .containerIcon {
       display: flex;
       animation: slideDown 1s forwards;
+    }
+
+    &:not(:hover) .containerIcon {
+      display: flex;
+      animation: slideUp 1s forwards;
     }
 
     img {
