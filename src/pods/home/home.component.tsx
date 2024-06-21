@@ -7,19 +7,19 @@ export const HomePage: React.FC = () => {
     <div className="rootHomePage">
       <div className="containerHome">
         <h1>Home Page</h1>
-        <details>
+        <details open name="details">
           <summary>Rotate Image</summary>
           <div className="containerRotate">
             <RotateImage />
           </div>
         </details>
-        <details>
+        <details name="details">
           <summary>Custom Text Input Styles</summary>
           <div className="containerInput">
             <CustomInputText />
           </div>
         </details>
-        <details>
+        <details name="details">
           <summary>Custom Tooltip</summary>
           <div className="containerInput">
             <CustomTooltip />
