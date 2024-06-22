@@ -4,10 +4,31 @@ import "./table.styles.scss";
 interface TableProps {
   columns: any[];
   key?: any;
-  rows: any[];
+  row: any[];
 }
 
-export const TableComponet: React.FC<TableProps> = ({ columns, key, rows }) => {
+export const TableComponet: React.FC<TableProps> = ({ columns, key, row }) => {
+  console.log("Rowxxs:", row);
+
+  const keysToFilter = row.map((row) => row.key);
+
+  // Filtrar 'columns' para obtener solo los objetos que coincidan con 'keysToFilter'
+  const filteredColumns = columns.map((column) => {
+    const filteredColumn: any = {};
+    keysToFilter.forEach((key) => {
+      if (column.hasOwnProperty(key)) {
+        filteredColumn[key] = column[key];
+      }
+    });
+    return filteredColumn;
+  });
+
+  console.log("Columns:", columns);
+  console.log("Rows:", row);
+  console.log("Filtered Columns:", filteredColumns);
+  row[0].key = filteredColumns.map((row) => row);
+  console.log("Rows:", row);
+
   return (
     <div className="rootCustomTooltip">
       <div className="containerTitle">
@@ -17,9 +38,9 @@ export const TableComponet: React.FC<TableProps> = ({ columns, key, rows }) => {
         <table className="table">
           <thead>
             <tr>
-              {rows &&
-                rows.length > 0 &&
-                rows.map((row, index) => (
+              {row &&
+                row.length > 0 &&
+                row.map((row, index) => (
                   <th scope="col" className={`${row?.title}_${index}`}>
                     {row?.title}
                   </th>
@@ -27,14 +48,19 @@ export const TableComponet: React.FC<TableProps> = ({ columns, key, rows }) => {
             </tr>
           </thead>
           <tbody>
-            <tr className="trTable">
-              {columns &&
-                columns?.length > 0 &&
-                columns.map(
-                  (item, index) =>
-                    ""
-                    // * aquí *
-                )}
+            <tr className={`trTable`}>
+              {filteredColumns.map((column, index, arr) => {
+                // const array = Object.keys(arr);
+                // console.log("here4", arr);
+                return (
+                  <td
+                    key={`${column}_${index}`}
+                    className={`${column}_${index}`}
+                  >
+                    {column[index]}
+                  </td>
+                );
+              })}
             </tr>
           </tbody>
         </table>
