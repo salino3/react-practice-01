@@ -10,14 +10,13 @@ export const WorkersTable: React.FC = () => {
   interface Arr {
     key: string;
     title: string;
-    unique?: boolean;
+    render?: (item: any, row: TableData) => string | undefined;
   }
 
   const array: Arr[] = [
     {
       key: "id",
       title: "Id",
-      unique: true,
     },
     {
       title: "Name",
@@ -30,7 +29,11 @@ export const WorkersTable: React.FC = () => {
     {
       key: "email",
       title: "Email",
-      //   render: (item: string, row: TableData) => getEmailPrefix(item),
+      render: (item: string, row: TableData) => getEmailPrefix(item),
+    },
+    {
+      key: "gender",
+      title: "Gender",
     },
   ];
   console.log("Rows11:", array);
