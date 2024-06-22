@@ -55,14 +55,23 @@ export const TableComponet: React.FC<TableProps> = ({ columns, key, row }) => {
           <tbody>
             {valuesArray.map((values, rowIndex) => (
               <tr key={rowIndex} className={`trTable`}>
-                {keysToFilter.map((key, colIndex) => (
-                  <td
-                    key={`${key}_${rowIndex}_${colIndex}`}
-                    className={`${key}_${rowIndex}_${colIndex}`}
-                  >
-                    {values[key]}
-                  </td>
-                ))}
+                {keysToFilter.map((key, colIndex) => {
+                  // Busca la fila correspondiente en 'row' para determinar si tiene 'render'
+                  const rowConfig = row.find((r) => r.key === key);
+                  const content = values[key];
+                  // rowConfig && rowConfig.render
+                  //   ? rowConfig.render(values[key], values)
+                  //   :
+
+                  return (
+                    <td
+                      key={`${key}_${rowIndex}_${colIndex}`}
+                      className={`${key}_${rowIndex}_${colIndex}`}
+                    >
+                      {content}
+                    </td>
+                  );
+                })}
               </tr>
             ))}
           </tbody>
