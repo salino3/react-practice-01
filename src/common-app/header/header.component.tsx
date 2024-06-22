@@ -11,7 +11,7 @@ export const Header: React.FC = () => {
           <ul className="nav_list">
             <li className="nav_item">
               <Link to={appRoutes?.root} className="nav_link">
-                Home
+                Home Page
               </Link>
             </li>
             <li className="nav_item">
