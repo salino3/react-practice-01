@@ -51,7 +51,8 @@
         border-radius: 12px;
         background-color: var(--color-one);
         top: -10px;
-        right: 10px;
+        left: 20px;
+        width: min-content;
       }
     }
   }
