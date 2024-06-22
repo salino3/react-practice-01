@@ -1,3 +1,4 @@
+import React from "react";
 import "./table.styles.scss";
 
 export const TableComponet: React.FC = () => {

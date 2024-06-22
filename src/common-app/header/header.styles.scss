@@ -1,0 +1,31 @@
+.rootHeader {
+  .containerHeader {
+    .nav {
+      padding: 1rem;
+      background-color: var(--color-one);
+      border-radius: 12px;
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+      .nav_list {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+
+        list-style-type: none;
+        .nav_item {
+          .nav_link {
+            color: var(--color-two);
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: solid 1px;
+            padding: 0.2rem;
+          }
+        }
+      }
+    }
+  }
+}

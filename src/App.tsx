@@ -1,10 +1,10 @@
-import { HomeLayout } from "./layouts";
+import { AppRouter } from "./router";
 import "./App.scss";
 
 function App() {
   return (
     <>
-      <HomeLayout />
+      <AppRouter />
     </>
   );
 }

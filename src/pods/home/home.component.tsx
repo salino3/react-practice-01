@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  CustomInputText,
-  CustomTooltip,
-  RotateImage,
-  TableComponet,
-} from "./components";
+import { CustomInputText, CustomTooltip, RotateImage } from "./components";
 import "./home.styles.scss";
 
 export const HomePage: React.FC = () => {
@@ -12,6 +7,7 @@ export const HomePage: React.FC = () => {
     <div className="rootHomePage">
       <div className="containerHome">
         <h1>Home Page</h1>
+
         <details open name="details">
           <summary>Rotate Image</summary>
           <div className="containerRotate">
@@ -28,12 +24,6 @@ export const HomePage: React.FC = () => {
           <summary>Custom Tooltip</summary>
           <div className="containerInput">
             <CustomTooltip />
-          </div>
-        </details>
-        <details name="details">
-          <summary>Table Component</summary>
-          <div className="containerInput">
-            <TableComponet />
           </div>
         </details>
       </div>
