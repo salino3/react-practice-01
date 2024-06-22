@@ -1,58 +1,12 @@
 import React from "react";
 import "./table.styles.scss";
 
-export const TableComponet: React.FC = () => {
-  enum Gender {
-    Male = "male",
-    Female = "female",
-    PreferNotSay = "prefer_not_say",
-  }
+interface TableProps {
+  columns: any[];
+  key?: any;
+}
 
-  interface TableData {
-    id: number;
-    name: string;
-    city: string;
-    email: string;
-    age: number;
-    gender: Gender;
-    employee: boolean;
-  }
-
-  const mockTableData: TableData[] = [
-    {
-      id: 1,
-      name: "Arianna",
-      city: "Berlin",
-      email: "arianna@gmail.com",
-      age: 32,
-      gender: Gender?.Female,
-      employee: true,
-    },
-    {
-      id: 2,
-      name: "Jacob",
-      city: "Madrid",
-      email: "jacob@gmail.com",
-      age: 39,
-      gender: Gender?.PreferNotSay,
-      employee: false,
-    },
-    {
-      id: 3,
-      name: "Larry",
-      city: "London",
-      email: "larry@gmail.com",
-      age: 50,
-      gender: Gender?.Male,
-      employee: true,
-    },
-  ];
-
-  const getEmailPrefix = (email: string) => {
-    const atIndex = email.indexOf("@");
-    if (atIndex === -1) return email;
-    return email.substring(0, atIndex + 1) + "...";
-  };
+export const TableComponet: React.FC<TableProps> = ({ columns, key }) => {
   return (
     <div className="rootCustomTooltip">
       <div className="containerTitle">
@@ -71,10 +25,10 @@ export const TableComponet: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {mockTableData &&
-              mockTableData?.length > 0 &&
-              mockTableData.map((item) => (
-                <tr className="trTable" key={item?.id}>
+            {columns &&
+              columns?.length > 0 &&
+              columns.map((item, index) => (
+                <tr className="trTable" key={key || index}>
                   <th scope="row">{item?.id}</th>
                   <th scope="row">
                     {item?.name}
@@ -86,7 +40,7 @@ export const TableComponet: React.FC = () => {
                     <span>{item?.city}</span>
                   </th>
                   <th scope="row">
-                    {getEmailPrefix(item.email)}
+                    {item.email}
                     <span>{item?.email}</span>
                   </th>
                 </tr>
