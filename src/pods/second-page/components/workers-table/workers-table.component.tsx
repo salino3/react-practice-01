@@ -29,7 +29,10 @@ export const WorkersTable: React.FC = () => {
     {
       key: "email",
       title: "Email",
-      render: (item: string, row: TableData) => getEmailPrefix(item),
+      render: (item: string, row: TableData) => {
+        console.log("Row:", row);
+        return getEmailPrefix(item);
+      },
     },
     {
       key: "gender",
