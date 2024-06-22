@@ -32,9 +32,6 @@ export const TableComponet: React.FC<TableProps> = ({ columns, key, row }) => {
 
   return (
     <div className="rootCustomTooltip">
-      <div className="containerTitle">
-        <h2>Custom Tooltip</h2>
-      </div>
       <div className="containerTable">
         <table className="table">
           <thead>
