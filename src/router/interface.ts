@@ -4,6 +4,6 @@ interface Routes {
 }
 
 export const appRoutes: Routes = {
-  root: "/",
-  table: "/table",
+  root: "/react-practice-01/",
+  table: "/react-practice-01/table",
 };
