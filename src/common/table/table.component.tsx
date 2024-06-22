@@ -54,7 +54,7 @@ export const TableComponet: React.FC<TableProps> = ({ columns, key, row }) => {
               <tr key={rowIndex} className={`trTable`}>
                 {keysToFilter.map((key, colIndex) => {
                   // Busca la fila correspondiente en 'row' para determinar si tiene 'render'
-                  const rowConfig = row.find((r) => r.key === key);
+                  // const rowConfig = row.find((r) => r.key === key);
                   const content = values[key];
                   // rowConfig && rowConfig.render
                   //   ? rowConfig.render(values[key], values)
