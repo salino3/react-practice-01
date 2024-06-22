@@ -8,14 +8,11 @@ interface TableProps {
 }
 
 export const TableComponet: React.FC<TableProps> = ({ columns, key, row }) => {
-  console.log("Rowxxs:", row);
-
   const keysToFilter = row.map((row) => row.key);
-
-  // Filtrar 'columns' para obtener solo los objetos que coincidan con 'keysToFilter'
+  const keysToFilter2 = keysToFilter;
   const filteredColumns = columns.map((column) => {
     const filteredColumn: any = {};
-    keysToFilter.forEach((key) => {
+    keysToFilter2.forEach((key) => {
       if (column.hasOwnProperty(key)) {
         filteredColumn[key] = column[key];
       }
@@ -23,11 +20,31 @@ export const TableComponet: React.FC<TableProps> = ({ columns, key, row }) => {
     return filteredColumn;
   });
 
-  console.log("Columns:", columns);
-  console.log("Rows:", row);
+  const arrId = filteredColumns.map((column) => Object.values(column)[0] || "");
+  const arrName = filteredColumns.map(
+    (column) => Object.values(column)[1] || ""
+  );
+  const arrCity = filteredColumns.map(
+    (column) => Object.values(column)[2] || ""
+  );
+  const arrEmail = filteredColumns.map(
+    (column) => Object.values(column)[3] || ""
+  );
+
+  const array = filteredColumns.map((column, index) => {
+    return {
+      id: arrId[index],
+      name: arrName[index],
+      city: arrCity[index],
+      email: arrEmail[index],
+    };
+  });
+
   console.log("Filtered Columns:", filteredColumns);
-  row[0].key = filteredColumns.map((row) => row);
-  console.log("Rows:", row);
+
+  console.log("here2:", Object.values(filteredColumns[0])[0]);
+
+  console.log("Roxs:", arrId || []);
 
   return (
     <div className="rootCustomTooltip">
@@ -48,20 +65,25 @@ export const TableComponet: React.FC<TableProps> = ({ columns, key, row }) => {
             </tr>
           </thead>
           <tbody>
-            <tr className={`trTable`}>
-              {filteredColumns.map((column, index, arr) => {
-                // const array = Object.keys(arr);
-                // console.log("here4", arr);
-                return (
-                  <td
-                    key={`${column}_${index}`}
-                    className={`${column}_${index}`}
-                  >
-                    {column[index]}
-                  </td>
-                );
-              })}
-            </tr>
+            {array &&
+              array.length > 0 &&
+              array.map((row: any, index) => (
+                <tr className={`trTable`}>
+                  {" "}
+                  <th scope="col" className={`${row?.id}_${index}`}>
+                    {row?.id}
+                  </th>
+                  <th scope="col" className={`${row?.name}_${index}`}>
+                    {row?.name}
+                  </th>
+                  <th scope="col" className={`${row?.city}_${index}`}>
+                    {row?.city}
+                  </th>
+                  <th scope="col" className={`${row?.email}_${index}`}>
+                    {row?.email}
+                  </th>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

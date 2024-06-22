@@ -15,13 +15,13 @@ export const WorkersTable: React.FC = () => {
 
   const array: Arr[] = [
     {
-      title: "Name",
-      key: "name",
-    },
-    {
       key: "id",
       title: "Id",
       unique: true,
+    },
+    {
+      title: "Name",
+      key: "name",
     },
     {
       key: "city",
