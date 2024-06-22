@@ -30,6 +30,12 @@ export const CustomTooltip: React.FC = () => {
     },
   ];
 
+  const getEmailPrefix = (email: string) => {
+    const atIndex = email.indexOf("@");
+    if (atIndex === -1) return email;
+    return email.substring(0, atIndex + 1) + "...";
+  };
+
   return (
     <div className="rootCustomTooltip">
       <div className="containerTitle">
@@ -63,7 +69,7 @@ export const CustomTooltip: React.FC = () => {
                     <span>{item?.city}</span>
                   </th>
                   <th scope="row">
-                    {item?.email}
+                    {getEmailPrefix(item.email)}
                     <span>{item?.email}</span>
                   </th>
                 </tr>
