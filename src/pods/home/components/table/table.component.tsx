@@ -1,32 +1,49 @@
-import React from "react";
-import "./custom-tooltip.styles.scss";
+import "./table.styles.scss";
 
-export const CustomTooltip: React.FC = () => {
+export const TableComponet: React.FC = () => {
+  enum Gender {
+    Male = "male",
+    Female = "female",
+    PreferNotSay = "prefer_not_say",
+  }
+
   interface TableData {
     id: number;
     name: string;
     city: string;
     email: string;
+    age: number;
+    gender: Gender;
+    employee: boolean;
   }
 
   const mockTableData: TableData[] = [
     {
       id: 1,
-      name: "Mark",
+      name: "Arianna",
       city: "Berlin",
-      email: "mark@gmail.com",
+      email: "arianna@gmail.com",
+      age: 32,
+      gender: Gender?.Female,
+      employee: true,
     },
     {
       id: 2,
       name: "Jacob",
       city: "Madrid",
       email: "jacob@gmail.com",
+      age: 39,
+      gender: Gender?.PreferNotSay,
+      employee: false,
     },
     {
       id: 3,
       name: "Larry",
       city: "London",
       email: "larry@gmail.com",
+      age: 50,
+      gender: Gender?.Male,
+      employee: true,
     },
   ];
 
@@ -35,7 +52,6 @@ export const CustomTooltip: React.FC = () => {
     if (atIndex === -1) return email;
     return email.substring(0, atIndex + 1) + "...";
   };
-
   return (
     <div className="rootCustomTooltip">
       <div className="containerTitle">

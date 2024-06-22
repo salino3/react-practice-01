@@ -1,0 +1,58 @@
+.rootCustomTooltip {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+
+  .containerTable {
+    .table {
+      thead th:first-child {
+        border-radius: 12px 0 0 0 !important;
+      }
+
+      thead tr,
+      thead th,
+      thead td {
+        background-color: var(--color-four);
+        color: var(--color-two);
+        width: 200px;
+      }
+
+      thead tr th:last-child {
+        border-radius: 0 12px 0 0 !important;
+      }
+      tbody tr,
+      tbody th,
+      tbody td {
+        background-color: var(--color-three);
+        color: var(--color-two);
+        width: 200px;
+      }
+      .trTable:hover th {
+        background-color: var(--color-five);
+      }
+
+      //
+      th span {
+        display: none;
+      }
+      tbody th {
+        position: relative;
+      }
+
+      tbody th:hover span {
+        position: absolute;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+          rgba(0, 0, 0, 0.22) 0px 15px 12px;
+        display: block;
+        padding: 0.5rem;
+        border-radius: 12px;
+        background-color: var(--color-one);
+        top: -10px;
+        right: 10px;
+      }
+    }
+  }
+}
