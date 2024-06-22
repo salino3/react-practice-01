@@ -28,4 +28,13 @@ export const mockTableData: TableData[] = [
     gender: Gender?.Male,
     employee: true,
   },
+  {
+    id: 4,
+    name: "Ma",
+    city: "ma",
+    email: "ma@gmail.com",
+    age: 50,
+    gender: Gender?.Male,
+    employee: true,
+  },
 ];
