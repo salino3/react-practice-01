@@ -9,12 +9,6 @@ export const CustomTooltip: React.FC = () => {
     email: string;
   }
 
-  const getEmailPrefix = (email: string) => {
-    const atIndex = email.indexOf("@");
-    if (atIndex === -1) return email;
-    return email.substring(0, atIndex + 1) + "...";
-  };
-
   const mockTableData: TableData[] = [
     {
       id: 1,
@@ -35,6 +29,12 @@ export const CustomTooltip: React.FC = () => {
       email: "larry@gmail.com",
     },
   ];
+
+  const getEmailPrefix = (email: string) => {
+    const atIndex = email.indexOf("@");
+    if (atIndex === -1) return email;
+    return email.substring(0, atIndex + 1) + "...";
+  };
 
   return (
     <div className="rootCustomTooltip">

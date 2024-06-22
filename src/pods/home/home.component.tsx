@@ -7,6 +7,7 @@ export const HomePage: React.FC = () => {
     <div className="rootHomePage">
       <div className="containerHome">
         <h1>Home Page</h1>
+
         <details open name="details">
           <summary>Rotate Image</summary>
           <div className="containerRotate">
