@@ -3,11 +3,10 @@ import "./table.styles.scss";
 
 interface TableProps {
   columns: any[];
-  key?: any;
   row: any[];
 }
 
-export const TableComponet: React.FC<TableProps> = ({ columns, key, row }) => {
+export const TableComponet: React.FC<TableProps> = ({ columns, row }) => {
   const keysToFilter = row.map((row) => row.key);
 
   // Filtrar 'columns' para obtener solo los objetos que coincidan con 'keysToFilter'
