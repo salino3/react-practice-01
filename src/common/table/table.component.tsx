@@ -4,9 +4,10 @@ import "./table.styles.scss";
 interface TableProps {
   columns: any[];
   key?: any;
+  rows: any[];
 }
 
-export const TableComponet: React.FC<TableProps> = ({ columns, key }) => {
+export const TableComponet: React.FC<TableProps> = ({ columns, key, rows }) => {
   return (
     <div className="rootCustomTooltip">
       <div className="containerTitle">
@@ -16,35 +17,25 @@ export const TableComponet: React.FC<TableProps> = ({ columns, key }) => {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">City</th>
-              <th className="lastThTitle" scope="col">
-                Email
-              </th>
+              {rows &&
+                rows.length > 0 &&
+                rows.map((row, index) => (
+                  <th scope="col" className={`${row?.title}_${index}`}>
+                    {row?.title}
+                  </th>
+                ))}
             </tr>
           </thead>
           <tbody>
-            {columns &&
-              columns?.length > 0 &&
-              columns.map((item, index) => (
-                <tr className="trTable" key={key || index}>
-                  <th scope="row">{item?.id}</th>
-                  <th scope="row">
-                    {item?.name}
-                    <span>{item?.name}</span>
-                  </th>
-                  <th scope="row">
-                    {item?.city}
-
-                    <span>{item?.city}</span>
-                  </th>
-                  <th scope="row">
-                    {item.email}
-                    <span>{item?.email}</span>
-                  </th>
-                </tr>
-              ))}
+            <tr className="trTable">
+              {columns &&
+                columns?.length > 0 &&
+                columns.map(
+                  (item, index) =>
+                    ""
+                    // * aquí *
+                )}
+            </tr>
           </tbody>
         </table>
       </div>

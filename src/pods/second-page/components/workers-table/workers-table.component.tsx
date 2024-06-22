@@ -7,21 +7,13 @@ import "./workers-table.styles.scss";
 export const WorkersTable: React.FC = () => {
   const { getEmailPrefix } = useAppFunctions();
 
-  //     <th scope="row">
-  //       {item?.name}
-  //       <span>{item?.name}</span>
-  //     </th>
-  //     <th scope="row">
-  //       {item?.city}
-
-  //       <span>{item?.city}</span>
-  //     </th>
-  //     <th scope="row">
-  //       {getEmailPrefix(item.email)}
-  //       <span>{item?.email}</span>
-  //       </th>
-
   const rows = [
+    {
+      key: "id",
+      title: "Id",
+      unique: true,
+    },
+
     {
       key: "name",
       title: "Name",
@@ -40,7 +32,7 @@ export const WorkersTable: React.FC = () => {
   return (
     <div className="rootWorkersTable">
       <div className="containerWorkesTable">
-        <TableComponet columns={mockTableData} />
+        <TableComponet rows={rows} columns={mockTableData} />
       </div>
     </div>
   );
