@@ -4,9 +4,14 @@ import "./table.styles.scss";
 interface TableProps {
   columns: any[];
   row: any[];
+  uniqueKey?: string;
 }
 
-export const TableComponet: React.FC<TableProps> = ({ columns, row }) => {
+export const TableComponet: React.FC<TableProps> = ({
+  columns,
+  row,
+  uniqueKey,
+}) => {
   const keysToFilter = row.map((r) => r.key);
 
   const valuesArray = columns.map((column) => {
@@ -38,7 +43,10 @@ export const TableComponet: React.FC<TableProps> = ({ columns, row }) => {
           </thead>
           <tbody>
             {valuesArray.map((values, rowIndex) => (
-              <tr key={rowIndex} className={`trTable`}>
+              <tr
+                key={uniqueKey ? values[uniqueKey] : rowIndex}
+                className={`trTable`}
+              >
                 {keysToFilter.map((key, colIndex) => {
                   const rowConfig = row.find((r) => r.key === key);
                   const content =

@@ -64,7 +64,7 @@ export const WorkersTable: React.FC = () => {
   return (
     <div className="rootWorkersTable">
       <div className="containerWorkesTable">
-        <TableComponet row={array} columns={mockTableData} />
+        <TableComponet uniqueKey="id" row={array} columns={mockTableData} />
       </div>
     </div>
   );
