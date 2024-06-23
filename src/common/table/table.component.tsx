@@ -7,21 +7,10 @@ interface TableProps {
 }
 
 export const TableComponet: React.FC<TableProps> = ({ columns, row }) => {
-  const keysToFilter = row.map((row) => row.key);
-
-  // Filtrar 'columns' para obtener solo los objetos que coincidan con 'keysToFilter'
-  const filteredColumns = columns.map((column) => {
-    const filteredColumn: any = {};
-    keysToFilter.forEach((key) => {
-      if (column.hasOwnProperty(key)) {
-        filteredColumn[key] = column[key];
-      }
-    });
-    return filteredColumn;
-  });
+  const keysToFilter = row.map((r) => r.key);
 
   // Crear una lista de valores filtrados para cada propiedad
-  const valuesArray = filteredColumns.map((column) => {
+  const valuesArray = columns.map((column) => {
     const values: any = {};
     keysToFilter.forEach((key) => {
       values[key] = column[key] || "";
@@ -37,13 +26,13 @@ export const TableComponet: React.FC<TableProps> = ({ columns, row }) => {
             <tr>
               {row &&
                 row.length > 0 &&
-                row.map((row, index) => (
+                row.map((r, index) => (
                   <th
                     key={index}
                     scope="col"
-                    className={`${row?.title}_${index}`}
+                    className={`${r?.title}_${index}`}
                   >
-                    {row?.title}
+                    {r?.title}
                   </th>
                 ))}
             </tr>
@@ -52,21 +41,18 @@ export const TableComponet: React.FC<TableProps> = ({ columns, row }) => {
             {valuesArray.map((values, rowIndex) => (
               <tr key={rowIndex} className={`trTable`}>
                 {keysToFilter.map((key, colIndex) => {
-                  // Busca la fila correspondiente en 'row' para determinar si tiene 'render'
-                  // const rowConfig = row.find((r) => r.key === key);
-                  const content = values[key];
-                  // rowConfig && rowConfig.render
-                  //   ? rowConfig.render(values[key], values)
-                  //   :
-                  console.log("here9", key);
+                  const rowConfig = row.find((r) => r.key === key);
+                  const content =
+                    rowConfig && rowConfig.render
+                      ? rowConfig.render(values[key], values)
+                      : values[key];
                   return (
-                    <th
+                    <td
                       key={`${key}_${rowIndex}_${colIndex}`}
                       className={`${key}_${rowIndex}_${colIndex}`}
                     >
-                      {key && <span>{content}</span>}
                       {content}
-                    </th>
+                    </td>
                   );
                 })}
               </tr>

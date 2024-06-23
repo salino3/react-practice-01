@@ -8,9 +8,9 @@ export const WorkersTable: React.FC = () => {
   const { getEmailPrefix } = useAppFunctions();
 
   interface Arr {
-    key: string;
+    key?: string;
     title: string;
-    render?: (item: any, row: TableData) => string | undefined;
+    render?: (item: any, row: TableData) => any | string | undefined;
   }
 
   const array: Arr[] = [
@@ -29,14 +29,24 @@ export const WorkersTable: React.FC = () => {
     {
       key: "email",
       title: "Email",
-      render: (item: string, row: TableData) => {
-        console.log("Row:", row);
-        return getEmailPrefix(item);
-      },
+      // render: (item: string) => {
+      //   return getEmailPrefix(item);
+      // },
     },
     {
       key: "gender",
       title: "Gender",
+    },
+    {
+      // key: "Action",
+      title: "Action",
+      render: (_: any, row: TableData) => {
+        return (
+          <div className="boxBtnRow">
+            <button onClick={() => alert(row?.email)}>{row?.city}</button>
+          </div>
+        );
+      },
     },
   ];
   console.log("Rows11:", array);
