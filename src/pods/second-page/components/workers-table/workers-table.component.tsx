@@ -10,6 +10,7 @@ export const WorkersTable: React.FC = () => {
   interface Arr {
     key?: string;
     title: string;
+    tooltip?: (item: any, row: TableData) => any | string | undefined;
     render?: (item: any, row: TableData) => any | string | undefined;
   }
 
@@ -29,16 +30,20 @@ export const WorkersTable: React.FC = () => {
     {
       key: "email",
       title: "Email",
-      // render: (item: string) => {
-      //   return getEmailPrefix(item);
-      // },
+      tooltip: (item: string) => item,
+      render: (item: string) => getEmailPrefix(item),
     },
     {
       key: "gender",
       title: "Gender",
+      tooltip: (item: string) =>
+        item === "male"
+          ? "male"
+          : item === "female"
+          ? "female"
+          : "prefer not say",
     },
     {
-      // key: "Action",
       title: "Action",
       render: (_: any, row: TableData) => {
         return (

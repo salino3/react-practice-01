@@ -30,11 +30,11 @@ export const mockTableData: TableData[] = [
   },
   {
     id: 4,
-    name: "Ma",
-    city: "ma",
-    email: "ma@gmail.com",
-    age: 50,
-    gender: Gender?.Male,
+    name: "Noelia",
+    city: "Tokyo",
+    email: "noealia@gmail.com",
+    age: 28,
+    gender: Gender?.Female,
     employee: true,
   },
 ];

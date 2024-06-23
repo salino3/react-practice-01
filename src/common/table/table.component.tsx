@@ -1,5 +1,6 @@
 import React from "react";
 import "./table.styles.scss";
+import { spawn } from "child_process";
 
 interface TableProps {
   columns: any[];
@@ -46,16 +47,23 @@ export const TableComponet: React.FC<TableProps> = ({ columns, row }) => {
                     rowConfig && rowConfig.render
                       ? rowConfig.render(values[key], values)
                       : values[key];
+                  const tooltip =
+                    rowConfig && rowConfig.tooltip
+                      ? rowConfig.tooltip(values[key], values)
+                      : values[key]; // Valor por defecto para tooltip
+
                   return (
-                    <td
+                    <th
                       key={`${key}_${rowIndex}_${colIndex}`}
                       className={`${key}_${rowIndex}_${colIndex}`}
                     >
+                      {key && <span>{tooltip}</span>}
                       {content}
-                    </td>
+                    </th>
                   );
                 })}
               </tr>
+              //
             ))}
           </tbody>
         </table>

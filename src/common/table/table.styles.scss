@@ -40,6 +40,7 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
+        white-space: nowrap;
       }
       tbody th {
         position: relative;
@@ -64,6 +65,7 @@
 
 .boxBtnRow {
   button {
+    min-width: 50px;
     border-radius: 1rem;
     padding: 0.25rem 0.5rem;
   }
