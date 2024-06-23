@@ -42,13 +42,19 @@ export const WorkersTable: React.FC = () => {
           : item === "female"
           ? "female"
           : "prefer not say",
+      render: (item: string) =>
+        item === "male"
+          ? "male"
+          : item === "female"
+          ? "female"
+          : "prefer not say",
     },
     {
       title: "Action",
       render: (_: any, row: TableData) => {
         return (
           <div className="boxBtnRow">
-            <button onClick={() => alert(row?.email)}>{row?.city}</button>
+            <button onClick={() => alert(row?.email)}>Click here</button>
           </div>
         );
       },

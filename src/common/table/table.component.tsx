@@ -51,13 +51,13 @@ export const TableComponet: React.FC<TableProps> = ({ columns, row }) => {
                       : values[key];
 
                   return (
-                    <th
+                    <td
                       key={`${key}_${rowIndex}_${colIndex}`}
                       className={`${key}_${rowIndex}_${colIndex}`}
                     >
                       {key && <span>{tooltip}</span>}
                       {content}
-                    </th>
+                    </td>
                   );
                 })}
               </tr>
