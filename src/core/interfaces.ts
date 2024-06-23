@@ -13,3 +13,8 @@ export interface TableData {
   gender: Gender;
   employee: boolean;
 }
+
+export interface Pagination {
+  totalResults: number;
+  results: TableData[];
+}
