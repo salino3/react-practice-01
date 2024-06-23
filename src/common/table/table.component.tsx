@@ -9,7 +9,6 @@ interface TableProps {
 export const TableComponet: React.FC<TableProps> = ({ columns, row }) => {
   const keysToFilter = row.map((r) => r.key);
 
-  // Crear una lista de valores filtrados para cada propiedad
   const valuesArray = columns.map((column) => {
     const values: any = {};
     keysToFilter.forEach((key) => {
@@ -19,12 +18,7 @@ export const TableComponet: React.FC<TableProps> = ({ columns, row }) => {
   });
 
   return (
-    <div
-      style={{
-        width: "300px",
-      }}
-      className="rootTableComponet"
-    >
+    <div className="rootTableComponet">
       <div className="containerTable">
         <table className="table">
           <thead>

@@ -2,13 +2,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: strech;
-  gap: 1rem;
+  align-items: stretch;
   margin-top: 0.5rem;
-  padding: 1rem;
-
+  width: 100%;
   .containerTable {
-    scrollbar-width: auto;
     .table {
       thead th:first-child {
         border-radius: 12px 0 0 0 !important;

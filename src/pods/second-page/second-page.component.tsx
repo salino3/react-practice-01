@@ -6,6 +6,7 @@ export const SecondPage: React.FC = () => {
   return (
     <div className="rootSecondPage">
       <h1>Table Component</h1>
+
       <WorkersTable />
     </div>
   );
