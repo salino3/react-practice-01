@@ -1,0 +1,15 @@
+.rootWorkersTable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+
+  .containerWorkesTable {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto; // Permite el desplazamiento horizontal de la tabla
+    -webkit-overflow-scrolling: touch; // Permite un desplazamiento suave en dispositivos móviles
+    display: flex;
+    justify-content: center;
+  }
+}

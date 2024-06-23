@@ -1,12 +1,14 @@
-.rootCustomTooltip {
+.rootTableComponet {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: strech;
   gap: 1rem;
   margin-top: 0.5rem;
+  padding: 1rem;
 
   .containerTable {
+    scrollbar-width: auto;
     .table {
       thead th:first-child {
         border-radius: 12px 0 0 0 !important;

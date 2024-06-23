@@ -1,6 +1,5 @@
 import React from "react";
 import "./table.styles.scss";
-import { spawn } from "child_process";
 
 interface TableProps {
   columns: any[];
@@ -20,7 +19,12 @@ export const TableComponet: React.FC<TableProps> = ({ columns, row }) => {
   });
 
   return (
-    <div className="rootCustomTooltip">
+    <div
+      style={{
+        width: "300px",
+      }}
+      className="rootTableComponet"
+    >
       <div className="containerTable">
         <table className="table">
           <thead>
@@ -50,7 +54,7 @@ export const TableComponet: React.FC<TableProps> = ({ columns, row }) => {
                   const tooltip =
                     rowConfig && rowConfig.tooltip
                       ? rowConfig.tooltip(values[key], values)
-                      : values[key]; // Valor por defecto para tooltip
+                      : values[key];
 
                   return (
                     <th
