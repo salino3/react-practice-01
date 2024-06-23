@@ -94,7 +94,7 @@ export const mockPaginationData: Pagination = {
       city: "New York",
       email: "emily@gmail.com",
       age: 29,
-      gender: Gender.Female,
+      gender: Gender.PreferNotSay,
       employee: true,
     },
     {
@@ -121,7 +121,7 @@ export const mockPaginationData: Pagination = {
       city: "Toronto",
       email: "david@gmail.com",
       age: 42,
-      gender: Gender.Male,
+      gender: Gender.PreferNotSay,
       employee: true,
     },
     {
@@ -148,7 +148,7 @@ export const mockPaginationData: Pagination = {
       city: "Sydney",
       email: "isabella@gmail.com",
       age: 31,
-      gender: Gender.Female,
+      gender: Gender.PreferNotSay,
       employee: false,
     },
     {
