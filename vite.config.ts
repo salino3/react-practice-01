@@ -4,7 +4,7 @@ import sass from "sass";
 import path from "path";
 
 export default defineConfig({
-  base: "./",
+  base: "/react-practice-01/",
   plugins: [react()],
   css: {
     preprocessorOptions: {

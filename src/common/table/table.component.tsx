@@ -4,24 +4,17 @@ import "./table.styles.scss";
 interface TableProps {
   columns: any[];
   row: any[];
+  uniqueKey?: string;
 }
 
-export const TableComponet: React.FC<TableProps> = ({ columns, row }) => {
-  const keysToFilter = row.map((row) => row.key);
+export const TableComponet: React.FC<TableProps> = ({
+  columns,
+  row,
+  uniqueKey,
+}) => {
+  const keysToFilter = row.map((r) => r.key);
 
-  // Filtrar 'columns' para obtener solo los objetos que coincidan con 'keysToFilter'
-  const filteredColumns = columns.map((column) => {
-    const filteredColumn: any = {};
-    keysToFilter.forEach((key) => {
-      if (column.hasOwnProperty(key)) {
-        filteredColumn[key] = column[key];
-      }
-    });
-    return filteredColumn;
-  });
-
-  // Crear una lista de valores filtrados para cada propiedad
-  const valuesArray = filteredColumns.map((column) => {
+  const valuesArray = columns.map((column) => {
     const values: any = {};
     keysToFilter.forEach((key) => {
       values[key] = column[key] || "";
@@ -30,45 +23,53 @@ export const TableComponet: React.FC<TableProps> = ({ columns, row }) => {
   });
 
   return (
-    <div className="rootCustomTooltip">
+    <div className="rootTableComponet">
       <div className="containerTable">
         <table className="table">
           <thead>
             <tr>
               {row &&
                 row.length > 0 &&
-                row.map((row, index) => (
+                row.map((r, index) => (
                   <th
                     key={index}
                     scope="col"
-                    className={`${row?.title}_${index}`}
+                    className={`${r?.title}_${index}`}
                   >
-                    {row?.title}
+                    {r?.title}
                   </th>
                 ))}
             </tr>
           </thead>
           <tbody>
             {valuesArray.map((values, rowIndex) => (
-              <tr key={rowIndex} className={`trTable`}>
+              <tr
+                key={uniqueKey ? values[uniqueKey] : rowIndex}
+                className={`trTable`}
+              >
                 {keysToFilter.map((key, colIndex) => {
-                  // Busca la fila correspondiente en 'row' para determinar si tiene 'render'
-                  // const rowConfig = row.find((r) => r.key === key);
-                  const content = values[key];
-                  // rowConfig && rowConfig.render
-                  //   ? rowConfig.render(values[key], values)
-                  //   :
+                  const rowConfig = row.find((r) => r.key === key);
+                  const content =
+                    rowConfig && rowConfig.render
+                      ? rowConfig.render(values[key], values)
+                      : values[key];
+                  const tooltip =
+                    rowConfig && rowConfig.tooltip
+                      ? rowConfig.tooltip(values[key], values)
+                      : values[key];
 
                   return (
                     <td
                       key={`${key}_${rowIndex}_${colIndex}`}
                       className={`${key}_${rowIndex}_${colIndex}`}
                     >
+                      {key && <span>{tooltip}</span>}
                       {content}
                     </td>
                   );
                 })}
               </tr>
+              //
             ))}
           </tbody>
         </table>

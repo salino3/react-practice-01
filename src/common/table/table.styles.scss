@@ -1,11 +1,10 @@
-.rootCustomTooltip {
+.rootTableComponet {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 1rem;
+  align-items: stretch;
   margin-top: 0.5rem;
-
+  width: 100%;
   .containerTable {
     .table {
       thead th:first-child {
@@ -30,28 +29,36 @@
         color: var(--color-two);
         width: 200px;
       }
-      .trTable:hover th {
+      .trTable:hover td {
         background-color: var(--color-five);
       }
 
       //
-      th span {
+      td span {
         display: none;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        white-space: nowrap;
+        z-index: 10;
       }
-      tbody th {
+
+      tbody td {
         position: relative;
       }
 
-      tbody th:hover span {
+      tbody td:hover span {
+        display: flex;
         position: absolute;
         box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
           rgba(0, 0, 0, 0.22) 0px 15px 12px;
-        display: block;
         padding: 0.5rem;
         border-radius: 12px;
         background-color: var(--color-one);
         top: -10px;
-        right: 10px;
+        left: 20px;
+        width: min-content;
+        min-width: 30px;
       }
     }
   }

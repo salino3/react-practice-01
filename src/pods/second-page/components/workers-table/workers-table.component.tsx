@@ -8,9 +8,10 @@ export const WorkersTable: React.FC = () => {
   const { getEmailPrefix } = useAppFunctions();
 
   interface Arr {
-    key: string;
+    key?: string;
     title: string;
-    render?: (item: any, row: TableData) => string | undefined;
+    tooltip?: (item: any, row: TableData) => any | string | undefined;
+    render?: (item: any, row: TableData) => any | string | undefined;
   }
 
   const array: Arr[] = [
@@ -29,21 +30,41 @@ export const WorkersTable: React.FC = () => {
     {
       key: "email",
       title: "Email",
-      render: (item: string, row: TableData) => {
-        console.log("Row:", row);
-        return getEmailPrefix(item);
-      },
+      tooltip: (item: string) => item,
+      render: (item: string) => getEmailPrefix(item),
     },
     {
       key: "gender",
       title: "Gender",
+      tooltip: (item: string) =>
+        item === "male"
+          ? "male"
+          : item === "female"
+          ? "female"
+          : "prefer not say",
+      render: (item: string) =>
+        item === "male"
+          ? "male"
+          : item === "female"
+          ? "female"
+          : "prefer not say",
+    },
+    {
+      title: "Action",
+      render: (_: any, row: TableData) => {
+        return (
+          <div className="boxBtnRow">
+            <button onClick={() => alert(row?.email)}>Click here</button>
+          </div>
+        );
+      },
     },
   ];
   console.log("Rows11:", array);
   return (
     <div className="rootWorkersTable">
       <div className="containerWorkesTable">
-        <TableComponet row={array} columns={mockTableData} />
+        <TableComponet uniqueKey="id" row={array} columns={mockTableData} />
       </div>
     </div>
   );

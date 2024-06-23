@@ -1,0 +1,27 @@
+.rootWorkersTable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // *  style for container table *
+  flex-grow: 1;
+  width: 100%;
+  overflow-x: auto;
+  .containerWorkesTable {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    justify-content: center;
+    padding: 0 0.5rem;
+  }
+}
+
+.boxBtnRow {
+  button {
+    min-width: 50px;
+    border-radius: 1rem;
+    padding: 0 0.5rem;
+    line-height: 1rem;
+  }
+}
