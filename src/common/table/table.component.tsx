@@ -105,7 +105,7 @@ export const TableComponet: React.FC<TableProps> = ({
         <div className="rootPagination">
           <div className="containerPagination">
             <div className="contentChoosePages">
-              <span>Row per page:</span>
+              <span>Rows per page:</span>
               <span className="spanChoosePages_02">{pageSize}</span>
               <details id="detailsPagesTable" className="detailsPages">
                 <summary></summary>
@@ -126,24 +126,39 @@ export const TableComponet: React.FC<TableProps> = ({
             </div>
             <div className="contentArrows">
               <KeyboardDoubleArrowLeftIcon
+                style={{
+                  cursor: page == 1 ? "" : "pointer",
+                  opacity: page == 1 ? "0.4" : "1",
+                }}
                 onClick={() => setPage && setPage(1)}
                 className="iconPagination"
               />
               <KeyboardArrowLeftIcon
+                style={{
+                  cursor: page == 1 ? "" : "pointer",
+                  opacity: page == 1 ? "0.4" : "1",
+                }}
                 onClick={() => setPage && setPage(page == 1 ? page : page - 1)}
                 className="iconPagination"
               />
-              <span>
-                {" "}
+              <div className="infoPagination">
                 {startRow} - {endRow} of {totalData || "No data"}
-              </span>
+              </div>
               <KeyboardArrowRightIcon
+                style={{
+                  cursor: page == totalPages ? "" : "pointer",
+                  opacity: page == totalPages ? "0.4" : "1",
+                }}
                 onClick={() =>
                   setPage && setPage(page == totalPages ? totalPages : page + 1)
                 }
                 className="iconPagination"
               />
               <KeyboardDoubleArrowRightIcon
+                style={{
+                  cursor: page == totalPages ? "" : "pointer",
+                  opacity: page == totalPages ? "0.4" : "1",
+                }}
                 onClick={() => setPage && setPage(totalPages)}
                 className="iconPagination"
               />

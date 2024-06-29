@@ -25,10 +25,12 @@ export const WorkersTable: React.FC = () => {
     {
       title: "Name",
       key: "name",
+      tooltip: (item: string) => item,
     },
     {
       key: "city",
       title: "City",
+      tooltip: (item: string) => item,
     },
     {
       key: "email",
