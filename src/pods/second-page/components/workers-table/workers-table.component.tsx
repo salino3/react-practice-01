@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TableComponet } from "@/common";
-import { mockPaginationData, Pagination, TableData } from "@/core";
+import { Pagination, TableData } from "@/core";
 import { useAppFunctions } from "@/hooks";
 import "./workers-table.styles.scss";
 
@@ -14,6 +14,8 @@ interface Arr {
 export const WorkersTable: React.FC = () => {
   const { getEmailPrefix, fetchPaginatedData } = useAppFunctions();
   const [tableData, setTableData] = useState<Pagination | undefined>();
+  const [page, setPage] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(11);
 
   const array: Arr[] = [
     {
@@ -65,9 +67,9 @@ export const WorkersTable: React.FC = () => {
 
   useEffect(() => {
     const body = {
-      name: "a",
+      name: "",
     };
-    fetchPaginatedData(1, 10, body)
+    fetchPaginatedData(page, pageSize, body)
       .then((res) => {
         setTableData(res);
         console.log("Response: ", res);
@@ -75,7 +77,7 @@ export const WorkersTable: React.FC = () => {
       .catch((err: any) => {
         console.error("Error fetching data: ", err);
       });
-  }, []);
+  }, [page, pageSize]);
 
   console.log("Rows11:", array);
   return (
