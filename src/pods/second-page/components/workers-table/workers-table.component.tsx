@@ -69,7 +69,7 @@ export const WorkersTable: React.FC = () => {
 
   useEffect(() => {
     const body = {
-      name: "a",
+      name: "",
     };
     fetchPaginatedData(page, pageSize, body)
       .then((res) => {
