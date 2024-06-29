@@ -1,15 +1,16 @@
-.rootTableComponet {
+.table_x02_rootTableComponet {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
   margin-top: 0.5rem;
   width: 100%;
-  .containerTable {
+  .table_x02_containerTable {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
+
     .table {
       thead th:first-child {
         border-radius: 12px 0 0 0 !important;
@@ -33,7 +34,7 @@
         color: var(--color-two);
         width: 200px;
       }
-      .trTable:hover td {
+      .table_x02_trTable:hover td {
         background-color: var(--color-five);
       }
 
@@ -66,13 +67,14 @@
       }
     }
 
-    .rootPagination {
+    .table_x02_rootPagination {
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
+      min-width: max-content;
       padding-bottom: 4rem;
 
-      .containerPagination {
+      .table_x02_containerPagination {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
@@ -83,21 +85,38 @@
         width: fit-content;
         gap: 1.5rem;
       }
-      .contentChoosePages {
+      .table_x02_contentChoosePages {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
         gap: 0.5rem;
-        .spanChoosePages_02 {
-          background-color: var(--color-one);
-          padding: 0 0.2rem;
-          border-radius: 4px;
-          line-height: 1.3rem;
+
+        .table_x02_containerSpanRowsInfo {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          gap: 0.25rem;
+
+          .table_x02_spanChoosePages_01 {
+            padding: 0 0.2rem;
+            border-radius: 4px;
+            line-height: 1.3rem;
+            white-space: nowrap;
+          }
+
+          .table_x02_spanChoosePages_02 {
+            background-color: var(--color-one);
+            padding: 0 0.2rem;
+            border-radius: 4px;
+            line-height: 1.3rem;
+          }
         }
-        .detailsPages {
+
+        .table_x02_detailsPages {
           position: relative;
-          .containerPages {
+          .table_x02_containerPages {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -107,14 +126,13 @@
             z-index: 999;
             top: 12px;
             padding: 0.3rem 0;
-
             left: 15px;
             border-radius: 0.25rem;
             background-color: var(--color-one);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
               0 4px 8px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombras en tres niveles */
 
-            .rowPages {
+            .table_x02_rowPages {
               display: flex;
               justify-content: center;
               align-items: center;
@@ -123,26 +141,26 @@
               width: 100%;
               cursor: pointer;
             }
-            .rowPages:hover {
+            .table_x02_rowPages:hover {
               background-color: var(--color-four);
             }
           }
         }
       }
 
-      .contentArrows {
+      .table_x02_contentArrows {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
         align-items: stretch;
         border-radius: 1rem;
         width: fit-content;
-        .iconPagination {
+        .table_x02_iconPagination {
           font-size: 1.5rem;
           border-radius: 1rem;
         }
 
-        .infoPagination {
+        .table_x02_infoPagination {
           display: flex;
           flex-direction: row;
           justify-content: center;
