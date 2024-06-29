@@ -87,10 +87,10 @@ export const TableComponet: React.FC<TableProps> = ({
                 row.length > 0 &&
                 row.map((r, index) => (
                   <th
-                    key={uniqueKey ? r[uniqueKey] : index}
+                    key={uniqueKey && r[uniqueKey] ? r[uniqueKey] : index}
                     scope="col"
                     className={`table_x02_${r?.title}_${
-                      uniqueKey ? r[uniqueKey] : index
+                      uniqueKey && r[uniqueKey] ? r[uniqueKey] : index
                     }`}
                   >
                     {/* start Filter Pop up */}
@@ -125,7 +125,11 @@ export const TableComponet: React.FC<TableProps> = ({
               valuesArray?.length > 0 &&
               valuesArray.map((values, rowIndex) => (
                 <tr
-                  key={uniqueKey ? values[uniqueKey] : rowIndex}
+                  key={
+                    uniqueKey && values[uniqueKey]
+                      ? values[uniqueKey]
+                      : rowIndex
+                  }
                   className={`table_x02_trTable`}
                 >
                   {keysToFilter &&
@@ -144,10 +148,14 @@ export const TableComponet: React.FC<TableProps> = ({
                       return (
                         <td
                           key={`${key}_${
-                            uniqueKey ? values[uniqueKey] : rowIndex
+                            uniqueKey && values[uniqueKey]
+                              ? values[uniqueKey]
+                              : rowIndex
                           }_${colIndex}`}
                           className={`table_x02_${key}_${
-                            uniqueKey ? values[uniqueKey] : rowIndex
+                            uniqueKey && values[uniqueKey]
+                              ? values[uniqueKey]
+                              : rowIndex
                           }_${colIndex}`}
                         >
                           {key && tooltip && <span>{tooltip}</span>}
