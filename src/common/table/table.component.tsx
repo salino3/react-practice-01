@@ -11,6 +11,8 @@ interface TableProps {
   columns: any[];
   row: any[];
   uniqueKey?: string;
+  setPage?: React.Dispatch<React.SetStateAction<number>>;
+  setPageSize?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const TableComponet: React.FC<TableProps> = ({

@@ -86,6 +86,8 @@ export const WorkersTable: React.FC = () => {
         <TableComponet
           uniqueKey="id"
           row={array}
+          setPage={setPage}
+          setPageSize={setPageSize}
           // totalData={mockTableData?.length}
           // columns={mockTableData}
           totalData={tableData?.totalProducts || 0}
