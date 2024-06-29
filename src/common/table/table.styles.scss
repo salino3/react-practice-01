@@ -34,10 +34,34 @@
         color: var(--color-two);
         width: 200px;
       }
+
       .table_x02_trTable:hover td {
         background-color: var(--color-five);
       }
+      thead {
+        position: relative;
+        //* Form
+        .table_x02_containerFormFilter {
+          z-index: 999999;
+          height: 110px;
+          box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+            rgba(0, 0, 0, 0.22) 0px 15px 12px;
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          background-color: var(--color-three);
+          padding: 0.25rem;
+          border-radius: 1rem;
 
+          span {
+            align-self: end;
+            cursor: pointer;
+            margin: 0.25rem;
+          }
+          .table_x02_inputFilter {
+          }
+        }
+      }
       //
       td span {
         display: none;

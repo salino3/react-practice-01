@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
-
+import SearchIcon from "@mui/icons-material/Search";
 import "./table.styles.scss";
+import { CustomInputText } from "./components";
 
 interface TableProps {
   totalData: number;
@@ -29,7 +30,33 @@ export const TableComponet: React.FC<TableProps> = ({
   setPageSize,
   rowPerPages = [5, 10, 25, 50],
 }) => {
-  const keysToFilter = row.map((r) => r.key);
+  const keysToFilter = row.map((r, index) => r?.key || index);
+
+  const [filtersTable, setFiltersTable] = useState<any>(
+    row.map((r, index) => {
+      return {
+        key: index,
+        filter: r.filter,
+        setFilter: r.setFilter,
+        typeFilter: r.typeFilter || "text",
+        open: false,
+      };
+    })
+  );
+
+  const toggleFilterOpen = (index: number) => {
+    setFiltersTable((prevFilters: any[]) => {
+      if (!Array.isArray(prevFilters)) {
+        return prevFilters;
+      }
+      return prevFilters.map(
+        (filter: any, i: number) =>
+          i === index ? { ...filter, open: !filter.open } : false // filter
+      );
+    });
+  };
+
+  console.log("here2", filtersTable);
 
   const valuesArray =
     columns &&
@@ -57,11 +84,33 @@ export const TableComponet: React.FC<TableProps> = ({
                 row.length > 0 &&
                 row.map((r, index) => (
                   <th
-                    key={index}
+                    key={uniqueKey ? r[uniqueKey] : index}
                     scope="col"
-                    className={`table_x02_${r?.title}_${index}`}
+                    className={`table_x02_${r?.title}_${
+                      uniqueKey ? r[uniqueKey] : index
+                    }`}
                   >
-                    {r?.title}
+                    {/* start Filter Pop up */}
+                    {r?.typeFilter && filtersTable[index]?.open && (
+                      <div className="table_x02_containerFormFilter">
+                        <span onClick={() => toggleFilterOpen(index)}>X</span>
+
+                        <CustomInputText
+                          lbl={r?.title}
+                          Styles="table_x02_inputFilter"
+                          type={r?.typeFilter || "text"}
+                          name={r?.title}
+                        />
+                      </div>
+                    )}
+                    {/* end Filter Pop up */}
+                    {r?.title} &nbsp;
+                    {r?.typeFilter && (
+                      <SearchIcon
+                        onClick={() => toggleFilterOpen(index)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    )}
                   </th>
                 ))}
             </tr>
@@ -89,8 +138,12 @@ export const TableComponet: React.FC<TableProps> = ({
 
                       return (
                         <td
-                          key={`${key}_${rowIndex}_${colIndex}`}
-                          className={`table_x02_${key}_${rowIndex}_${colIndex}`}
+                          key={`${key}_${
+                            uniqueKey ? values[uniqueKey] : rowIndex
+                          }_${colIndex}`}
+                          className={`table_x02_${key}_${
+                            uniqueKey ? values[uniqueKey] : rowIndex
+                          }_${colIndex}`}
                         >
                           {key && tooltip && <span>{tooltip}</span>}
                           {content}
