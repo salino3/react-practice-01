@@ -14,6 +14,7 @@ interface TableProps {
   uniqueKey?: string;
   page?: number;
   pageSize?: number;
+  setFlag?: React.Dispatch<React.SetStateAction<boolean>>;
   setPage?: React.Dispatch<React.SetStateAction<number>>;
   setPageSize?: React.Dispatch<React.SetStateAction<number>>;
   rowPerPages?: number[];
@@ -26,11 +27,13 @@ export const TableComponet: React.FC<TableProps> = ({
   uniqueKey,
   page = 1,
   pageSize = 10,
+  setFlag,
   setPage,
   setPageSize,
   rowPerPages = [5, 10, 25, 50],
 }) => {
-  const keysToFilter = row.map((r, index) => r?.key || index);
+  // const keysToFilter = row.map((r, index) => r?.key || index);
+  const keysToFilter = row.map((r) => r.key);
 
   const [filtersTable, setFiltersTable] = useState<any>(
     row.map((r, index) => {
@@ -104,9 +107,11 @@ export const TableComponet: React.FC<TableProps> = ({
                       </div>
                     )}
                     {/* end Filter Pop up */}
-                    {r?.title} &nbsp;
+                    {r?.title}
+
                     {r?.typeFilter && (
                       <SearchIcon
+                        className="table_x02_iconSearchIcon"
                         onClick={() => toggleFilterOpen(index)}
                         style={{ cursor: "pointer" }}
                       />

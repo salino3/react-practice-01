@@ -21,6 +21,7 @@ export const WorkersTable: React.FC = () => {
   const [filterCity, setFilterCity] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(5);
+  const [flag, setFlag] = useState<boolean>(false);
 
   const array: Row[] = [
     {
@@ -90,7 +91,7 @@ export const WorkersTable: React.FC = () => {
       .catch((err: any) => {
         console.error("Error fetching data: ", err);
       });
-  }, [page, pageSize]);
+  }, [page, pageSize, flag]);
 
   console.log("Rows11:", array);
   return (
@@ -103,6 +104,7 @@ export const WorkersTable: React.FC = () => {
           setPageSize={setPageSize}
           page={page}
           pageSize={pageSize}
+          setFlag={setFlag}
           rowPerPages={[5, 10, 25]}
           totalData={tableData?.totalProducts || 0}
           columns={tableData?.products || []}

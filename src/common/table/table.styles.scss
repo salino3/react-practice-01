@@ -38,6 +38,13 @@
       .table_x02_trTable:hover td {
         background-color: var(--color-five);
       }
+      thead th {
+        position: relative;
+      }
+      .table_x02_iconSearchIcon {
+        position: absolute;
+        left: 50px;
+      }
       thead {
         position: relative;
         //* Form
