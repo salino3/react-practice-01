@@ -1,4 +1,9 @@
 import React from "react";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+
 import "./table.styles.scss";
 
 interface TableProps {
@@ -56,7 +61,7 @@ export const TableComponet: React.FC<TableProps> = ({
                   const tooltip =
                     rowConfig && rowConfig.tooltip
                       ? rowConfig.tooltip(values[key], values)
-                      : "";
+                      : null;
 
                   return (
                     <td
@@ -73,6 +78,15 @@ export const TableComponet: React.FC<TableProps> = ({
             ))}
           </tbody>
         </table>
+        <div className="containerPagination">
+          <div className="contentPagination">
+            <KeyboardDoubleArrowLeftIcon className="iconPagination" />
+            <KeyboardArrowLeftIcon className="iconPagination" />
+            Pagination
+            <KeyboardArrowRightIcon className="iconPagination" />
+            <KeyboardDoubleArrowRightIcon className="iconPagination" />
+          </div>
+        </div>
       </div>
     </div>
   );
