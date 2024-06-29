@@ -57,9 +57,11 @@ export const TableComponet: React.FC<TableProps> = ({
                 row.length > 0 &&
                 row.map((r, index) => (
                   <th
-                    key={index}
+                    key={uniqueKey ? r[uniqueKey] : index}
                     scope="col"
-                    className={`table_x02_${r?.title}_${index}`}
+                    className={`table_x02_${r?.title}_${
+                      uniqueKey ? r[uniqueKey] : index
+                    }`}
                   >
                     {r?.title}
                   </th>
@@ -89,8 +91,12 @@ export const TableComponet: React.FC<TableProps> = ({
 
                       return (
                         <td
-                          key={`${key}_${rowIndex}_${colIndex}`}
-                          className={`table_x02_${key}_${rowIndex}_${colIndex}`}
+                          key={`${key}_${
+                            uniqueKey ? values[uniqueKey] : rowIndex
+                          }_${colIndex}`}
+                          className={`table_x02_${key}_${
+                            uniqueKey ? values[uniqueKey] : rowIndex
+                          }_${colIndex}`}
                         >
                           {key && tooltip && <span>{tooltip}</span>}
                           {content}

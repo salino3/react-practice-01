@@ -9,11 +9,15 @@ interface Row {
   title: string;
   tooltip?: (item: any, row: TableData) => any | string | undefined;
   render?: (item: any, row: TableData) => any | string | undefined;
+  typeFilter?: any;
+  filter?: any;
+  setFilter?: any;
 }
 
 export const WorkersTable: React.FC = () => {
   const { getEmailPrefix, fetchPaginatedData } = useAppFunctions();
   const [tableData, setTableData] = useState<Pagination | undefined>();
+  const [filterName, setFilterName] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(5);
 
@@ -26,6 +30,9 @@ export const WorkersTable: React.FC = () => {
       title: "Name",
       key: "name",
       tooltip: (item: string) => item,
+      typeFilter: "string",
+      setFilter: setFilterName,
+      filter: filterName,
     },
     {
       key: "city",
