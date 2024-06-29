@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
@@ -29,7 +29,32 @@ export const TableComponet: React.FC<TableProps> = ({
   setPageSize,
   rowPerPages = [5, 10, 25, 50],
 }) => {
-  const keysToFilter = row.map((r) => r.key);
+  const keysToFilter = row.map((r, index) => r?.key || index);
+
+  const [filtersTable, setFiltersTable] = useState<any>(
+    row.map((r, index) => {
+      return {
+        key: index,
+        filter: r.filter,
+        setFilter: r.setFilter,
+        typeFilter: r.typeFilter || "text",
+        open: false,
+      };
+    })
+  );
+
+  const toggleFilterOpen = (index: number) => {
+    setFiltersTable((prevFilters: any[]) => {
+      if (!Array.isArray(prevFilters)) {
+        return prevFilters;
+      }
+      return prevFilters.map((filter: any, i: number) =>
+        i === index ? { ...filter, open: !filter.open } : filter
+      );
+    });
+  };
+
+  console.log("here2", filtersTable);
 
   const valuesArray =
     columns &&
@@ -63,7 +88,29 @@ export const TableComponet: React.FC<TableProps> = ({
                       uniqueKey ? r[uniqueKey] : index
                     }`}
                   >
-                    {r?.title} &nbsp;{r?.typeFilter && <SearchIcon />}
+                    {/* start Filter Pop up */}
+                    {r?.typeFilter && filtersTable[index]?.open && (
+                      <div className="table_x02_containerFormFilter">
+                        <span onClick={() => toggleFilterOpen(index)}>X</span>
+                        <input
+                          type={r?.typeFilter || "text"}
+                          value={filtersTable[index].filter}
+                          onChange={(e) =>
+                            filtersTable[index].setFilter(e.target.value)
+                          }
+                          disabled={!filtersTable[index].open}
+                          className="table_x02_inputFilter"
+                        />
+                      </div>
+                    )}
+                    {/* end Filter Pop up */}
+                    {r?.title} &nbsp;
+                    {r?.typeFilter && (
+                      <SearchIcon
+                        onClick={() => toggleFilterOpen(index)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    )}
                   </th>
                 ))}
             </tr>

@@ -18,6 +18,7 @@ export const WorkersTable: React.FC = () => {
   const { getEmailPrefix, fetchPaginatedData } = useAppFunctions();
   const [tableData, setTableData] = useState<Pagination | undefined>();
   const [filterName, setFilterName] = useState<string>("");
+  const [filterCity, setFilterCity] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(5);
 
@@ -38,6 +39,9 @@ export const WorkersTable: React.FC = () => {
       key: "city",
       title: "City",
       tooltip: (item: string) => item,
+      typeFilter: "string",
+      setFilter: setFilterCity,
+      filter: filterCity,
     },
     {
       key: "email",
