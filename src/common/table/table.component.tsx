@@ -7,12 +7,14 @@ import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrow
 import "./table.styles.scss";
 
 interface TableProps {
+  totalData: number;
   columns: any[];
   row: any[];
   uniqueKey?: string;
 }
 
 export const TableComponet: React.FC<TableProps> = ({
+  totalData = 0,
   columns,
   row,
   uniqueKey,
@@ -82,7 +84,7 @@ export const TableComponet: React.FC<TableProps> = ({
           <div className="contentPagination">
             <KeyboardDoubleArrowLeftIcon className="iconPagination" />
             <KeyboardArrowLeftIcon className="iconPagination" />
-            Pagination
+            {totalData || "No data"}
             <KeyboardArrowRightIcon className="iconPagination" />
             <KeyboardDoubleArrowRightIcon className="iconPagination" />
           </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { TableComponet } from "@/common";
-import { mockTableData, TableData } from "@/core";
+import { mockPaginationData, TableData } from "@/core";
 import { useAppFunctions } from "@/hooks";
 import "./workers-table.styles.scss";
 
@@ -65,7 +65,12 @@ export const WorkersTable: React.FC = () => {
   return (
     <div className="rootWorkersTable">
       <div className="containerWorkesTable">
-        <TableComponet uniqueKey="id" row={array} columns={mockTableData} />
+        <TableComponet
+          uniqueKey="id"
+          row={array}
+          totalData={mockPaginationData?.totalData}
+          columns={mockPaginationData?.data}
+        />
       </div>
     </div>
   );

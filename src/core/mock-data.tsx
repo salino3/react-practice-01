@@ -41,8 +41,8 @@ export const mockTableData: TableData[] = [
 
 //
 export const mockPaginationData: Pagination = {
-  totalResults: 30,
-  results: [
+  totalProducts: 30,
+  products: [
     {
       id: 1,
       name: "Arianna",
@@ -315,3 +315,10 @@ export const mockPaginationData: Pagination = {
     },
   ],
 };
+
+// Functions
+export interface PaginatedResponse<Pagination> {
+  products: Pagination[];
+  page: number;
+  pageSize: number;
+}

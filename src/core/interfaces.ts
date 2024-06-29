@@ -15,6 +15,6 @@ export interface TableData {
 }
 
 export interface Pagination {
-  totalResults: number;
-  results: TableData[];
+  totalProducts: number;
+  products: TableData[];
 }
