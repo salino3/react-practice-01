@@ -21,13 +21,16 @@ export const TableComponet: React.FC<TableProps> = ({
 }) => {
   const keysToFilter = row.map((r) => r.key);
 
-  const valuesArray = columns.map((column) => {
-    const values: any = {};
-    keysToFilter.forEach((key) => {
-      values[key] = column[key] || "";
+  const valuesArray =
+    columns &&
+    columns?.length > 0 &&
+    columns.map((column) => {
+      const values: any = {};
+      keysToFilter.forEach((key) => {
+        values[key] = column[key] || "";
+      });
+      return values;
     });
-    return values;
-  });
 
   return (
     <div className="rootTableComponet">
@@ -49,42 +52,48 @@ export const TableComponet: React.FC<TableProps> = ({
             </tr>
           </thead>
           <tbody>
-            {valuesArray.map((values, rowIndex) => (
-              <tr
-                key={uniqueKey ? values[uniqueKey] : rowIndex}
-                className={`trTable`}
-              >
-                {keysToFilter.map((key, colIndex) => {
-                  const rowConfig = row.find((r) => r.key === key);
-                  const content =
-                    rowConfig && rowConfig.render
-                      ? rowConfig.render(values[key], values)
-                      : values[key];
-                  const tooltip =
-                    rowConfig && rowConfig.tooltip
-                      ? rowConfig.tooltip(values[key], values)
-                      : null;
+            {valuesArray &&
+              valuesArray?.length > 0 &&
+              valuesArray.map((values, rowIndex) => (
+                <tr
+                  key={uniqueKey ? values[uniqueKey] : rowIndex}
+                  className={`trTable`}
+                >
+                  {keysToFilter &&
+                    keysToFilter?.length > 0 &&
+                    keysToFilter.map((key, colIndex) => {
+                      const rowConfig = row.find((r) => r.key === key);
+                      const content =
+                        rowConfig && rowConfig.render
+                          ? rowConfig.render(values[key], values)
+                          : values[key];
+                      const tooltip =
+                        rowConfig && rowConfig.tooltip
+                          ? rowConfig.tooltip(values[key], values)
+                          : null;
 
-                  return (
-                    <td
-                      key={`${key}_${rowIndex}_${colIndex}`}
-                      className={`${key}_${rowIndex}_${colIndex}`}
-                    >
-                      {key && tooltip && <span>{tooltip}</span>}
-                      {content}
-                    </td>
-                  );
-                })}
-              </tr>
-              //
-            ))}
+                      return (
+                        <td
+                          key={`${key}_${rowIndex}_${colIndex}`}
+                          className={`${key}_${rowIndex}_${colIndex}`}
+                        >
+                          {key && tooltip && <span>{tooltip}</span>}
+                          {content}
+                        </td>
+                      );
+                    })}
+                </tr>
+                //
+              ))}
           </tbody>
         </table>
         <div className="containerPagination">
           <div className="contentPagination">
             <KeyboardDoubleArrowLeftIcon className="iconPagination" />
             <KeyboardArrowLeftIcon className="iconPagination" />
-            {totalData || "No data"}
+            <span>
+              {columns?.length} of {totalData || "No data"}
+            </span>
             <KeyboardArrowRightIcon className="iconPagination" />
             <KeyboardDoubleArrowRightIcon className="iconPagination" />
           </div>

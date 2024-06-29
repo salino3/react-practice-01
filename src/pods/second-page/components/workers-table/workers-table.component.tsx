@@ -1,18 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TableComponet } from "@/common";
-import { mockPaginationData, TableData } from "@/core";
+import { mockPaginationData, Pagination, TableData } from "@/core";
 import { useAppFunctions } from "@/hooks";
 import "./workers-table.styles.scss";
 
-export const WorkersTable: React.FC = () => {
-  const { getEmailPrefix } = useAppFunctions();
+interface Arr {
+  key?: string;
+  title: string;
+  tooltip?: (item: any, row: TableData) => any | string | undefined;
+  render?: (item: any, row: TableData) => any | string | undefined;
+}
 
-  interface Arr {
-    key?: string;
-    title: string;
-    tooltip?: (item: any, row: TableData) => any | string | undefined;
-    render?: (item: any, row: TableData) => any | string | undefined;
-  }
+export const WorkersTable: React.FC = () => {
+  const { getEmailPrefix, fetchPaginatedData } = useAppFunctions();
+  const [tableData, setTableData] = useState<Pagination | undefined>();
 
   const array: Arr[] = [
     {
@@ -61,6 +62,21 @@ export const WorkersTable: React.FC = () => {
       },
     },
   ];
+
+  useEffect(() => {
+    const body = {
+      name: "a",
+    };
+    fetchPaginatedData(1, 10, body)
+      .then((res) => {
+        setTableData(res);
+        console.log("Response: ", res);
+      })
+      .catch((err: any) => {
+        console.error("Error fetching data: ", err);
+      });
+  }, []);
+
   console.log("Rows11:", array);
   return (
     <div className="rootWorkersTable">
@@ -68,8 +84,10 @@ export const WorkersTable: React.FC = () => {
         <TableComponet
           uniqueKey="id"
           row={array}
-          totalData={mockPaginationData?.totalData}
-          columns={mockPaginationData?.data}
+          // totalData={mockTableData?.length}
+          // columns={mockTableData}
+          totalData={tableData?.totalProducts || 0}
+          columns={tableData?.products || []}
         />
       </div>
     </div>

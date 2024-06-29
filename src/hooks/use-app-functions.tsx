@@ -1,4 +1,4 @@
-import { PaginatedResponse, Pagination, TableData } from "@/core";
+import { mockPaginationData, Pagination, TableData } from "@/core";
 
 export const useAppFunctions = () => {
   const getEmailPrefix = (str: string) => {
@@ -14,31 +14,33 @@ export const useAppFunctions = () => {
   const fetchPaginatedData = (
     page: number,
     pageSize: number,
-    TableData: Pagination,
-    nameFilter: string = ""
+    body: Partial<TableData> = {}
   ): Promise<Pagination> => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        const filteredData = TableData?.products?.filter((item: TableData) =>
-          item?.name.toLowerCase().includes(nameFilter.toLowerCase())
-        );
-
+        const nameFilter = body.name?.toLowerCase() || "";
+        let filteredData;
+        if (nameFilter) {
+          filteredData = mockPaginationData?.products?.filter(
+            (item: TableData) =>
+              item?.name
+                .toLowerCase()
+                .includes(nameFilter && nameFilter.toLowerCase())
+          );
+        } else {
+          filteredData = mockPaginationData?.products;
+        }
         const start = (page - 1) * pageSize;
         const end = start + pageSize;
-        const paginatedData = filteredData.slice(start, end);
+        const paginatedData = filteredData && filteredData.slice(start, end);
 
         resolve({
-          products: paginatedData,
-          totalProducts: TableData?.products?.length,
+          products: paginatedData || [],
+          totalProducts: filteredData?.length || 0,
         });
       }, 100);
     });
   };
 
-  // // Ejemplo de uso
-  // fetchPaginatedData<TableData>(1, 10, "a").then((response) => {
-  //   console.log(response);
-  // });
-
-  return { getEmailPrefix };
+  return { getEmailPrefix, fetchPaginatedData };
 };
