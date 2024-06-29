@@ -15,7 +15,7 @@ export const WorkersTable: React.FC = () => {
   const { getEmailPrefix, fetchPaginatedData } = useAppFunctions();
   const [tableData, setTableData] = useState<Pagination | undefined>();
   const [page, setPage] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(11);
+  const [pageSize, setPageSize] = useState<number>(10);
 
   const array: Arr[] = [
     {
@@ -88,6 +88,8 @@ export const WorkersTable: React.FC = () => {
           row={array}
           setPage={setPage}
           setPageSize={setPageSize}
+          page={page}
+          pageSize={pageSize}
           // totalData={mockTableData?.length}
           // columns={mockTableData}
           totalData={tableData?.totalProducts || 0}

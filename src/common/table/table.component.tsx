@@ -11,6 +11,8 @@ interface TableProps {
   columns: any[];
   row: any[];
   uniqueKey?: string;
+  page?: number;
+  pageSize?: number;
   setPage?: React.Dispatch<React.SetStateAction<number>>;
   setPageSize?: React.Dispatch<React.SetStateAction<number>>;
 }
@@ -20,6 +22,10 @@ export const TableComponet: React.FC<TableProps> = ({
   columns,
   row,
   uniqueKey,
+  page = 1,
+  pageSize = 10,
+  setPage,
+  setPageSize,
 }) => {
   const keysToFilter = row.map((r) => r.key);
 
@@ -91,13 +97,25 @@ export const TableComponet: React.FC<TableProps> = ({
         </table>
         <div className="containerPagination">
           <div className="contentPagination">
-            <KeyboardDoubleArrowLeftIcon className="iconPagination" />
-            <KeyboardArrowLeftIcon className="iconPagination" />
+            <KeyboardDoubleArrowLeftIcon
+              onClick={() => setPage && setPage(1)}
+              className="iconPagination"
+            />
+            <KeyboardArrowLeftIcon
+              onClick={() => setPage && setPage(page - 1)}
+              className="iconPagination"
+            />
             <span>
               {columns?.length} of {totalData || "No data"}
             </span>
-            <KeyboardArrowRightIcon className="iconPagination" />
-            <KeyboardDoubleArrowRightIcon className="iconPagination" />
+            <KeyboardArrowRightIcon
+              onClick={() => setPage && setPage(page + 1)}
+              className="iconPagination"
+            />
+            <KeyboardDoubleArrowRightIcon
+              onClick={() => setPage && setPage(1)}
+              className="iconPagination"
+            />
           </div>
         </div>
       </div>
