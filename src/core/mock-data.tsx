@@ -313,6 +313,15 @@ export const mockPaginationData: Pagination = {
       gender: Gender.Male,
       employee: false,
     },
+    {
+      id: 31,
+      name: "Zara",
+      city: "Palermo",
+      email: "zara@gmail.com",
+      age: 34,
+      gender: Gender.Female,
+      employee: false,
+    },
   ],
 };
 

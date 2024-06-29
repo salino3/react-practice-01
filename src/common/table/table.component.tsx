@@ -40,6 +40,8 @@ export const TableComponet: React.FC<TableProps> = ({
       return values;
     });
 
+  const totalPages: number = Math.ceil(totalData / pageSize);
+  console.log(totalPages);
   return (
     <div className="rootTableComponet">
       <div className="containerTable">
@@ -113,7 +115,7 @@ export const TableComponet: React.FC<TableProps> = ({
               className="iconPagination"
             />
             <KeyboardDoubleArrowRightIcon
-              onClick={() => setPage && setPage(1)}
+              onClick={() => setPage && setPage(totalPages)}
               className="iconPagination"
             />
           </div>

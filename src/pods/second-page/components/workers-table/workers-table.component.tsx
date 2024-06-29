@@ -4,7 +4,7 @@ import { Pagination, TableData } from "@/core";
 import { useAppFunctions } from "@/hooks";
 import "./workers-table.styles.scss";
 
-interface Arr {
+interface Row {
   key?: string;
   title: string;
   tooltip?: (item: any, row: TableData) => any | string | undefined;
@@ -17,7 +17,7 @@ export const WorkersTable: React.FC = () => {
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
 
-  const array: Arr[] = [
+  const array: Row[] = [
     {
       key: "id",
       title: "Id",
@@ -90,8 +90,6 @@ export const WorkersTable: React.FC = () => {
           setPageSize={setPageSize}
           page={page}
           pageSize={pageSize}
-          // totalData={mockTableData?.length}
-          // columns={mockTableData}
           totalData={tableData?.totalProducts || 0}
           columns={tableData?.products || []}
         />
