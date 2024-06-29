@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
@@ -15,6 +15,7 @@ interface TableProps {
   pageSize?: number;
   setPage?: React.Dispatch<React.SetStateAction<number>>;
   setPageSize?: React.Dispatch<React.SetStateAction<number>>;
+  rowPerPages?: number[];
 }
 
 export const TableComponet: React.FC<TableProps> = ({
@@ -26,6 +27,7 @@ export const TableComponet: React.FC<TableProps> = ({
   pageSize = 10,
   setPage,
   setPageSize,
+  rowPerPages = [5, 10, 25, 50],
 }) => {
   const keysToFilter = row.map((r) => r.key);
 
@@ -42,6 +44,9 @@ export const TableComponet: React.FC<TableProps> = ({
 
   const totalPages: number = Math.ceil(totalData / pageSize);
   console.log(totalPages);
+  const startRow = (page - 1) * pageSize + 1;
+  const endRow = Math.min(page * pageSize, totalData);
+
   return (
     <div className="rootTableComponet">
       <div className="containerTable">
@@ -102,12 +107,20 @@ export const TableComponet: React.FC<TableProps> = ({
             <div className="contentChoosePages">
               <span>Row per page:</span>
               <span className="spanChoosePages_02">{pageSize}</span>
-              <details className="detailsPages">
+              <details id="detailsPagesTable" className="detailsPages">
                 <summary></summary>
-                <div className="containerPages">
-                  <span className="rowPages">5</span>
-                  <span className="rowPages">10</span>
-                  <span className="rowPages">25</span>
+                <div id="containerPagesTable" className="containerPages">
+                  {rowPerPages &&
+                    rowPerPages?.length > 0 &&
+                    rowPerPages.map((item: number) => (
+                      <span
+                        onClick={() => setPageSize && setPageSize(item)}
+                        key={item}
+                        className="rowPages"
+                      >
+                        {item}
+                      </span>
+                    ))}
                 </div>
               </details>
             </div>
@@ -117,14 +130,17 @@ export const TableComponet: React.FC<TableProps> = ({
                 className="iconPagination"
               />
               <KeyboardArrowLeftIcon
-                onClick={() => setPage && setPage(page - 1)}
+                onClick={() => setPage && setPage(page == 1 ? page : page - 1)}
                 className="iconPagination"
               />
               <span>
-                {columns?.length} of {totalData || "No data"}
+                {" "}
+                {startRow} - {endRow} of {totalData || "No data"}
               </span>
               <KeyboardArrowRightIcon
-                onClick={() => setPage && setPage(page + 1)}
+                onClick={() =>
+                  setPage && setPage(page == totalPages ? totalPages : page + 1)
+                }
                 className="iconPagination"
               />
               <KeyboardDoubleArrowRightIcon
