@@ -49,8 +49,9 @@ export const TableComponet: React.FC<TableProps> = ({
       if (!Array.isArray(prevFilters)) {
         return prevFilters;
       }
-      return prevFilters.map((filter: any, i: number) =>
-        i === index ? { ...filter, open: !filter.open } : filter
+      return prevFilters.map(
+        (filter: any, i: number) =>
+          i === index ? { ...filter, open: !filter.open } : false // filter
       );
     });
   };
@@ -93,15 +94,6 @@ export const TableComponet: React.FC<TableProps> = ({
                     {r?.typeFilter && filtersTable[index]?.open && (
                       <div className="table_x02_containerFormFilter">
                         <span onClick={() => toggleFilterOpen(index)}>X</span>
-                        {/* <input
-                          type={r?.typeFilter || "text"}
-                          value={filtersTable[index].filter}
-                          onChange={(e) =>
-                            filtersTable[index].setFilter(e.target.value)
-                          }
-                          disabled={!filtersTable[index].open}
-                          className="table_x02_inputFilter"
-                        /> */}
 
                         <CustomInputText
                           lbl={r?.title}

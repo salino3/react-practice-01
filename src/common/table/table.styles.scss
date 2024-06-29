@@ -43,12 +43,11 @@
         //* Form
         .table_x02_containerFormFilter {
           z-index: 999999;
-          height: 150px;
+          height: 110px;
           box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
             rgba(0, 0, 0, 0.22) 0px 15px 12px;
           display: flex;
           flex-direction: column;
-          gap: 2rem;
           position: absolute;
           background-color: var(--color-three);
           padding: 0.25rem;
