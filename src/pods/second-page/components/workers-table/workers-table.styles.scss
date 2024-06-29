@@ -5,10 +5,12 @@
   // *  style for container table *
   flex-grow: 1;
   width: 100%;
+  min-height: 100%;
   overflow-x: auto;
   .containerWorkesTable {
-    width: 100%;
     max-width: 100%;
+    min-height: 100%;
+
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     display: flex;

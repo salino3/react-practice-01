@@ -102,6 +102,14 @@ export const TableComponet: React.FC<TableProps> = ({
             <div className="contentChoosePages">
               <span>Row per page:</span>
               <span className="spanChoosePages_02">{pageSize}</span>
+              <details className="detailsPages">
+                <summary></summary>
+                <div className="containerPages">
+                  <span className="rowPages">5</span>
+                  <span className="rowPages">10</span>
+                  <span className="rowPages">25</span>
+                </div>
+              </details>
             </div>
             <div className="contentArrows">
               <KeyboardDoubleArrowLeftIcon
