@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TableComponet } from "@/common";
-import { mockTableData, TableData } from "@/core";
+import { Pagination, TableData } from "@/core";
 import { useAppFunctions } from "@/hooks";
 import "./workers-table.styles.scss";
 
-export const WorkersTable: React.FC = () => {
-  const { getEmailPrefix } = useAppFunctions();
+interface Arr {
+  key?: string;
+  title: string;
+  tooltip?: (item: any, row: TableData) => any | string | undefined;
+  render?: (item: any, row: TableData) => any | string | undefined;
+}
 
-  interface Arr {
-    key?: string;
-    title: string;
-    tooltip?: (item: any, row: TableData) => any | string | undefined;
-    render?: (item: any, row: TableData) => any | string | undefined;
-  }
+export const WorkersTable: React.FC = () => {
+  const { getEmailPrefix, fetchPaginatedData } = useAppFunctions();
+  const [tableData, setTableData] = useState<Pagination | undefined>();
+  const [page, setPage] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(11);
 
   const array: Arr[] = [
     {
@@ -30,6 +33,7 @@ export const WorkersTable: React.FC = () => {
     {
       key: "email",
       title: "Email",
+
       tooltip: (item: string) => item,
       render: (item: string) => getEmailPrefix(item),
     },
@@ -60,11 +64,35 @@ export const WorkersTable: React.FC = () => {
       },
     },
   ];
+
+  useEffect(() => {
+    const body = {
+      name: "",
+    };
+    fetchPaginatedData(page, pageSize, body)
+      .then((res) => {
+        setTableData(res);
+        console.log("Response: ", res);
+      })
+      .catch((err: any) => {
+        console.error("Error fetching data: ", err);
+      });
+  }, [page, pageSize]);
+
   console.log("Rows11:", array);
   return (
     <div className="rootWorkersTable">
       <div className="containerWorkesTable">
-        <TableComponet uniqueKey="id" row={array} columns={mockTableData} />
+        <TableComponet
+          uniqueKey="id"
+          row={array}
+          setPage={setPage}
+          setPageSize={setPageSize}
+          // totalData={mockTableData?.length}
+          // columns={mockTableData}
+          totalData={tableData?.totalProducts || 0}
+          columns={tableData?.products || []}
+        />
       </div>
     </div>
   );

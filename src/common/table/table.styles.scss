@@ -6,6 +6,10 @@
   margin-top: 0.5rem;
   width: 100%;
   .containerTable {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
     .table {
       thead th:first-child {
         border-radius: 12px 0 0 0 !important;
@@ -59,6 +63,28 @@
         left: 20px;
         width: min-content;
         min-width: 30px;
+      }
+    }
+
+    .containerPagination {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      .contentPagination {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: stretch;
+        border: solid 1px;
+        border-radius: 1rem;
+        padding: 0 0.5rem;
+        width: fit-content;
+      }
+      .iconPagination {
+        font-size: 1.5rem;
+        border-radius: 1rem;
+
+        cursor: pointer;
       }
     }
   }
