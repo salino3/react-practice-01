@@ -4,7 +4,7 @@ import { Pagination, TableData } from "@/core";
 import { useAppFunctions } from "@/hooks";
 import "./workers-table.styles.scss";
 
-interface Arr {
+interface Row {
   key?: string;
   title: string;
   tooltip?: (item: any, row: TableData) => any | string | undefined;
@@ -15,9 +15,9 @@ export const WorkersTable: React.FC = () => {
   const { getEmailPrefix, fetchPaginatedData } = useAppFunctions();
   const [tableData, setTableData] = useState<Pagination | undefined>();
   const [page, setPage] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(11);
+  const [pageSize, setPageSize] = useState<number>(5);
 
-  const array: Arr[] = [
+  const array: Row[] = [
     {
       key: "id",
       title: "Id",
@@ -25,10 +25,12 @@ export const WorkersTable: React.FC = () => {
     {
       title: "Name",
       key: "name",
+      tooltip: (item: string) => item,
     },
     {
       key: "city",
       title: "City",
+      tooltip: (item: string) => item,
     },
     {
       key: "email",
@@ -88,8 +90,9 @@ export const WorkersTable: React.FC = () => {
           row={array}
           setPage={setPage}
           setPageSize={setPageSize}
-          // totalData={mockTableData?.length}
-          // columns={mockTableData}
+          page={page}
+          pageSize={pageSize}
+          rowPerPages={[5, 10, 25]}
           totalData={tableData?.totalProducts || 0}
           columns={tableData?.products || []}
         />

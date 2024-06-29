@@ -1,15 +1,16 @@
-.rootTableComponet {
+.table_x02_rootTableComponet {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
   margin-top: 0.5rem;
   width: 100%;
-  .containerTable {
+  .table_x02_containerTable {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
+
     .table {
       thead th:first-child {
         border-radius: 12px 0 0 0 !important;
@@ -33,7 +34,7 @@
         color: var(--color-two);
         width: 200px;
       }
-      .trTable:hover td {
+      .table_x02_trTable:hover td {
         background-color: var(--color-five);
       }
 
@@ -66,25 +67,108 @@
       }
     }
 
-    .containerPagination {
+    .table_x02_rootPagination {
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
-      .contentPagination {
+      min-width: max-content;
+      padding-bottom: 4rem;
+
+      .table_x02_containerPagination {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        border: solid 1px;
+        border-radius: 1rem;
+        padding: 0.1rem 0.5rem;
+        width: fit-content;
+        gap: 1.5rem;
+      }
+      .table_x02_contentChoosePages {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+
+        .table_x02_containerSpanRowsInfo {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          gap: 0.25rem;
+
+          .table_x02_spanChoosePages_01 {
+            padding: 0 0.2rem;
+            border-radius: 4px;
+            line-height: 1.3rem;
+            white-space: nowrap;
+          }
+
+          .table_x02_spanChoosePages_02 {
+            background-color: var(--color-one);
+            padding: 0 0.2rem;
+            border-radius: 4px;
+            line-height: 1.3rem;
+          }
+        }
+
+        .table_x02_detailsPages {
+          position: relative;
+          .table_x02_containerPages {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0.2rem;
+            position: absolute;
+            z-index: 999;
+            top: 12px;
+            padding: 0.3rem 0;
+            left: 15px;
+            border-radius: 0.25rem;
+            background-color: var(--color-one);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
+              0 4px 8px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombras en tres niveles */
+
+            .table_x02_rowPages {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              line-height: 1.1rem;
+              min-width: 1.5rem;
+              width: 100%;
+              cursor: pointer;
+            }
+            .table_x02_rowPages:hover {
+              background-color: var(--color-four);
+            }
+          }
+        }
+      }
+
+      .table_x02_contentArrows {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
         align-items: stretch;
-        border: solid 1px;
         border-radius: 1rem;
-        padding: 0 0.5rem;
         width: fit-content;
-      }
-      .iconPagination {
-        font-size: 1.5rem;
-        border-radius: 1rem;
+        .table_x02_iconPagination {
+          font-size: 1.5rem;
+          border-radius: 1rem;
+        }
 
-        cursor: pointer;
+        .table_x02_infoPagination {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          min-width: 6rem;
+          gap: 0.5rem;
+          cursor: pointer;
+        }
       }
     }
   }

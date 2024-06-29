@@ -11,8 +11,11 @@ interface TableProps {
   columns: any[];
   row: any[];
   uniqueKey?: string;
+  page?: number;
+  pageSize?: number;
   setPage?: React.Dispatch<React.SetStateAction<number>>;
   setPageSize?: React.Dispatch<React.SetStateAction<number>>;
+  rowPerPages?: number[];
 }
 
 export const TableComponet: React.FC<TableProps> = ({
@@ -20,6 +23,11 @@ export const TableComponet: React.FC<TableProps> = ({
   columns,
   row,
   uniqueKey,
+  page = 1,
+  pageSize = 10,
+  setPage,
+  setPageSize,
+  rowPerPages = [5, 10, 25, 50],
 }) => {
   const keysToFilter = row.map((r) => r.key);
 
@@ -34,9 +42,14 @@ export const TableComponet: React.FC<TableProps> = ({
       return values;
     });
 
+  const totalPages: number = Math.ceil(totalData / pageSize);
+  console.log(totalPages);
+  const startRow = (page - 1) * pageSize + 1;
+  const endRow = Math.min(page * pageSize, totalData);
+
   return (
-    <div className="rootTableComponet">
-      <div className="containerTable">
+    <div className="table_x02_rootTableComponet">
+      <div className="table_x02_containerTable">
         <table className="table">
           <thead>
             <tr>
@@ -46,7 +59,7 @@ export const TableComponet: React.FC<TableProps> = ({
                   <th
                     key={index}
                     scope="col"
-                    className={`${r?.title}_${index}`}
+                    className={`table_x02_${r?.title}_${index}`}
                   >
                     {r?.title}
                   </th>
@@ -59,7 +72,7 @@ export const TableComponet: React.FC<TableProps> = ({
               valuesArray.map((values, rowIndex) => (
                 <tr
                   key={uniqueKey ? values[uniqueKey] : rowIndex}
-                  className={`trTable`}
+                  className={`table_x02_trTable`}
                 >
                   {keysToFilter &&
                     keysToFilter?.length > 0 &&
@@ -77,7 +90,7 @@ export const TableComponet: React.FC<TableProps> = ({
                       return (
                         <td
                           key={`${key}_${rowIndex}_${colIndex}`}
-                          className={`${key}_${rowIndex}_${colIndex}`}
+                          className={`table_x02_${key}_${rowIndex}_${colIndex}`}
                         >
                           {key && tooltip && <span>{tooltip}</span>}
                           {content}
@@ -89,15 +102,77 @@ export const TableComponet: React.FC<TableProps> = ({
               ))}
           </tbody>
         </table>
-        <div className="containerPagination">
-          <div className="contentPagination">
-            <KeyboardDoubleArrowLeftIcon className="iconPagination" />
-            <KeyboardArrowLeftIcon className="iconPagination" />
-            <span>
-              {columns?.length} of {totalData || "No data"}
-            </span>
-            <KeyboardArrowRightIcon className="iconPagination" />
-            <KeyboardDoubleArrowRightIcon className="iconPagination" />
+        <div className="table_x02_rootPagination">
+          <div className="table_x02_containerPagination">
+            <div className="table_x02_contentChoosePages">
+              <div className="table_x02_containerSpanRowsInfo">
+                <span className="table_x02_spanChoosePages_01">
+                  Rows per page:
+                </span>
+                <span className="table_x02_spanChoosePages_02">{pageSize}</span>
+              </div>
+              <details
+                id="detailsPagesTable"
+                className="table_x02_detailsPages"
+              >
+                <summary></summary>
+                <div
+                  id="containerPagesTable"
+                  className="table_x02_containerPages"
+                >
+                  {rowPerPages &&
+                    rowPerPages?.length > 0 &&
+                    rowPerPages.map((item: number) => (
+                      <span
+                        onClick={() => setPageSize && setPageSize(item)}
+                        key={item}
+                        className="table_x02_rowPages"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                </div>
+              </details>
+            </div>
+            <div className="table_x02_contentArrows">
+              <KeyboardDoubleArrowLeftIcon
+                style={{
+                  cursor: page == 1 ? "" : "pointer",
+                  opacity: page == 1 ? "0.4" : "1",
+                }}
+                onClick={() => setPage && setPage(1)}
+                className="table_x02_iconPagination"
+              />
+              <KeyboardArrowLeftIcon
+                style={{
+                  cursor: page == 1 ? "" : "pointer",
+                  opacity: page == 1 ? "0.4" : "1",
+                }}
+                onClick={() => setPage && setPage(page == 1 ? page : page - 1)}
+                className="table_x02_iconPagination"
+              />
+              <div className="table_x02_infoPagination">
+                {startRow} - {endRow} of {totalData || "No data"}
+              </div>
+              <KeyboardArrowRightIcon
+                style={{
+                  cursor: page == totalPages ? "" : "pointer",
+                  opacity: page == totalPages ? "0.4" : "1",
+                }}
+                onClick={() =>
+                  setPage && setPage(page == totalPages ? totalPages : page + 1)
+                }
+                className="table_x02_iconPagination"
+              />
+              <KeyboardDoubleArrowRightIcon
+                style={{
+                  cursor: page == totalPages ? "" : "pointer",
+                  opacity: page == totalPages ? "0.4" : "1",
+                }}
+                onClick={() => setPage && setPage(totalPages)}
+                className="table_x02_iconPagination"
+              />
+            </div>
           </div>
         </div>
       </div>
