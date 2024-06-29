@@ -97,27 +97,33 @@ export const TableComponet: React.FC<TableProps> = ({
               ))}
           </tbody>
         </table>
-        <div className="containerPagination">
-          <div className="contentPagination">
-            <KeyboardDoubleArrowLeftIcon
-              onClick={() => setPage && setPage(1)}
-              className="iconPagination"
-            />
-            <KeyboardArrowLeftIcon
-              onClick={() => setPage && setPage(page - 1)}
-              className="iconPagination"
-            />
-            <span>
-              {columns?.length} of {totalData || "No data"}
-            </span>
-            <KeyboardArrowRightIcon
-              onClick={() => setPage && setPage(page + 1)}
-              className="iconPagination"
-            />
-            <KeyboardDoubleArrowRightIcon
-              onClick={() => setPage && setPage(totalPages)}
-              className="iconPagination"
-            />
+        <div className="rootPagination">
+          <div className="containerPagination">
+            <div className="contentChoosePages">
+              <span>Row per page:</span>
+              <span className="spanChoosePages_02">{pageSize}</span>
+            </div>
+            <div className="contentArrows">
+              <KeyboardDoubleArrowLeftIcon
+                onClick={() => setPage && setPage(1)}
+                className="iconPagination"
+              />
+              <KeyboardArrowLeftIcon
+                onClick={() => setPage && setPage(page - 1)}
+                className="iconPagination"
+              />
+              <span>
+                {columns?.length} of {totalData || "No data"}
+              </span>
+              <KeyboardArrowRightIcon
+                onClick={() => setPage && setPage(page + 1)}
+                className="iconPagination"
+              />
+              <KeyboardDoubleArrowRightIcon
+                onClick={() => setPage && setPage(totalPages)}
+                className="iconPagination"
+              />
+            </div>
           </div>
         </div>
       </div>

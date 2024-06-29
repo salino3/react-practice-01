@@ -66,25 +66,49 @@
       }
     }
 
-    .containerPagination {
+    .rootPagination {
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
       padding-bottom: 0.5rem;
-      .contentPagination {
+
+      .containerPagination {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        border: solid 1px;
+        border-radius: 1rem;
+        padding: 0.1rem 0.5rem;
+        width: fit-content;
+        gap: 0.5rem;
+      }
+      .contentChoosePages {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        .spanChoosePages_02 {
+          background-color: var(--color-one);
+          padding: 0 0.2rem;
+          border-radius: 4px;
+          line-height: 1.3rem;
+        }
+      }
+
+      .contentArrows {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
         align-items: stretch;
-        border: solid 1px;
         border-radius: 1rem;
-        padding: 0 0.5rem;
         width: fit-content;
-      }
-      .iconPagination {
-        font-size: 1.5rem;
-        border-radius: 1rem;
-        cursor: pointer;
+        .iconPagination {
+          font-size: 1.5rem;
+          border-radius: 1rem;
+          cursor: pointer;
+        }
       }
     }
   }
