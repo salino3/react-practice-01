@@ -34,10 +34,13 @@
         color: var(--color-two);
         width: 200px;
       }
+
       .table_x02_trTable:hover td {
         background-color: var(--color-five);
       }
-
+      thead {
+        position: relative;
+      }
       //
       td span {
         display: none;

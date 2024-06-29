@@ -3,7 +3,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
-
+import SearchIcon from "@mui/icons-material/Search";
 import "./table.styles.scss";
 
 interface TableProps {
@@ -63,7 +63,7 @@ export const TableComponet: React.FC<TableProps> = ({
                       uniqueKey ? r[uniqueKey] : index
                     }`}
                   >
-                    {r?.title}
+                    {r?.title} &nbsp;{r?.typeFilter && <SearchIcon />}
                   </th>
                 ))}
             </tr>
