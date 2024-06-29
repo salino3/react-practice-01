@@ -30,6 +30,7 @@ export const WorkersTable: React.FC = () => {
     {
       key: "email",
       title: "Email",
+
       tooltip: (item: string) => item,
       render: (item: string) => getEmailPrefix(item),
     },

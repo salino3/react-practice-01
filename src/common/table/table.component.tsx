@@ -56,14 +56,14 @@ export const TableComponet: React.FC<TableProps> = ({
                   const tooltip =
                     rowConfig && rowConfig.tooltip
                       ? rowConfig.tooltip(values[key], values)
-                      : values[key];
+                      : "";
 
                   return (
                     <td
                       key={`${key}_${rowIndex}_${colIndex}`}
                       className={`${key}_${rowIndex}_${colIndex}`}
                     >
-                      {key && <span>{tooltip}</span>}
+                      {key && tooltip && <span>{tooltip}</span>}
                       {content}
                     </td>
                   );
