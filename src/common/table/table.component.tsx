@@ -59,7 +59,7 @@ export const TableComponet: React.FC<TableProps> = ({
     });
   };
 
-  console.log("here2", filtersTable);
+  console.log("here2", filtersTable, setFlag);
 
   const valuesArray =
     columns &&
