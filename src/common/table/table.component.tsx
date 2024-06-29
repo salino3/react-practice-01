@@ -5,6 +5,7 @@ import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArro
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import SearchIcon from "@mui/icons-material/Search";
 import "./table.styles.scss";
+import { CustomInputText } from "./components";
 
 interface TableProps {
   totalData: number;
@@ -92,7 +93,7 @@ export const TableComponet: React.FC<TableProps> = ({
                     {r?.typeFilter && filtersTable[index]?.open && (
                       <div className="table_x02_containerFormFilter">
                         <span onClick={() => toggleFilterOpen(index)}>X</span>
-                        <input
+                        {/* <input
                           type={r?.typeFilter || "text"}
                           value={filtersTable[index].filter}
                           onChange={(e) =>
@@ -100,6 +101,13 @@ export const TableComponet: React.FC<TableProps> = ({
                           }
                           disabled={!filtersTable[index].open}
                           className="table_x02_inputFilter"
+                        /> */}
+
+                        <CustomInputText
+                          lbl={r?.title}
+                          Styles="table_x02_inputFilter"
+                          type={r?.typeFilter || "text"}
+                          name={r?.title}
                         />
                       </div>
                     )}

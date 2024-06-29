@@ -52,9 +52,14 @@
           position: absolute;
           background-color: var(--color-three);
           padding: 0.25rem;
+          border-radius: 1rem;
 
           span {
             align-self: end;
+            cursor: pointer;
+            margin: 0.25rem;
+          }
+          .table_x02_inputFilter {
           }
         }
       }
