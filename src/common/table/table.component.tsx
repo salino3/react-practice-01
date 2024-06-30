@@ -4,8 +4,9 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import SearchIcon from "@mui/icons-material/Search";
-import "./table.styles.scss";
 import { CustomInputText } from "./components";
+import CancelIcon from "@mui/icons-material/Cancel";
+import "./table.styles.scss";
 
 interface TableProps {
   totalData: number;
@@ -15,6 +16,7 @@ interface TableProps {
   page?: number;
   pageSize?: number;
   setFlag?: React.Dispatch<React.SetStateAction<boolean>>;
+  flag?: boolean;
   setPage?: React.Dispatch<React.SetStateAction<number>>;
   setPageSize?: React.Dispatch<React.SetStateAction<number>>;
   rowPerPages?: number[];
@@ -27,6 +29,7 @@ export const TableComponet: React.FC<TableProps> = ({
   uniqueKey,
   page = 1,
   pageSize = 10,
+  flag = false,
   setFlag,
   setPage,
   setPageSize,
@@ -47,20 +50,6 @@ export const TableComponet: React.FC<TableProps> = ({
     })
   );
 
-  const toggleFilterOpen = (index: number) => {
-    setFiltersTable((prevFilters: any[]) => {
-      if (!Array.isArray(prevFilters)) {
-        return prevFilters;
-      }
-      return prevFilters.map(
-        (filter: any, i: number) =>
-          i === index ? { ...filter, open: !filter.open } : false // filter
-      );
-    });
-  };
-
-  console.log("here2", filtersTable, setFlag);
-
   const valuesArray =
     columns &&
     columns?.length > 0 &&
@@ -76,6 +65,42 @@ export const TableComponet: React.FC<TableProps> = ({
   console.log(totalPages);
   const startRow = (page - 1) * pageSize + 1;
   const endRow = Math.min(page * pageSize, totalData);
+
+  //
+  const toggleFilterOpen = (index: number) => {
+    setFiltersTable((prevFilters: any[]) => {
+      if (!Array.isArray(prevFilters)) {
+        return prevFilters;
+      }
+      return prevFilters.map((filter: any, i: number) =>
+        i === index ? { ...filter, open: !filter.open } : filter
+      );
+    });
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log("here3", filtersTable);
+    // Update the filters in the parent component
+    filtersTable.forEach((filter: any) => {
+      if (filter.setFilter) {
+        filter.setFilter(filter.filter);
+      }
+    });
+    setFlag && setFlag(!flag);
+  };
+
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const { name, value } = event.target;
+    setFiltersTable((prevFilters: any) =>
+      prevFilters.map((filter: any, i: number) =>
+        i === index ? { ...filter, filter: value } : filter
+      )
+    );
+  };
 
   return (
     <div className="table_x02_rootTableComponet">
@@ -96,14 +121,37 @@ export const TableComponet: React.FC<TableProps> = ({
                     {/* start Filter Pop up */}
                     {r?.typeFilter && filtersTable[index]?.open && (
                       <div className="table_x02_containerFormFilter">
-                        <span onClick={() => toggleFilterOpen(index)}>X</span>
+                        <form onSubmit={handleSubmit} id="table_x02_formFilter">
+                          <span onClick={() => toggleFilterOpen(index)}>
+                            <CancelIcon
+                              style={{
+                                color: "var(--color-two)",
+                              }}
+                            />
+                          </span>
 
-                        <CustomInputText
-                          lbl={r?.typeFilter == "date" ? null : r?.title}
-                          Styles="table_x02_inputFilter"
-                          type={r?.typeFilter || "text"}
-                          name={r?.title}
-                        />
+                          <CustomInputText
+                            handleChange={(event) => handleChange(event, index)}
+                            // handleChange={(event) =>
+                            //   setFiltersTable({
+                            //     ...filtersTable,
+                            //     [event?.target?.name]:
+                            //       filtersTable[index]?.filter,
+                            //   })
+                            // }
+                            lbl={r?.typeFilter == "date" ? null : r?.title}
+                            Styles="table_x02_inputFilter"
+                            type={r?.typeFilter || "text"}
+                            inputValue={filtersTable[index]?.filter}
+                            name={r?.title}
+                          />
+                          <button
+                            type="submit"
+                            className="btn btn-primary table_x02_btnFilter"
+                          >
+                            Confirm
+                          </button>
+                        </form>
                       </div>
                     )}
                     {/* end Filter Pop up */}

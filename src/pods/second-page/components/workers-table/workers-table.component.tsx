@@ -83,8 +83,11 @@ export const WorkersTable: React.FC = () => {
 
   useEffect(() => {
     const body = {
-      name: "",
+      name: filterName,
+      city: filterCity,
     };
+    console.log("here4", body);
+
     fetchPaginatedData(page, pageSize, body)
       .then((res) => {
         setTableData(res);
@@ -107,6 +110,7 @@ export const WorkersTable: React.FC = () => {
           page={page}
           pageSize={pageSize}
           setFlag={setFlag}
+          flag={flag}
           rowPerPages={[5, 10, 25]}
           totalData={tableData?.totalProducts || 0}
           columns={tableData?.products || []}
