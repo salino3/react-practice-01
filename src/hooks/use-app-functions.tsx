@@ -1,4 +1,4 @@
-import { mockPaginationData, Pagination, TableData } from "@/core";
+import { mockPaginationData, Pagination } from "@/core";
 
 export const useAppFunctions = () => {
   const getEmailPrefix = (str: string) => {
@@ -22,7 +22,7 @@ export const useAppFunctions = () => {
           acc[key] = body[key]?.toLowerCase();
           return acc;
         }, {} as Record<string, any | undefined>);
-
+        console.log("body1", body);
         let filteredData = mockPaginationData?.products?.filter((item: any) => {
           return Object.keys(filters).every((key) => {
             const filterValue = filters[key];

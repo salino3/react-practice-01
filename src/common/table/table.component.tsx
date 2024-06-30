@@ -94,12 +94,13 @@ export const TableComponet: React.FC<TableProps> = ({
     event: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
-    const { name, value } = event.target;
+    const { value } = event.target;
     setFiltersTable((prevFilters: any) =>
       prevFilters.map((filter: any, i: number) =>
         i === index ? { ...filter, filter: value } : filter
       )
     );
+    console.log("handleChange");
   };
 
   return (
