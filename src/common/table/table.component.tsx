@@ -99,7 +99,7 @@ export const TableComponet: React.FC<TableProps> = ({
                         <span onClick={() => toggleFilterOpen(index)}>X</span>
 
                         <CustomInputText
-                          lbl={r?.title}
+                          lbl={r?.typeFilter == "date" ? null : r?.title}
                           Styles="table_x02_inputFilter"
                           type={r?.typeFilter || "text"}
                           name={r?.title}
@@ -190,7 +190,10 @@ export const TableComponet: React.FC<TableProps> = ({
                     rowPerPages?.length > 0 &&
                     rowPerPages.map((item: number) => (
                       <span
-                        onClick={() => setPageSize && setPageSize(item)}
+                        onClick={() => {
+                          setPageSize && setPageSize(item);
+                          setPage && setPage(1);
+                        }}
                         key={item}
                         className="table_x02_rowPages"
                       >
