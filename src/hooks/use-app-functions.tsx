@@ -11,6 +11,42 @@ export const useAppFunctions = () => {
     }
   };
 
+  // const fetchPaginatedData = (
+  //   page: number,
+  //   pageSize: number,
+  //   body: any
+  // ): Promise<Pagination> => {
+  //   return new Promise((resolve) => {
+  //     setTimeout(() => {
+  //       const filters = Object.keys(body).reduce((acc, key) => {
+  //         acc[key] = body[key]?.toLowerCase();
+  //         return acc;
+  //       }, {} as Record<string, any | undefined>);
+  //       console.log("body1", body);
+  //       let filteredData = mockPaginationData?.products?.filter((item: any) => {
+  //         return Object.keys(filters).every((key) => {
+  //           const filterValue = filters[key];
+  //           return (
+  //             !filterValue || item[key]?.toLowerCase().includes(filterValue)
+  //           );
+  //         });
+  //       });
+  //       if (!filteredData || !filteredData.length) {
+  //         filteredData = mockPaginationData?.products;
+  //       }
+
+  //       const start = (page - 1) * pageSize;
+  //       const end = start + pageSize;
+  //       const paginatedData = filteredData && filteredData.slice(start, end);
+
+  //       resolve({
+  //         products: paginatedData || [],
+  //         totalProducts: (filteredData && filteredData?.length) || 0,
+  //       });
+  //     }, 100);
+  //   });
+  // };
+
   const fetchPaginatedData = (
     page: number,
     pageSize: number,
@@ -18,11 +54,14 @@ export const useAppFunctions = () => {
   ): Promise<Pagination> => {
     return new Promise((resolve) => {
       setTimeout(() => {
+        // Convertimos los valores de body a minúsculas para hacer coincidencias de filtro insensibles a mayúsculas
         const filters = Object.keys(body).reduce((acc, key) => {
           acc[key] = body[key]?.toLowerCase();
           return acc;
-        }, {} as Record<string, any | undefined>);
-        console.log("body1", body);
+        }, {} as Record<string, string | undefined>);
+
+        console.log("Filters:", filters);
+
         let filteredData = mockPaginationData?.products?.filter((item: any) => {
           return Object.keys(filters).every((key) => {
             const filterValue = filters[key];
@@ -31,13 +70,14 @@ export const useAppFunctions = () => {
             );
           });
         });
+
         if (!filteredData || !filteredData.length) {
-          filteredData = mockPaginationData?.products;
+          filteredData = [];
         }
 
         const start = (page - 1) * pageSize;
         const end = start + pageSize;
-        const paginatedData = filteredData && filteredData.slice(start, end);
+        const paginatedData = filteredData.slice(start, end);
 
         resolve({
           products: paginatedData || [],
