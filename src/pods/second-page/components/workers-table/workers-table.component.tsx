@@ -17,10 +17,13 @@ interface Row {
 export const WorkersTable: React.FC = () => {
   const { getEmailPrefix, fetchPaginatedData } = useAppFunctions();
   const [tableData, setTableData] = useState<Pagination | undefined>();
+  // const [filterId, setFilterId] = useState<number | null>(null);
   const [filterName, setFilterName] = useState<string>("");
   const [filterCity, setFilterCity] = useState<string>("");
+  const [filterEmail, setFilterEmail] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(5);
+  const [flag, setFlag] = useState<boolean>(false);
 
   const array: Row[] = [
     {
@@ -28,10 +31,10 @@ export const WorkersTable: React.FC = () => {
       title: "Id",
     },
     {
-      title: "Name",
       key: "name",
+      title: "Name",
       tooltip: (item: string) => item,
-      typeFilter: "string",
+      typeFilter: "text",
       setFilter: setFilterName,
       filter: filterName,
     },
@@ -39,16 +42,18 @@ export const WorkersTable: React.FC = () => {
       key: "city",
       title: "City",
       tooltip: (item: string) => item,
-      typeFilter: "string",
+      typeFilter: "text",
       setFilter: setFilterCity,
       filter: filterCity,
     },
     {
       key: "email",
       title: "Email",
-
       tooltip: (item: string) => item,
       render: (item: string) => getEmailPrefix(item),
+      typeFilter: "text",
+      setFilter: setFilterEmail,
+      filter: filterEmail,
     },
     {
       key: "gender",
@@ -71,7 +76,9 @@ export const WorkersTable: React.FC = () => {
       render: (_: any, row: TableData) => {
         return (
           <div className="boxBtnRow">
-            <button onClick={() => alert(row?.email)}>Click here</button>
+            <button className="btnRow" onClick={() => alert(row?.email)}>
+              Click here
+            </button>
           </div>
         );
       },
@@ -80,8 +87,13 @@ export const WorkersTable: React.FC = () => {
 
   useEffect(() => {
     const body = {
-      name: "",
+      // id: filterId,
+      name: filterName,
+      city: filterCity,
+      email: filterEmail,
     };
+    console.log("here4", body);
+
     fetchPaginatedData(page, pageSize, body)
       .then((res) => {
         setTableData(res);
@@ -90,7 +102,7 @@ export const WorkersTable: React.FC = () => {
       .catch((err: any) => {
         console.error("Error fetching data: ", err);
       });
-  }, [page, pageSize]);
+  }, [page, pageSize, flag]);
 
   console.log("Rows11:", array);
   return (
@@ -103,6 +115,8 @@ export const WorkersTable: React.FC = () => {
           setPageSize={setPageSize}
           page={page}
           pageSize={pageSize}
+          setFlag={setFlag}
+          flag={flag}
           rowPerPages={[5, 10, 25]}
           totalData={tableData?.totalProducts || 0}
           columns={tableData?.products || []}

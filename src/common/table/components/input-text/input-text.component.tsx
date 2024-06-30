@@ -4,7 +4,6 @@ import "./input-text.styles.scss";
 interface PropsInput {
   lbl: string;
   Styles?: string;
-  // setInputValue?: React.Dispatch<React.SetStateAction<any>>;
   handleChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
   inputValue?: any;
   type: React.HTMLInputTypeAttribute | undefined;
@@ -15,15 +14,10 @@ export const CustomInputText: React.FC<PropsInput> = ({
   lbl,
   Styles,
   inputValue,
-  // setInputValue,
   handleChange,
   type,
   name,
 }) => {
-  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setInputValue && setInputValue(event.target.value);
-  // };
-
   return (
     <div className={`table_x02_rootCustomInputText ${Styles}`}>
       <div className="table_x02_containerInput">

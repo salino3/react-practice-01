@@ -29,10 +29,15 @@
 }
 
 .boxBtnRow {
-  button {
+  .btnRow {
     min-width: 50px;
     border-radius: 1rem;
     padding: 0 0.5rem;
     line-height: 1rem;
+    background-color: var(--color-five);
+    color: var(--color-one);
+  }
+  .btnRow:active {
+    transform: scale(0.95);
   }
 }

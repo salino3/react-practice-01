@@ -1,4 +1,4 @@
-import { mockPaginationData, Pagination, TableData } from "@/core";
+import { mockPaginationData, Pagination } from "@/core";
 
 export const useAppFunctions = () => {
   const getEmailPrefix = (str: string) => {
@@ -14,29 +14,34 @@ export const useAppFunctions = () => {
   const fetchPaginatedData = (
     page: number,
     pageSize: number,
-    body: Partial<TableData> = {}
+    body: any
   ): Promise<Pagination> => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        const nameFilter = body.name?.toLowerCase() || "";
-        let filteredData;
-        if (nameFilter) {
-          filteredData = mockPaginationData?.products?.filter(
-            (item: TableData) =>
-              item?.name
-                .toLowerCase()
-                .includes(nameFilter && nameFilter.toLowerCase())
-          );
-        } else {
+        const filters = Object.keys(body).reduce((acc, key) => {
+          acc[key] = body[key]?.toLowerCase();
+          return acc;
+        }, {} as Record<string, any | undefined>);
+        console.log("body1", body);
+        let filteredData = mockPaginationData?.products?.filter((item: any) => {
+          return Object.keys(filters).every((key) => {
+            const filterValue = filters[key];
+            return (
+              !filterValue || item[key]?.toLowerCase().includes(filterValue)
+            );
+          });
+        });
+        if (!filteredData || !filteredData.length) {
           filteredData = mockPaginationData?.products;
         }
+
         const start = (page - 1) * pageSize;
         const end = start + pageSize;
         const paginatedData = filteredData && filteredData.slice(start, end);
 
         resolve({
           products: paginatedData || [],
-          totalProducts: filteredData?.length || 0,
+          totalProducts: (filteredData && filteredData?.length) || 0,
         });
       }, 100);
     });

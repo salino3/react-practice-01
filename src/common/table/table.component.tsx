@@ -4,8 +4,9 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import SearchIcon from "@mui/icons-material/Search";
-import "./table.styles.scss";
 import { CustomInputText } from "./components";
+import CancelIcon from "@mui/icons-material/Cancel";
+import "./table.styles.scss";
 
 interface TableProps {
   totalData: number;
@@ -14,6 +15,8 @@ interface TableProps {
   uniqueKey?: string;
   page?: number;
   pageSize?: number;
+  setFlag?: React.Dispatch<React.SetStateAction<boolean>>;
+  flag?: boolean;
   setPage?: React.Dispatch<React.SetStateAction<number>>;
   setPageSize?: React.Dispatch<React.SetStateAction<number>>;
   rowPerPages?: number[];
@@ -26,11 +29,14 @@ export const TableComponet: React.FC<TableProps> = ({
   uniqueKey,
   page = 1,
   pageSize = 10,
+  flag = false,
+  setFlag,
   setPage,
   setPageSize,
   rowPerPages = [5, 10, 25, 50],
 }) => {
-  const keysToFilter = row.map((r, index) => r?.key || index);
+  // const keysToFilter = row.map((r, index) => r?.key || index);
+  const keysToFilter = row.map((r) => r.key);
 
   const [filtersTable, setFiltersTable] = useState<any>(
     row.map((r, index) => {
@@ -43,20 +49,6 @@ export const TableComponet: React.FC<TableProps> = ({
       };
     })
   );
-
-  const toggleFilterOpen = (index: number) => {
-    setFiltersTable((prevFilters: any[]) => {
-      if (!Array.isArray(prevFilters)) {
-        return prevFilters;
-      }
-      return prevFilters.map(
-        (filter: any, i: number) =>
-          i === index ? { ...filter, open: !filter.open } : false // filter
-      );
-    });
-  };
-
-  console.log("here2", filtersTable);
 
   const valuesArray =
     columns &&
@@ -74,6 +66,43 @@ export const TableComponet: React.FC<TableProps> = ({
   const startRow = (page - 1) * pageSize + 1;
   const endRow = Math.min(page * pageSize, totalData);
 
+  //
+  const toggleFilterOpen = (index: number) => {
+    setFiltersTable((prevFilters: any[]) => {
+      if (!Array.isArray(prevFilters)) {
+        return prevFilters;
+      }
+      return prevFilters.map((filter: any, i: number) =>
+        i === index ? { ...filter, open: !filter.open } : filter
+      );
+    });
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log("here3", filtersTable);
+    // Update the filters in the parent component
+    filtersTable.forEach((filter: any) => {
+      if (filter.setFilter) {
+        filter.setFilter(filter.filter);
+      }
+    });
+    setFlag && setFlag(!flag);
+  };
+
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const { value } = event.target;
+    setFiltersTable((prevFilters: any) =>
+      prevFilters.map((filter: any, i: number) =>
+        i === index ? { ...filter, filter: value } : filter
+      )
+    );
+    console.log("handleChange");
+  };
+
   return (
     <div className="table_x02_rootTableComponet">
       <div className="table_x02_containerTable">
@@ -84,29 +113,54 @@ export const TableComponet: React.FC<TableProps> = ({
                 row.length > 0 &&
                 row.map((r, index) => (
                   <th
-                    key={uniqueKey ? r[uniqueKey] : index}
+                    key={uniqueKey && r[uniqueKey] ? r[uniqueKey] : index}
                     scope="col"
                     className={`table_x02_${r?.title}_${
-                      uniqueKey ? r[uniqueKey] : index
+                      uniqueKey && r[uniqueKey] ? r[uniqueKey] : index
                     }`}
                   >
                     {/* start Filter Pop up */}
                     {r?.typeFilter && filtersTable[index]?.open && (
                       <div className="table_x02_containerFormFilter">
-                        <span onClick={() => toggleFilterOpen(index)}>X</span>
+                        <form onSubmit={handleSubmit} id="table_x02_formFilter">
+                          <span onClick={() => toggleFilterOpen(index)}>
+                            <CancelIcon
+                              style={{
+                                color: "var(--color-two)",
+                              }}
+                            />
+                          </span>
 
-                        <CustomInputText
-                          lbl={r?.title}
-                          Styles="table_x02_inputFilter"
-                          type={r?.typeFilter || "text"}
-                          name={r?.title}
-                        />
+                          <CustomInputText
+                            handleChange={(event) => handleChange(event, index)}
+                            // handleChange={(event) =>
+                            //   setFiltersTable({
+                            //     ...filtersTable,
+                            //     [event?.target?.name]:
+                            //       filtersTable[index]?.filter,
+                            //   })
+                            // }
+                            lbl={r?.typeFilter == "date" ? null : r?.title}
+                            Styles="table_x02_inputFilter"
+                            type={r?.typeFilter || "text"}
+                            inputValue={filtersTable[index]?.filter}
+                            name={r?.title}
+                          />
+                          <button
+                            type="submit"
+                            className="btn btn-primary table_x02_btnFilter"
+                          >
+                            Confirm
+                          </button>
+                        </form>
                       </div>
                     )}
                     {/* end Filter Pop up */}
-                    {r?.title} &nbsp;
+                    {r?.title}
+
                     {r?.typeFilter && (
                       <SearchIcon
+                        className="table_x02_iconSearchIcon"
                         onClick={() => toggleFilterOpen(index)}
                         style={{ cursor: "pointer" }}
                       />
@@ -120,7 +174,11 @@ export const TableComponet: React.FC<TableProps> = ({
               valuesArray?.length > 0 &&
               valuesArray.map((values, rowIndex) => (
                 <tr
-                  key={uniqueKey ? values[uniqueKey] : rowIndex}
+                  key={
+                    uniqueKey && values[uniqueKey]
+                      ? values[uniqueKey]
+                      : rowIndex
+                  }
                   className={`table_x02_trTable`}
                 >
                   {keysToFilter &&
@@ -139,10 +197,14 @@ export const TableComponet: React.FC<TableProps> = ({
                       return (
                         <td
                           key={`${key}_${
-                            uniqueKey ? values[uniqueKey] : rowIndex
+                            uniqueKey && values[uniqueKey]
+                              ? values[uniqueKey]
+                              : rowIndex
                           }_${colIndex}`}
                           className={`table_x02_${key}_${
-                            uniqueKey ? values[uniqueKey] : rowIndex
+                            uniqueKey && values[uniqueKey]
+                              ? values[uniqueKey]
+                              : rowIndex
                           }_${colIndex}`}
                         >
                           {key && tooltip && <span>{tooltip}</span>}
@@ -177,7 +239,10 @@ export const TableComponet: React.FC<TableProps> = ({
                     rowPerPages?.length > 0 &&
                     rowPerPages.map((item: number) => (
                       <span
-                        onClick={() => setPageSize && setPageSize(item)}
+                        onClick={() => {
+                          setPageSize && setPageSize(item);
+                          setPage && setPage(1);
+                        }}
                         key={item}
                         className="table_x02_rowPages"
                       >
