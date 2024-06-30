@@ -72,7 +72,9 @@ export const WorkersTable: React.FC = () => {
       render: (_: any, row: TableData) => {
         return (
           <div className="boxBtnRow">
-            <button onClick={() => alert(row?.email)}>Click here</button>
+            <button className="btnRow" onClick={() => alert(row?.email)}>
+              Click here
+            </button>
           </div>
         );
       },
