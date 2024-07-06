@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { TableComponet } from "@/common";
+import { TableComponet, typesFilter } from "@/common";
 import { Pagination, TableData } from "@/core";
 import { useAppFunctions } from "@/hooks";
 import "./workers-table.styles.scss";
@@ -10,26 +10,30 @@ interface Row {
   tooltip?: (item: any, row: TableData) => any | string | undefined;
   render?: (item: any, row: TableData) => any | string | undefined;
   typeFilter?: any;
+  valuesFilter?: string[] | [];
   filter?: any;
   setFilter?: any;
 }
 
 export const WorkersTable: React.FC = () => {
   const { getEmailPrefix, fetchPaginatedData } = useAppFunctions();
+
+  const [page, setPage] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(5);
+  const [flag, setFlag] = useState<boolean>(false);
+
   const [tableData, setTableData] = useState<Pagination | undefined>();
   const [filterId, setFilterId] = useState<number | null>(null);
   const [filterName, setFilterName] = useState<string>("");
   const [filterCity, setFilterCity] = useState<string>("");
   const [filterEmail, setFilterEmail] = useState<string>("");
-  const [page, setPage] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(5);
-  const [flag, setFlag] = useState<boolean>(false);
+  const [filterGender, setFilterGender] = useState<string>("");
 
   const array: Row[] = [
     {
       key: "id",
       title: "Id",
-      typeFilter: "number",
+      typeFilter: typesFilter?.number,
       setFilter: setFilterId,
       filter: filterId,
     },
@@ -37,7 +41,7 @@ export const WorkersTable: React.FC = () => {
       key: "name",
       title: "Name",
       tooltip: (item: string) => item,
-      typeFilter: "text",
+      typeFilter: typesFilter?.text,
       setFilter: setFilterName,
       filter: filterName,
     },
@@ -45,7 +49,7 @@ export const WorkersTable: React.FC = () => {
       key: "city",
       title: "City",
       tooltip: (item: string) => item,
-      typeFilter: "text",
+      typeFilter: typesFilter?.text,
       setFilter: setFilterCity,
       filter: filterCity,
     },
@@ -54,7 +58,7 @@ export const WorkersTable: React.FC = () => {
       title: "Email",
       tooltip: (item: string) => item,
       render: (item: string) => getEmailPrefix(item),
-      typeFilter: "text",
+      typeFilter: typesFilter?.text,
       setFilter: setFilterEmail,
       filter: filterEmail,
     },
@@ -73,6 +77,10 @@ export const WorkersTable: React.FC = () => {
           : item === "female"
           ? "female"
           : "prefer not say",
+      typeFilter: typesFilter?.select,
+      valuesFilter: ["", "female", "male", "prefer_not_say"],
+      setFilter: setFilterGender,
+      filter: filterGender,
     },
     {
       title: "Action",
@@ -94,10 +102,11 @@ export const WorkersTable: React.FC = () => {
       name: filterName,
       city: filterCity,
       email: filterEmail,
+      gender: filterGender,
     };
     console.log("here4", body);
 
-    fetchPaginatedData(page, pageSize, body)
+    fetchPaginatedData(page, pageSize, body, ["gender"])
       .then((res) => {
         setTableData(res);
         console.log("Response: ", res);

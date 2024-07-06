@@ -4,10 +4,13 @@ import "./input-text.styles.scss";
 interface PropsInput {
   lbl: string;
   Styles?: string;
-  handleChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
+  handleChange?:
+    | React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement>
+    | undefined;
   inputValue?: any;
   type: React.HTMLInputTypeAttribute | undefined;
   name: string;
+  valuesFilter?: string[] | [];
 }
 
 export const CustomInputText: React.FC<PropsInput> = ({
@@ -17,19 +20,39 @@ export const CustomInputText: React.FC<PropsInput> = ({
   handleChange,
   type,
   name,
+  valuesFilter,
 }) => {
   return (
     <div className={`table_x02_rootCustomInputText ${Styles}`}>
       <div className="table_x02_containerInput">
-        <input
-          autoFocus
-          type={type}
-          id={name}
-          className="table_x02_inputText"
-          name={name}
-          value={inputValue}
-          onChange={handleChange}
-        />
+        {type == "select" ? (
+          <select
+            value={inputValue}
+            autoFocus
+            onChange={handleChange}
+            id={name}
+            className="table_x02_inputText"
+            name={name}
+          >
+            {valuesFilter &&
+              valuesFilter?.length &&
+              valuesFilter.map((item: string, index: number) => (
+                <option key={index} value={item}>
+                  {item == "prefer_not_say" ? "prefer not say" : item}
+                </option>
+              ))}
+          </select>
+        ) : (
+          <input
+            autoFocus
+            type={type}
+            id={name}
+            className="table_x02_inputText"
+            name={name}
+            value={inputValue}
+            onChange={handleChange}
+          />
+        )}
         <label
           htmlFor={name}
           className={`table_x02_inputLabel ${

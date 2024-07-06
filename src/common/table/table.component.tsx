@@ -21,6 +21,24 @@ interface TableProps {
   rowPerPages?: number[];
 }
 
+interface TypesFilter {
+  text: string;
+  number: string;
+  select: string;
+  date: string;
+  checkbox: string;
+  range: string;
+}
+
+export const typesFilter: TypesFilter = {
+  text: "text",
+  number: "number",
+  select: "select",
+  date: "date",
+  checkbox: "checkbox",
+  range: "range",
+};
+
 export const TableComponet: React.FC<TableProps> = ({
   totalData = 0,
   columns,
@@ -91,7 +109,7 @@ export const TableComponet: React.FC<TableProps> = ({
   };
 
   const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement> | any,
     index: number
   ) => {
     const { value } = event.target;
@@ -100,7 +118,6 @@ export const TableComponet: React.FC<TableProps> = ({
         i === index ? { ...filter, filter: value } : filter
       )
     );
-    console.log("handleChange");
   };
 
   const handleReset = (index: number) => {
@@ -165,6 +182,7 @@ export const TableComponet: React.FC<TableProps> = ({
                           </span>
 
                           <CustomInputText
+                            valuesFilter={r?.valuesFilter || []}
                             handleChange={(event) => handleChange(event, index)}
                             lbl={r?.typeFilter == "date" ? null : r?.title}
                             Styles="table_x02_inputFilter"
