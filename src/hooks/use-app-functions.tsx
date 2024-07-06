@@ -11,6 +11,42 @@ export const useAppFunctions = () => {
     }
   };
 
+  // const fetchPaginatedData = (
+  //   page: number,
+  //   pageSize: number,
+  //   body: any
+  // ): Promise<Pagination> => {
+  //   return new Promise((resolve) => {
+  //     setTimeout(() => {
+  //       const filters = Object.keys(body).reduce((acc, key) => {
+  //         acc[key] = body[key]?.toLowerCase();
+  //         return acc;
+  //       }, {} as Record<string, any | undefined>);
+  //       console.log("body1", body);
+  //       let filteredData = mockPaginationData?.products?.filter((item: any) => {
+  //         return Object.keys(filters).every((key) => {
+  //           const filterValue = filters[key];
+  //           return (
+  //             !filterValue || item[key]?.toLowerCase().includes(filterValue)
+  //           );
+  //         });
+  //       });
+  //       if (!filteredData || !filteredData.length) {
+  //         filteredData = mockPaginationData?.products;
+  //       }
+
+  //       const start = (page - 1) * pageSize;
+  //       const end = start + pageSize;
+  //       const paginatedData = filteredData && filteredData.slice(start, end);
+
+  //       resolve({
+  //         products: paginatedData || [],
+  //         totalProducts: (filteredData && filteredData?.length) || 0,
+  //       });
+  //     }, 100);
+  //   });
+  // };
+
   const fetchPaginatedData = (
     page: number,
     pageSize: number,
@@ -19,25 +55,34 @@ export const useAppFunctions = () => {
     return new Promise((resolve) => {
       setTimeout(() => {
         const filters = Object.keys(body).reduce((acc, key) => {
-          acc[key] = body[key]?.toLowerCase();
+          acc[key] =
+            typeof body[key] === "number"
+              ? body[key]
+              : body[key]?.toLowerCase();
           return acc;
-        }, {} as Record<string, any | undefined>);
-        console.log("body1", body);
+        }, {} as Record<string, string | number | undefined>);
+
+        console.log("Filters:", filters);
+
         let filteredData = mockPaginationData?.products?.filter((item: any) => {
           return Object.keys(filters).every((key) => {
             const filterValue = filters[key];
-            return (
-              !filterValue || item[key]?.toLowerCase().includes(filterValue)
-            );
+            const itemValue = item[key]?.toString().toLowerCase();
+            if (typeof filterValue === "number") {
+              return itemValue.includes(filterValue.toString());
+            } else {
+              return !filterValue || itemValue.includes(filterValue);
+            }
           });
         });
+
         if (!filteredData || !filteredData.length) {
-          filteredData = mockPaginationData?.products;
+          filteredData = [];
         }
 
         const start = (page - 1) * pageSize;
         const end = start + pageSize;
-        const paginatedData = filteredData && filteredData.slice(start, end);
+        const paginatedData = filteredData.slice(start, end);
 
         resolve({
           products: paginatedData || [],

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
@@ -16,7 +16,6 @@ interface TableProps {
   page?: number;
   pageSize?: number;
   setFlag?: React.Dispatch<React.SetStateAction<boolean>>;
-  flag?: boolean;
   setPage?: React.Dispatch<React.SetStateAction<number>>;
   setPageSize?: React.Dispatch<React.SetStateAction<number>>;
   rowPerPages?: number[];
@@ -29,7 +28,6 @@ export const TableComponet: React.FC<TableProps> = ({
   uniqueKey,
   page = 1,
   pageSize = 10,
-  flag = false,
   setFlag,
   setPage,
   setPageSize,
@@ -37,6 +35,8 @@ export const TableComponet: React.FC<TableProps> = ({
 }) => {
   // const keysToFilter = row.map((r, index) => r?.key || index);
   const keysToFilter = row.map((r) => r.key);
+
+  const popupRefs = useRef<any[]>([]);
 
   const [filtersTable, setFiltersTable] = useState<any>(
     row.map((r, index) => {
@@ -83,11 +83,11 @@ export const TableComponet: React.FC<TableProps> = ({
     console.log("here3", filtersTable);
     // Update the filters in the parent component
     filtersTable.forEach((filter: any) => {
-      if (filter.setFilter) {
-        filter.setFilter(filter.filter);
+      if (filter?.setFilter) {
+        filter?.setFilter(filter.filter);
       }
     });
-    setFlag && setFlag(!flag);
+    setFlag && setFlag((prev) => !prev);
   };
 
   const handleChange = (
@@ -103,9 +103,39 @@ export const TableComponet: React.FC<TableProps> = ({
     console.log("handleChange");
   };
 
+  const handleReset = (index: number) => {
+    setFiltersTable((prevFilters: any[]) =>
+      prevFilters.map((filter: any, i: number) =>
+        i === index ? { ...filter, filter: "" } : filter
+      )
+    );
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      popupRefs.current.forEach((ref, index) => {
+        if (ref && !ref.contains(event.target as Node)) {
+          setFiltersTable((prevFilters: any[]) => {
+            return prevFilters.map((filter: any, i: number) =>
+              i === index ? { ...filter, open: false } : filter
+            );
+          });
+        }
+      });
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="table_x02_rootTableComponet">
       <div className="table_x02_containerTable">
+        <span className="table_x02_totalResults">
+          Total results: {totalData || "No data"}
+        </span>
         <table className="table">
           <thead>
             <tr>
@@ -115,13 +145,16 @@ export const TableComponet: React.FC<TableProps> = ({
                   <th
                     key={uniqueKey && r[uniqueKey] ? r[uniqueKey] : index}
                     scope="col"
-                    className={`table_x02_${r?.title}_${
+                    className={`table_x02_thHeader  table_x02_${r?.title}_${
                       uniqueKey && r[uniqueKey] ? r[uniqueKey] : index
                     }`}
                   >
                     {/* start Filter Pop up */}
                     {r?.typeFilter && filtersTable[index]?.open && (
-                      <div className="table_x02_containerFormFilter">
+                      <div
+                        className="table_x02_containerFormFilter"
+                        ref={(el) => (popupRefs.current[index] = el)}
+                      >
                         <form onSubmit={handleSubmit} id="table_x02_formFilter">
                           <span onClick={() => toggleFilterOpen(index)}>
                             <CancelIcon
@@ -133,38 +166,47 @@ export const TableComponet: React.FC<TableProps> = ({
 
                           <CustomInputText
                             handleChange={(event) => handleChange(event, index)}
-                            // handleChange={(event) =>
-                            //   setFiltersTable({
-                            //     ...filtersTable,
-                            //     [event?.target?.name]:
-                            //       filtersTable[index]?.filter,
-                            //   })
-                            // }
                             lbl={r?.typeFilter == "date" ? null : r?.title}
                             Styles="table_x02_inputFilter"
                             type={r?.typeFilter || "text"}
                             inputValue={filtersTable[index]?.filter}
                             name={r?.title}
                           />
-                          <button
-                            type="submit"
-                            className="btn btn-primary table_x02_btnFilter"
-                          >
-                            Confirm
-                          </button>
+                          <div className="table_x02_btnsContainer">
+                            <button
+                              type="submit"
+                              className="btn btn-primary table_x02_btnFilter"
+                            >
+                              Confirm
+                            </button>
+                            <button
+                              type="reset"
+                              onClick={() => handleReset(index)}
+                              className="btn btn-secondary table_x02_btnFilter"
+                            >
+                              Cancel
+                            </button>
+                          </div>
                         </form>
                       </div>
                     )}
                     {/* end Filter Pop up */}
-                    {r?.title}
+                    <span className="table_x02_spanTitleIcon">
+                      {r?.title}
 
-                    {r?.typeFilter && (
-                      <SearchIcon
-                        className="table_x02_iconSearchIcon"
-                        onClick={() => toggleFilterOpen(index)}
-                        style={{ cursor: "pointer" }}
-                      />
-                    )}
+                      {r?.typeFilter && (
+                        <SearchIcon
+                          className="table_x02_iconSearchIcon"
+                          onClick={() => toggleFilterOpen(index)}
+                          style={{
+                            cursor: "pointer",
+                            color: filtersTable[index]?.filter
+                              ? "var(--color-one)"
+                              : "",
+                          }}
+                        />
+                      )}
+                    </span>
                   </th>
                 ))}
             </tr>
@@ -270,7 +312,7 @@ export const TableComponet: React.FC<TableProps> = ({
                 className="table_x02_iconPagination"
               />
               <div className="table_x02_infoPagination">
-                {startRow} - {endRow} of {totalData || "No data"}
+                {startRow} - {endRow}
               </div>
               <KeyboardArrowRightIcon
                 style={{
