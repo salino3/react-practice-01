@@ -145,7 +145,7 @@ export const TableComponet: React.FC<TableProps> = ({
                   <th
                     key={uniqueKey && r[uniqueKey] ? r[uniqueKey] : index}
                     scope="col"
-                    className={`table_x02_${r?.title}_${
+                    className={`table_x02_thHeader  table_x02_${r?.title}_${
                       uniqueKey && r[uniqueKey] ? r[uniqueKey] : index
                     }`}
                   >
@@ -191,15 +191,22 @@ export const TableComponet: React.FC<TableProps> = ({
                       </div>
                     )}
                     {/* end Filter Pop up */}
-                    {r?.title}
+                    <span className="table_x02_spanTitleIcon">
+                      {r?.title}
 
-                    {r?.typeFilter && (
-                      <SearchIcon
-                        className="table_x02_iconSearchIcon"
-                        onClick={() => toggleFilterOpen(index)}
-                        style={{ cursor: "pointer" }}
-                      />
-                    )}
+                      {r?.typeFilter && (
+                        <SearchIcon
+                          className="table_x02_iconSearchIcon"
+                          onClick={() => toggleFilterOpen(index)}
+                          style={{
+                            cursor: "pointer",
+                            color: filtersTable[index]?.filter
+                              ? "var(--color-one)"
+                              : "",
+                          }}
+                        />
+                      )}
+                    </span>
                   </th>
                 ))}
             </tr>
