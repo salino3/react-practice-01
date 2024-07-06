@@ -50,7 +50,8 @@ export const useAppFunctions = () => {
   const fetchPaginatedData = (
     page: number,
     pageSize: number,
-    body: any
+    body: any,
+    exactFilters: string[]
   ): Promise<Pagination> => {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -75,6 +76,23 @@ export const useAppFunctions = () => {
             }
           });
         });
+
+        if (exactFilters && exactFilters.length > 0) {
+          exactFilters.forEach((filterKey) => {
+            const exactValue = body[filterKey];
+            if (
+              exactValue !== undefined &&
+              exactValue !== null &&
+              exactValue !== ""
+            ) {
+              filteredData = filteredData?.filter(
+                (item: any) =>
+                  item[filterKey]?.toString().toLowerCase() ===
+                  exactValue.toString().toLowerCase()
+              );
+            }
+          });
+        }
 
         if (!filteredData || !filteredData.length) {
           filteredData = [];

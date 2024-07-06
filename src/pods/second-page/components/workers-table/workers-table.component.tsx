@@ -106,7 +106,7 @@ export const WorkersTable: React.FC = () => {
     };
     console.log("here4", body);
 
-    fetchPaginatedData(page, pageSize, body)
+    fetchPaginatedData(page, pageSize, body, ["gender"])
       .then((res) => {
         setTableData(res);
         console.log("Response: ", res);

@@ -28,6 +28,7 @@ export const CustomInputText: React.FC<PropsInput> = ({
         {type == "select" ? (
           <select
             value={inputValue}
+            autoFocus
             onChange={handleChange}
             id={name}
             className="table_x02_inputText"
