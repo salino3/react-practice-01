@@ -106,6 +106,9 @@ export const TableComponet: React.FC<TableProps> = ({
   return (
     <div className="table_x02_rootTableComponet">
       <div className="table_x02_containerTable">
+        <span className="table_x02_totalResults">
+          Total results: {totalData || "No data"}
+        </span>
         <table className="table">
           <thead>
             <tr>
@@ -270,7 +273,7 @@ export const TableComponet: React.FC<TableProps> = ({
                 className="table_x02_iconPagination"
               />
               <div className="table_x02_infoPagination">
-                {startRow} - {endRow} of {totalData || "No data"}
+                {startRow} - {endRow}
               </div>
               <KeyboardArrowRightIcon
                 style={{
