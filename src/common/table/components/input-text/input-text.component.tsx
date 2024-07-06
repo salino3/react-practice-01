@@ -22,6 +22,7 @@ export const CustomInputText: React.FC<PropsInput> = ({
     <div className={`table_x02_rootCustomInputText ${Styles}`}>
       <div className="table_x02_containerInput">
         <input
+          autoFocus
           type={type}
           id={name}
           className="table_x02_inputText"
