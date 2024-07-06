@@ -78,14 +78,23 @@
             }
             .table_x02_inputFilter {
             }
-            .table_x02_btnFilter {
+            .table_x02_btnsContainer {
               display: flex;
-              flex-direction: column;
-              justify-content: center;
+              flex-direction: row;
+              gap: 1rem;
+              justify-content: space-between;
               align-items: center;
-              height: 2.2rem;
-              font-size: 1.2rem;
-              letter-spacing: 2px;
+
+              .table_x02_btnFilter {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 2.2rem;
+                font-size: 1.2rem;
+                letter-spacing: 1px;
+                width: 5.5rem;
+              }
             }
           }
         }

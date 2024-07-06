@@ -101,6 +101,14 @@ export const TableComponet: React.FC<TableProps> = ({
     console.log("handleChange");
   };
 
+  const handleReset = (index: number) => {
+    setFiltersTable((prevFilters: any[]) =>
+      prevFilters.map((filter: any, i: number) =>
+        i === index ? { ...filter, filter: "" } : filter
+      )
+    );
+  };
+
   return (
     <div className="table_x02_rootTableComponet">
       <div className="table_x02_containerTable">
@@ -134,25 +142,27 @@ export const TableComponet: React.FC<TableProps> = ({
 
                           <CustomInputText
                             handleChange={(event) => handleChange(event, index)}
-                            // handleChange={(event) =>
-                            //   setFiltersTable({
-                            //     ...filtersTable,
-                            //     [event?.target?.name]:
-                            //       filtersTable[index]?.filter,
-                            //   })
-                            // }
                             lbl={r?.typeFilter == "date" ? null : r?.title}
                             Styles="table_x02_inputFilter"
                             type={r?.typeFilter || "text"}
                             inputValue={filtersTable[index]?.filter}
                             name={r?.title}
                           />
-                          <button
-                            type="submit"
-                            className="btn btn-primary table_x02_btnFilter"
-                          >
-                            Confirm
-                          </button>
+                          <div className="table_x02_btnsContainer">
+                            <button
+                              type="reset"
+                              onClick={() => handleReset(index)}
+                              className="btn btn-secondary table_x02_btnFilter"
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              type="submit"
+                              className="btn btn-primary table_x02_btnFilter"
+                            >
+                              Confirm
+                            </button>
+                          </div>
                         </form>
                       </div>
                     )}
