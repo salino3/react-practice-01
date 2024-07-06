@@ -21,6 +21,24 @@ interface TableProps {
   rowPerPages?: number[];
 }
 
+interface TypesFilter {
+  text: string;
+  number: string;
+  select: string;
+  date: string;
+  checkbox: string;
+  range: string;
+}
+
+export const typesFilter: TypesFilter = {
+  text: "text",
+  number: "number",
+  select: "select",
+  date: "date",
+  checkbox: "checkbox",
+  range: "range",
+};
+
 export const TableComponet: React.FC<TableProps> = ({
   totalData = 0,
   columns,
