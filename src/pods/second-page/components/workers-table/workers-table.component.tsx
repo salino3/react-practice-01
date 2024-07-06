@@ -17,7 +17,7 @@ interface Row {
 export const WorkersTable: React.FC = () => {
   const { getEmailPrefix, fetchPaginatedData } = useAppFunctions();
   const [tableData, setTableData] = useState<Pagination | undefined>();
-  // const [filterId, setFilterId] = useState<number | null>(null);
+  const [filterId, setFilterId] = useState<number | null>(null);
   const [filterName, setFilterName] = useState<string>("");
   const [filterCity, setFilterCity] = useState<string>("");
   const [filterEmail, setFilterEmail] = useState<string>("");
@@ -29,6 +29,9 @@ export const WorkersTable: React.FC = () => {
     {
       key: "id",
       title: "Id",
+      typeFilter: "number",
+      setFilter: setFilterId,
+      filter: filterId,
     },
     {
       key: "name",
@@ -87,7 +90,7 @@ export const WorkersTable: React.FC = () => {
 
   useEffect(() => {
     const body = {
-      // id: filterId,
+      id: filterId,
       name: filterName,
       city: filterCity,
       email: filterEmail,

@@ -47,7 +47,7 @@ export const mockPaginationData: Pagination = {
       id: 1,
       name: "Arianna",
       city: "Berlin",
-      email: "arianna@gmail.com",
+      email: "arianna@gmail.es",
       age: 32,
       gender: Gender.Female,
       employee: true,

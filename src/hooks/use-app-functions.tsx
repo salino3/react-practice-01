@@ -54,20 +54,25 @@ export const useAppFunctions = () => {
   ): Promise<Pagination> => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        // Convertimos los valores de body a minúsculas para hacer coincidencias de filtro insensibles a mayúsculas
         const filters = Object.keys(body).reduce((acc, key) => {
-          acc[key] = body[key]?.toLowerCase();
+          acc[key] =
+            typeof body[key] === "number"
+              ? body[key]
+              : body[key]?.toLowerCase();
           return acc;
-        }, {} as Record<string, string | undefined>);
+        }, {} as Record<string, string | number | undefined>);
 
         console.log("Filters:", filters);
 
         let filteredData = mockPaginationData?.products?.filter((item: any) => {
           return Object.keys(filters).every((key) => {
             const filterValue = filters[key];
-            return (
-              !filterValue || item[key]?.toLowerCase().includes(filterValue)
-            );
+            const itemValue = item[key]?.toString().toLowerCase();
+            if (typeof filterValue === "number") {
+              return itemValue.includes(filterValue.toString());
+            } else {
+              return !filterValue || itemValue.includes(filterValue);
+            }
           });
         });
 
