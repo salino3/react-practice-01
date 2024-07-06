@@ -16,7 +16,6 @@ interface TableProps {
   page?: number;
   pageSize?: number;
   setFlag?: React.Dispatch<React.SetStateAction<boolean>>;
-  flag?: boolean;
   setPage?: React.Dispatch<React.SetStateAction<number>>;
   setPageSize?: React.Dispatch<React.SetStateAction<number>>;
   rowPerPages?: number[];
@@ -29,7 +28,6 @@ export const TableComponet: React.FC<TableProps> = ({
   uniqueKey,
   page = 1,
   pageSize = 10,
-  flag = false,
   setFlag,
   setPage,
   setPageSize,
@@ -83,11 +81,11 @@ export const TableComponet: React.FC<TableProps> = ({
     console.log("here3", filtersTable);
     // Update the filters in the parent component
     filtersTable.forEach((filter: any) => {
-      if (filter.setFilter) {
-        filter.setFilter(filter.filter);
+      if (filter?.setFilter) {
+        filter?.setFilter(filter.filter);
       }
     });
-    setFlag && setFlag(!flag);
+    setFlag && setFlag((prev) => !prev);
   };
 
   const handleChange = (
