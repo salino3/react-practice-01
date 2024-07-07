@@ -26,7 +26,7 @@ interface TypesFilter {
   number: string;
   select: string;
   date: string;
-  checkbox: string;
+  multiselect: string;
   range: string;
 }
 
@@ -35,7 +35,7 @@ export const typesFilter: TypesFilter = {
   number: "number",
   select: "select",
   date: "date",
-  checkbox: "checkbox",
+  multiselect: "multiselect",
   range: "range",
 };
 
