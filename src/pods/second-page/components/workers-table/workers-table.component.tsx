@@ -39,7 +39,7 @@ export const WorkersTable: React.FC = () => {
     {
       key: "id",
       title: "Id",
-      typeFilter: typesFilter?.number,
+      typeFilter: typesFilter?.range,
       setFilter: setFilterId,
       filter: filterId,
     },

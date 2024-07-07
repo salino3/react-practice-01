@@ -1,6 +1,6 @@
 import React from "react";
-import "./input-text.styles.scss";
 import { ValuesFilter } from "@/pods";
+import "./input-text.styles.scss";
 
 interface PropsInput {
   lbl: string;
@@ -23,37 +23,49 @@ export const CustomInputText: React.FC<PropsInput> = ({
   name,
   valuesFilter,
 }) => {
+  let input;
+
+  switch (type) {
+    case "select":
+      input = (
+        <select
+          value={inputValue}
+          autoFocus
+          onChange={handleChange}
+          id={name}
+          className="table_x02_inputText"
+          name={name}
+        >
+          {valuesFilter &&
+            valuesFilter?.length &&
+            valuesFilter.map((item: ValuesFilter) => (
+              <option key={item?.value} value={item?.value}>
+                {item?.text}
+              </option>
+            ))}
+        </select>
+      );
+      break;
+
+    default:
+      input = (
+        <input
+          autoFocus
+          type={type}
+          id={name}
+          className="table_x02_inputText"
+          name={name}
+          value={inputValue}
+          onChange={handleChange}
+        />
+      );
+      break;
+  }
+
   return (
     <div className={`table_x02_rootCustomInputText ${Styles}`}>
       <div className="table_x02_containerInput">
-        {type == "select" ? (
-          <select
-            value={inputValue}
-            autoFocus
-            onChange={handleChange}
-            id={name}
-            className="table_x02_inputText"
-            name={name}
-          >
-            {valuesFilter &&
-              valuesFilter?.length &&
-              valuesFilter.map((item: ValuesFilter) => (
-                <option key={item?.value} value={item?.value}>
-                  {item?.text}
-                </option>
-              ))}
-          </select>
-        ) : (
-          <input
-            autoFocus
-            type={type}
-            id={name}
-            className="table_x02_inputText"
-            name={name}
-            value={inputValue}
-            onChange={handleChange}
-          />
-        )}
+        {input}
         <label
           htmlFor={name}
           className={`table_x02_inputLabel ${

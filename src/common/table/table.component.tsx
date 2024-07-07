@@ -4,7 +4,7 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import SearchIcon from "@mui/icons-material/Search";
-import { CustomInputText } from "./components";
+import { CustomInputText, InputRange } from "./components";
 import CancelIcon from "@mui/icons-material/Cancel";
 import "./table.styles.scss";
 
@@ -108,15 +108,38 @@ export const TableComponet: React.FC<TableProps> = ({
     setFlag && setFlag((prev) => !prev);
   };
 
+  // const handleChange = (
+  //   event: React.ChangeEvent<HTMLInputElement> | any,
+  //   index: number
+  // ) => {
+  //   const { value } = event.target;
+  //   setFiltersTable((prevFilters: any) =>
+  //     prevFilters.map((filter: any, i: number) =>
+  //       i === index ? { ...filter, filter: value } : filter
+  //     )
+  //   );
+  // };
+
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement> | any,
-    index: number
+    index: number,
+    inputIndex?: number
   ) => {
     const { value } = event.target;
     setFiltersTable((prevFilters: any) =>
-      prevFilters.map((filter: any, i: number) =>
-        i === index ? { ...filter, filter: value } : filter
-      )
+      prevFilters.map((filter: any, i: number) => {
+        if (i === index) {
+          if (filter.typeFilter === "range") {
+            const newValue = {
+              ...filter.filter,
+              [inputIndex === 0 ? "min" : "max"]: value,
+            };
+            return { ...filter, filter: newValue };
+          }
+          return { ...filter, filter: value };
+        }
+        return filter;
+      })
     );
   };
 
@@ -181,15 +204,30 @@ export const TableComponet: React.FC<TableProps> = ({
                             />
                           </span>
 
-                          <CustomInputText
-                            valuesFilter={r?.valuesFilter || []}
-                            handleChange={(event) => handleChange(event, index)}
-                            lbl={r?.typeFilter == "date" ? null : r?.title}
-                            Styles="table_x02_inputFilter"
-                            type={r?.typeFilter || "text"}
-                            inputValue={filtersTable[index]?.filter}
-                            name={r?.title}
-                          />
+                          {r?.typeFilter == "range" ? (
+                            <InputRange
+                              handleChange={(event, inputIndex) =>
+                                handleChange(event, index, inputIndex)
+                              }
+                              lbl={r?.typeFilter === "date" ? null : r?.title}
+                              Styles="table_x02_inputFilter"
+                              type={r?.typeFilter || "text"}
+                              inputValue={filtersTable[index]?.filter}
+                              name={r?.title}
+                            />
+                          ) : (
+                            <CustomInputText
+                              valuesFilter={r?.valuesFilter || []}
+                              handleChange={(event) =>
+                                handleChange(event, index)
+                              }
+                              lbl={r?.typeFilter == "date" ? null : r?.title}
+                              Styles="table_x02_inputFilter"
+                              type={r?.typeFilter || "text"}
+                              inputValue={filtersTable[index]?.filter}
+                              name={r?.title}
+                            />
+                          )}
                           <div className="table_x02_btnsContainer">
                             <button
                               type="submit"
