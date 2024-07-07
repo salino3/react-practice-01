@@ -30,10 +30,11 @@ export const WorkersTable: React.FC = () => {
   const [flag, setFlag] = useState<boolean>(false);
 
   const [tableData, setTableData] = useState<Pagination | undefined>();
-  const [filterId, setFilterId] = useState<number | null>(null);
+  const [filterId, setFilterId] = useState<string>("");
   const [filterName, setFilterName] = useState<string>("");
   const [filterCity, setFilterCity] = useState<string>("");
   const [filterEmail, setFilterEmail] = useState<string>("");
+  const [filterAge, setFilterAge] = useState<number | null>(null);
   const [filterBirthDate, setFilterBirthDate] = useState<string>("");
   const [filterGender, setFilterGender] = useState<string>("");
   const [filterEmployee, setFilterEmployee] = useState<string>("");
@@ -45,7 +46,7 @@ export const WorkersTable: React.FC = () => {
     {
       key: "id",
       title: "Id",
-      typeFilter: typesFilter?.range,
+      typeFilter: typesFilter?.number,
       setFilter: setFilterId,
       filter: filterId,
     },
@@ -73,6 +74,13 @@ export const WorkersTable: React.FC = () => {
       typeFilter: typesFilter?.text,
       setFilter: setFilterEmail,
       filter: filterEmail,
+    },
+    {
+      key: "age",
+      title: "Age",
+      typeFilter: typesFilter?.range,
+      setFilter: setFilterAge,
+      filter: filterAge,
     },
     {
       key: "gender",
@@ -150,6 +158,7 @@ export const WorkersTable: React.FC = () => {
       name: filterName,
       city: filterCity,
       email: filterEmail,
+      age: filterAge,
       birthDate: filterBirthDate,
       gender: filterGender,
       employee: filterEmployee,
@@ -161,7 +170,7 @@ export const WorkersTable: React.FC = () => {
       pageSize,
       body,
       ["gender", "employee"],
-      ["id", "birthDate"]
+      ["age", "birthDate"]
     )
       .then((res) => {
         setTableData(res);

@@ -182,7 +182,9 @@ export const useAppFunctions = () => {
 
             if (
               typeof filterValue === "object" &&
+              filterValue.min &&
               filterValue.min !== undefined &&
+              filterValue.max &&
               filterValue.max !== undefined
             ) {
               if (
