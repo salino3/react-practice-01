@@ -51,6 +51,7 @@ export const mockPaginationData: Pagination = {
       age: 32,
       gender: Gender.Female,
       employee: true,
+      birthDate: "1992-05-15T00:00:00Z",
     },
     {
       id: 2,
@@ -60,6 +61,7 @@ export const mockPaginationData: Pagination = {
       age: 39,
       gender: Gender.PreferNotSay,
       employee: false,
+      birthDate: "1985-10-20T00:00:00Z",
     },
     {
       id: 3,
@@ -69,6 +71,7 @@ export const mockPaginationData: Pagination = {
       age: 50,
       gender: Gender.Male,
       employee: true,
+      birthDate: "1990-03-15T00:00:00Z",
     },
     {
       id: 4,
@@ -78,6 +81,7 @@ export const mockPaginationData: Pagination = {
       age: 28,
       gender: Gender.Female,
       employee: true,
+      birthDate: "1978-07-25T00:00:00Z",
     },
     {
       id: 5,
@@ -87,6 +91,7 @@ export const mockPaginationData: Pagination = {
       age: 45,
       gender: Gender.Male,
       employee: false,
+      birthDate: "",
     },
     {
       id: 6,
@@ -96,6 +101,7 @@ export const mockPaginationData: Pagination = {
       age: 29,
       gender: Gender.PreferNotSay,
       employee: true,
+      birthDate: "2001-12-05T00:00:00Z",
     },
     {
       id: 7,
@@ -105,6 +111,7 @@ export const mockPaginationData: Pagination = {
       age: 35,
       gender: Gender.Male,
       employee: true,
+      birthDate: "1995-02-28T00:00:00Z",
     },
     {
       id: 8,
@@ -114,6 +121,7 @@ export const mockPaginationData: Pagination = {
       age: 31,
       gender: Gender.Female,
       employee: false,
+      birthDate: "1990-03-15T00:00:00Z",
     },
     {
       id: 9,
@@ -123,6 +131,7 @@ export const mockPaginationData: Pagination = {
       age: 42,
       gender: Gender.PreferNotSay,
       employee: true,
+      birthDate: "1983-11-18T00:00:00Z",
     },
     {
       id: 10,
@@ -132,6 +141,7 @@ export const mockPaginationData: Pagination = {
       age: 27,
       gender: Gender.Female,
       employee: false,
+      birthDate: "",
     },
     {
       id: 11,
@@ -141,6 +151,7 @@ export const mockPaginationData: Pagination = {
       age: 34,
       gender: Gender.Male,
       employee: true,
+      birthDate: "1976-04-30T00:00:00Z",
     },
     {
       id: 12,
@@ -150,6 +161,7 @@ export const mockPaginationData: Pagination = {
       age: 31,
       gender: Gender.PreferNotSay,
       employee: false,
+      birthDate: "1999-08-12T00:00:00Z",
     },
     {
       id: 13,
@@ -159,6 +171,7 @@ export const mockPaginationData: Pagination = {
       age: 36,
       gender: Gender.Male,
       employee: true,
+      birthDate: "2005-06-22T00:00:00Z",
     },
     {
       id: 14,
@@ -168,6 +181,7 @@ export const mockPaginationData: Pagination = {
       age: 29,
       gender: Gender.Female,
       employee: true,
+      birthDate: "1983-11-18T00:00:00Z",
     },
     {
       id: 15,
@@ -177,6 +191,7 @@ export const mockPaginationData: Pagination = {
       age: 40,
       gender: Gender.Male,
       employee: false,
+      birthDate: "1985-10-20T00:00:00Z",
     },
     {
       id: 16,
@@ -186,6 +201,7 @@ export const mockPaginationData: Pagination = {
       age: 25,
       gender: Gender.Female,
       employee: true,
+      birthDate: "1990-03-15T00:00:00Z",
     },
     {
       id: 17,
@@ -195,6 +211,7 @@ export const mockPaginationData: Pagination = {
       age: 33,
       gender: Gender.Male,
       employee: true,
+      birthDate: "1978-07-25T00:00:00Z",
     },
     {
       id: 18,
@@ -204,6 +221,7 @@ export const mockPaginationData: Pagination = {
       age: 27,
       gender: Gender.Female,
       employee: false,
+      birthDate: "2001-12-05T00:00:00Z",
     },
     {
       id: 19,
@@ -213,6 +231,7 @@ export const mockPaginationData: Pagination = {
       age: 38,
       gender: Gender.Male,
       employee: true,
+      birthDate: "1987-09-10T00:00:00Z",
     },
     {
       id: 20,
@@ -222,6 +241,7 @@ export const mockPaginationData: Pagination = {
       age: 26,
       gender: Gender.Female,
       employee: false,
+      birthDate: "1995-02-28T00:00:00Z",
     },
     {
       id: 21,
@@ -231,6 +251,7 @@ export const mockPaginationData: Pagination = {
       age: 43,
       gender: Gender.Male,
       employee: true,
+      birthDate: "1983-11-18T00:00:00Z",
     },
     {
       id: 22,
@@ -240,6 +261,7 @@ export const mockPaginationData: Pagination = {
       age: 30,
       gender: Gender.Female,
       employee: true,
+      birthDate: "1976-04-30T00:00:00Z",
     },
     {
       id: 23,
@@ -249,6 +271,7 @@ export const mockPaginationData: Pagination = {
       age: 37,
       gender: Gender.Male,
       employee: false,
+      birthDate: "2005-06-22T00:00:00Z",
     },
     {
       id: 24,
@@ -258,6 +281,7 @@ export const mockPaginationData: Pagination = {
       age: 28,
       gender: Gender.Female,
       employee: true,
+      birthDate: "",
     },
     {
       id: 25,
@@ -267,6 +291,7 @@ export const mockPaginationData: Pagination = {
       age: 39,
       gender: Gender.Male,
       employee: true,
+      birthDate: "20012-07-22T00:00:00Z",
     },
     {
       id: 26,
@@ -276,6 +301,7 @@ export const mockPaginationData: Pagination = {
       age: 32,
       gender: Gender.Female,
       employee: false,
+      birthDate: "2005-06-22T00:00:00Z",
     },
     {
       id: 27,
@@ -285,6 +311,7 @@ export const mockPaginationData: Pagination = {
       age: 41,
       gender: Gender.Male,
       employee: true,
+      birthDate: "",
     },
     {
       id: 28,
@@ -294,6 +321,7 @@ export const mockPaginationData: Pagination = {
       age: 24,
       gender: Gender.Female,
       employee: false,
+      birthDate: "2002-06-27T00:00:00Z",
     },
     {
       id: 29,
@@ -303,6 +331,7 @@ export const mockPaginationData: Pagination = {
       age: 35,
       gender: Gender.Female,
       employee: true,
+      birthDate: "",
     },
     {
       id: 30,
@@ -312,6 +341,7 @@ export const mockPaginationData: Pagination = {
       age: 44,
       gender: Gender.Male,
       employee: false,
+      birthDate: "1999-08-30T00:00:00Z",
     },
     {
       id: 31,
@@ -321,6 +351,7 @@ export const mockPaginationData: Pagination = {
       age: 34,
       gender: Gender.Female,
       employee: false,
+      birthDate: "1992-02-22T00:00:00Z",
     },
   ],
 };
