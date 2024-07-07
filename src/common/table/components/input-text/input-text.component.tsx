@@ -90,7 +90,7 @@ export const CustomInputText: React.FC<PropsInput> = ({
         <label
           htmlFor={name}
           className={`table_x02_inputLabel ${
-            inputValue ? "table_x02_shrink" : ""
+            inputValue || type == "multiselect" ? "table_x02_shrink" : ""
           }`}
         >
           {lbl}
