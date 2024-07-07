@@ -14,30 +14,57 @@ export const useAppFunctions = () => {
   // const fetchPaginatedData = (
   //   page: number,
   //   pageSize: number,
-  //   body: any
+  //   body: any,
+  //   exactFilters: string[]
   // ): Promise<Pagination> => {
   //   return new Promise((resolve) => {
   //     setTimeout(() => {
   //       const filters = Object.keys(body).reduce((acc, key) => {
-  //         acc[key] = body[key]?.toLowerCase();
+  //         acc[key] =
+  //           typeof body[key] === "number"
+  //             ? body[key]
+  //             : body[key]?.toLowerCase();
   //         return acc;
-  //       }, {} as Record<string, any | undefined>);
-  //       console.log("body1", body);
+  //       }, {} as Record<string, string | number | undefined>);
+
+  //       console.log("Filters:", filters);
+
   //       let filteredData = mockPaginationData?.products?.filter((item: any) => {
   //         return Object.keys(filters).every((key) => {
   //           const filterValue = filters[key];
-  //           return (
-  //             !filterValue || item[key]?.toLowerCase().includes(filterValue)
-  //           );
+  //           const itemValue = item[key]?.toString().toLowerCase();
+  //           if (typeof filterValue === "number") {
+  //             return itemValue.includes(filterValue.toString());
+  //           } else {
+  //             return !filterValue || itemValue.includes(filterValue);
+  //           }
   //         });
   //       });
+
+  //       if (exactFilters && exactFilters.length > 0) {
+  //         exactFilters.forEach((filterKey) => {
+  //           const exactValue = body[filterKey];
+  //           if (
+  //             exactValue !== undefined &&
+  //             exactValue !== null &&
+  //             exactValue !== ""
+  //           ) {
+  //             filteredData = filteredData?.filter(
+  //               (item: any) =>
+  //                 item[filterKey]?.toString().toLowerCase() ===
+  //                 exactValue.toString().toLowerCase()
+  //             );
+  //           }
+  //         });
+  //       }
+
   //       if (!filteredData || !filteredData.length) {
-  //         filteredData = mockPaginationData?.products;
+  //         filteredData = [];
   //       }
 
   //       const start = (page - 1) * pageSize;
   //       const end = start + pageSize;
-  //       const paginatedData = filteredData && filteredData.slice(start, end);
+  //       const paginatedData = filteredData.slice(start, end);
 
   //       resolve({
   //         products: paginatedData || [],
@@ -51,28 +78,43 @@ export const useAppFunctions = () => {
     page: number,
     pageSize: number,
     body: any,
-    exactFilters: string[]
+    exactFilters: string[],
+    rangeFilters: string[]
   ): Promise<Pagination> => {
     return new Promise((resolve) => {
       setTimeout(() => {
         const filters = Object.keys(body).reduce((acc, key) => {
-          acc[key] =
-            typeof body[key] === "number"
-              ? body[key]
-              : body[key]?.toLowerCase();
+          if (rangeFilters.includes(key)) {
+            if (body[key]?.min !== undefined && body[key]?.max !== undefined) {
+              acc[key] = body[key];
+            }
+          } else if (typeof body[key] === "string") {
+            acc[key] = body[key].toLowerCase();
+          } else {
+            acc[key] = body[key];
+          }
           return acc;
-        }, {} as Record<string, string | number | undefined>);
+        }, {} as Record<string, any>);
 
         console.log("Filters:", filters);
 
         let filteredData = mockPaginationData?.products?.filter((item: any) => {
           return Object.keys(filters).every((key) => {
             const filterValue = filters[key];
-            const itemValue = item[key]?.toString().toLowerCase();
-            if (typeof filterValue === "number") {
-              return itemValue.includes(filterValue.toString());
-            } else {
+            if (
+              typeof filterValue === "object" &&
+              filterValue.min !== undefined &&
+              filterValue.max !== undefined
+            ) {
+              const itemNumber = Number(item[key]);
+              return (
+                itemNumber >= filterValue.min && itemNumber <= filterValue.max
+              );
+            } else if (typeof filterValue === "string") {
+              const itemValue = item[key]?.toString().toLowerCase();
               return !filterValue || itemValue.includes(filterValue);
+            } else {
+              return true;
             }
           });
         });
