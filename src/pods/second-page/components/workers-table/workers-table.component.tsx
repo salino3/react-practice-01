@@ -13,6 +13,8 @@ interface Row {
   valuesFilter?: ValuesFilter[] | [];
   filter?: any;
   setFilter?: any;
+  minDate?: string | number | undefined;
+  maxDate?: string | number | undefined;
 }
 
 export interface ValuesFilter {
@@ -35,6 +37,9 @@ export const WorkersTable: React.FC = () => {
   const [filterBirthDate, setFilterBirthDate] = useState<string>("");
   const [filterGender, setFilterGender] = useState<string>("");
   const [filterEmployee, setFilterEmployee] = useState<string>("");
+
+  let today = new Date();
+  let toISODate = today.toISOString().substr(0, 10);
 
   const array: Row[] = [
     {
@@ -109,6 +114,7 @@ export const WorkersTable: React.FC = () => {
       typeFilter: typesFilter?.date,
       setFilter: setFilterBirthDate,
       filter: filterBirthDate,
+      maxDate: toISODate,
     },
 
     {

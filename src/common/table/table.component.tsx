@@ -211,6 +211,8 @@ export const TableComponet: React.FC<TableProps> = ({
                               handleChange={(event, inputIndex) =>
                                 handleChange(event, index, inputIndex)
                               }
+                              maxDate={r?.maxDate}
+                              minDate={r?.minDate}
                               lbl={r?.typeFilter === "date" ? null : r?.title}
                               Styles="table_x02_inputFilter"
                               type={r?.typeFilter || "text"}

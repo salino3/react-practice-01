@@ -10,6 +10,8 @@ interface PropsInput {
   ) => void;
   inputValue?: { min: number; max: number };
   type: React.HTMLInputTypeAttribute | undefined;
+  minDate?: any;
+  maxDate?: any;
   name: string;
 }
 
@@ -20,6 +22,8 @@ export const InputRange: React.FC<PropsInput> = ({
   handleChange,
   type,
   name,
+  minDate,
+  maxDate,
 }) => {
   let inputs;
 
@@ -76,6 +80,7 @@ export const InputRange: React.FC<PropsInput> = ({
             {"Date min"}
           </label>
           <input
+            min={minDate || null}
             autoFocus
             type="date"
             id={`${name}-min`}
@@ -94,6 +99,7 @@ export const InputRange: React.FC<PropsInput> = ({
             {"Date max"}
           </label>
           <input
+            max={maxDate || null}
             type={"date"}
             id={`${name}-max`}
             className="table_x02_inputText_02"
