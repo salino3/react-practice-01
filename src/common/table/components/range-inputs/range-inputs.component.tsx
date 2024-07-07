@@ -73,9 +73,7 @@ export const InputRange: React.FC<PropsInput> = ({
         <div className="table_x02_boxInputsRange">
           <label
             htmlFor={name}
-            className={`table_x02_inputLabel ${
-              inputValue?.min ? "table_x02_shrink" : ""
-            }`}
+            className="table_x02_inputLabel table_x02_shrink"
           >
             {"Date min"}
           </label>
@@ -89,12 +87,10 @@ export const InputRange: React.FC<PropsInput> = ({
             value={inputValue?.min || ""}
             onChange={(event) => handleChange && handleChange(event, 0)}
           />
-          {/*  */}
+
           <label
             htmlFor={name}
-            className={`table_x02_inputLabel_02 ${
-              inputValue?.max ? "table_x02_shrink_02" : ""
-            }`}
+            className="table_x02_inputLabel_02 table_x02_shrink_02"
           >
             {"Date max"}
           </label>
