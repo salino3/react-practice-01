@@ -204,7 +204,8 @@ export const TableComponet: React.FC<TableProps> = ({
                             />
                           </span>
 
-                          {r?.typeFilter == "range" ? (
+                          {r?.typeFilter == "range" ||
+                          r?.typeFilter == "date" ? (
                             <InputRange
                               handleChange={(event, inputIndex) =>
                                 handleChange(event, index, inputIndex)

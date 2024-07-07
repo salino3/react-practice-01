@@ -32,6 +32,7 @@ export const WorkersTable: React.FC = () => {
   const [filterName, setFilterName] = useState<string>("");
   const [filterCity, setFilterCity] = useState<string>("");
   const [filterEmail, setFilterEmail] = useState<string>("");
+  const [filterBirthDate, setFilterBirthDate] = useState<string>("");
   const [filterGender, setFilterGender] = useState<string>("");
   const [filterEmployee, setFilterEmployee] = useState<string>("");
 
@@ -105,6 +106,9 @@ export const WorkersTable: React.FC = () => {
         });
         return formattedDate;
       },
+      typeFilter: typesFilter?.date,
+      setFilter: setFilterBirthDate,
+      filter: filterBirthDate,
     },
 
     {

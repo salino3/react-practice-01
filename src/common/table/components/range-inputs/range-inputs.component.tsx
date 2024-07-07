@@ -94,7 +94,7 @@ export const InputRange: React.FC<PropsInput> = ({
             {lbl + " max"}
           </label>
           <input
-            type="date"
+            type={"date"}
             id={`${name}-max`}
             className="table_x02_inputText_02"
             name={`${name}-max`}
