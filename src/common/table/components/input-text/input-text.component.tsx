@@ -1,5 +1,6 @@
 import React from "react";
 import "./input-text.styles.scss";
+import { ValuesFilter } from "@/pods";
 
 interface PropsInput {
   lbl: string;
@@ -10,7 +11,7 @@ interface PropsInput {
   inputValue?: any;
   type: React.HTMLInputTypeAttribute | undefined;
   name: string;
-  valuesFilter?: string[] | [];
+  valuesFilter?: ValuesFilter[] | [];
 }
 
 export const CustomInputText: React.FC<PropsInput> = ({
@@ -36,9 +37,9 @@ export const CustomInputText: React.FC<PropsInput> = ({
           >
             {valuesFilter &&
               valuesFilter?.length &&
-              valuesFilter.map((item: string, index: number) => (
-                <option key={index} value={item}>
-                  {item == "prefer_not_say" ? "prefer not say" : item}
+              valuesFilter.map((item: ValuesFilter) => (
+                <option key={item?.value} value={item?.value}>
+                  {item?.text}
                 </option>
               ))}
           </select>

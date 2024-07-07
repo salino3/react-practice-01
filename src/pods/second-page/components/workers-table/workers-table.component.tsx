@@ -10,9 +10,14 @@ interface Row {
   tooltip?: (item: any, row: TableData) => any | string | undefined;
   render?: (item: any, row: TableData) => any | string | undefined;
   typeFilter?: any;
-  valuesFilter?: string[] | [];
+  valuesFilter?: ValuesFilter[] | [];
   filter?: any;
   setFilter?: any;
+}
+
+export interface ValuesFilter {
+  text: string;
+  value: string;
 }
 
 export const WorkersTable: React.FC = () => {
@@ -78,7 +83,12 @@ export const WorkersTable: React.FC = () => {
           ? "female"
           : "prefer not say",
       typeFilter: typesFilter?.select,
-      valuesFilter: ["", "female", "male", "prefer_not_say"],
+      valuesFilter: [
+        { text: "", value: "" },
+        { text: "Female", value: "female" },
+        { text: "Male", value: "male" },
+        { text: "Prefer not say", value: "prefer_not_say" },
+      ],
       setFilter: setFilterGender,
       filter: filterGender,
     },
