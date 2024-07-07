@@ -12,6 +12,7 @@ export interface TableData {
   age: number;
   gender: Gender;
   employee: boolean;
+  birthDate?: string;
 }
 
 export interface Pagination {

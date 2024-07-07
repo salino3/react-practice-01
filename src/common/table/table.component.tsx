@@ -120,6 +120,7 @@ export const TableComponet: React.FC<TableProps> = ({
   //   );
   // };
 
+  // Version 2
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement> | any,
     index: number,
@@ -129,7 +130,7 @@ export const TableComponet: React.FC<TableProps> = ({
     setFiltersTable((prevFilters: any) =>
       prevFilters.map((filter: any, i: number) => {
         if (i === index) {
-          if (filter.typeFilter === "range") {
+          if (filter.typeFilter === "range" || filter.typeFilter === "date") {
             const newValue = {
               ...filter.filter,
               [inputIndex === 0 ? "min" : "max"]: value,
@@ -137,6 +138,41 @@ export const TableComponet: React.FC<TableProps> = ({
             return { ...filter, filter: newValue };
           }
           return { ...filter, filter: value };
+        }
+        return filter;
+      })
+    );
+  };
+
+  const handleMultiselectChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+    index: number
+  ) => {
+    const selectedOptions = Array.from(
+      event.target.selectedOptions,
+      (option) => option.value
+    );
+
+    setFiltersTable((prevFilters: any[]) =>
+      prevFilters.map((filter, i) => {
+        if (i === index) {
+          const updatedFilter = { ...filter };
+          let currentFilters = updatedFilter.filter;
+
+          selectedOptions.forEach((option: string) => {
+            const index = currentFilters.indexOf(option);
+            if (index !== -1) {
+              currentFilters = currentFilters.filter(
+                (item: string) => item !== option
+              );
+            } else {
+              currentFilters = [...currentFilters, option];
+            }
+          });
+
+          updatedFilter.filter = currentFilters;
+
+          return updatedFilter;
         }
         return filter;
       })
@@ -204,22 +240,27 @@ export const TableComponet: React.FC<TableProps> = ({
                             />
                           </span>
 
-                          {r?.typeFilter == "range" ? (
+                          {r?.typeFilter == "range" ||
+                          r?.typeFilter == "date" ? (
                             <InputRange
                               handleChange={(event, inputIndex) =>
                                 handleChange(event, index, inputIndex)
                               }
+                              maxDate={r?.maxDate}
+                              minDate={r?.minDate}
                               lbl={r?.typeFilter === "date" ? null : r?.title}
                               Styles="table_x02_inputFilter"
-                              // type={r?.typeFilter || "text"}
+                              type={r?.typeFilter || "text"}
                               inputValue={filtersTable[index]?.filter}
                               name={r?.title}
                             />
                           ) : (
                             <CustomInputText
                               valuesFilter={r?.valuesFilter || []}
-                              handleChange={(event) =>
-                                handleChange(event, index)
+                              handleChange={(event: any) =>
+                                r?.typeFilter === "multiselect"
+                                  ? handleMultiselectChange(event, index)
+                                  : handleChange(event, index)
                               }
                               lbl={r?.typeFilter == "date" ? null : r?.title}
                               Styles="table_x02_inputFilter"

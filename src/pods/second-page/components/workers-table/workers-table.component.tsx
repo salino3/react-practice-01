@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TableComponet, typesFilter } from "@/common";
-import { Pagination, TableData } from "@/core";
+import { mockPaginationData, Pagination, TableData } from "@/core";
 import { useAppFunctions } from "@/hooks";
 import "./workers-table.styles.scss";
 
@@ -13,6 +13,8 @@ interface Row {
   valuesFilter?: ValuesFilter[] | [];
   filter?: any;
   setFilter?: any;
+  minDate?: string | number | undefined;
+  maxDate?: string | number | undefined;
 }
 
 export interface ValuesFilter {
@@ -28,18 +30,23 @@ export const WorkersTable: React.FC = () => {
   const [flag, setFlag] = useState<boolean>(false);
 
   const [tableData, setTableData] = useState<Pagination | undefined>();
-  const [filterId, setFilterId] = useState<number | null>(null);
+  const [filterId, setFilterId] = useState<string>("");
   const [filterName, setFilterName] = useState<string>("");
   const [filterCity, setFilterCity] = useState<string>("");
   const [filterEmail, setFilterEmail] = useState<string>("");
+  const [filterAge, setFilterAge] = useState<number | null>(null);
+  const [filterBirthDate, setFilterBirthDate] = useState<string>("");
   const [filterGender, setFilterGender] = useState<string>("");
   const [filterEmployee, setFilterEmployee] = useState<string>("");
+
+  let today = new Date();
+  let toISODate = today.toISOString().substr(0, 10);
 
   const array: Row[] = [
     {
       key: "id",
       title: "Id",
-      typeFilter: typesFilter?.range,
+      typeFilter: typesFilter?.number,
       setFilter: setFilterId,
       filter: filterId,
     },
@@ -55,7 +62,16 @@ export const WorkersTable: React.FC = () => {
       key: "city",
       title: "City",
       tooltip: (item: string) => item,
-      typeFilter: typesFilter?.text,
+      typeFilter: typesFilter?.multiselect,
+      valuesFilter: [
+        ...(mockPaginationData && mockPaginationData?.products?.length > 0
+          ? Array.from(
+              new Set(
+                mockPaginationData?.products?.map((product) => product.city)
+              )
+            ).map((city) => ({ text: city, value: city }))
+          : []),
+      ],
       setFilter: setFilterCity,
       filter: filterCity,
     },
@@ -67,6 +83,13 @@ export const WorkersTable: React.FC = () => {
       typeFilter: typesFilter?.text,
       setFilter: setFilterEmail,
       filter: filterEmail,
+    },
+    {
+      key: "age",
+      title: "Age",
+      typeFilter: typesFilter?.range,
+      setFilter: setFilterAge,
+      filter: filterAge,
     },
     {
       key: "gender",
@@ -93,6 +116,24 @@ export const WorkersTable: React.FC = () => {
       setFilter: setFilterGender,
       filter: filterGender,
     },
+    {
+      key: "birthDate",
+      title: "Birth Date",
+      render: (dateString: string) => {
+        const dateObject = new Date(dateString);
+        const formattedDate = dateObject.toLocaleDateString("es-ES", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        });
+        return formattedDate;
+      },
+      typeFilter: typesFilter?.date,
+      setFilter: setFilterBirthDate,
+      filter: filterBirthDate,
+      maxDate: toISODate,
+    },
+
     {
       key: "employee",
       title: "Employee",
@@ -126,12 +167,20 @@ export const WorkersTable: React.FC = () => {
       name: filterName,
       city: filterCity,
       email: filterEmail,
+      age: filterAge,
+      birthDate: filterBirthDate,
       gender: filterGender,
       employee: filterEmployee,
     };
     console.log("here4", body);
 
-    fetchPaginatedData(page, pageSize, body, ["gender", "employee"], ["id"])
+    fetchPaginatedData(
+      page,
+      pageSize,
+      body,
+      ["gender", "employee", "city"],
+      ["age", "birthDate"]
+    )
       .then((res) => {
         setTableData(res);
         console.log("Response: ", res);

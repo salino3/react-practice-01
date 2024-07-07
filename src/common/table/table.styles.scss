@@ -104,8 +104,7 @@
             flex-direction: row;
             gap: 0.5rem;
             width: fit-content;
-            .table_x02_iconSearchIcon {
-            }
+            white-space: nowrap;
           }
         }
       }
@@ -143,7 +142,7 @@
       flex-direction: row;
       justify-content: flex-end;
       min-width: max-content;
-      padding-bottom: 4rem;
+      padding-bottom: 8rem;
 
       .table_x02_containerPagination {
         display: flex;

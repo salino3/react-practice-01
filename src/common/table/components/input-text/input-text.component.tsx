@@ -46,6 +46,31 @@ export const CustomInputText: React.FC<PropsInput> = ({
         </select>
       );
       break;
+    case "multiselect":
+      input = (
+        <select
+          multiple
+          value={inputValue || []}
+          autoFocus
+          onChange={handleChange}
+          id={name}
+          className="table_x02_inputTextMultiselect"
+          name={name}
+        >
+          {valuesFilter &&
+            valuesFilter?.length &&
+            valuesFilter.map((item: ValuesFilter) => (
+              <option
+                className="table_x02_option"
+                key={item?.value}
+                value={item?.value}
+              >
+                {item?.text}
+              </option>
+            ))}
+        </select>
+      );
+      break;
 
     default:
       input = (
@@ -69,7 +94,7 @@ export const CustomInputText: React.FC<PropsInput> = ({
         <label
           htmlFor={name}
           className={`table_x02_inputLabel ${
-            inputValue ? "table_x02_shrink" : ""
+            inputValue || type == "multiselect" ? "table_x02_shrink" : ""
           }`}
         >
           {lbl}
