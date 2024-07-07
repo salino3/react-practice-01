@@ -159,13 +159,14 @@ export const TableComponet: React.FC<TableProps> = ({
           const updatedFilter = { ...filter };
           let currentFilters = updatedFilter.filter;
 
-          // Verificar si la opción seleccionada ya está en el array
           selectedOptions.forEach((option: string) => {
             const index = currentFilters.indexOf(option);
             if (index !== -1) {
-              currentFilters = currentFilters.filter((item) => item !== option); // Eliminar el elemento del array
+              currentFilters = currentFilters.filter(
+                (item: string) => item !== option
+              );
             } else {
-              currentFilters = [...currentFilters, option]; // Agregar el nuevo elemento al array
+              currentFilters = [...currentFilters, option];
             }
           });
 
