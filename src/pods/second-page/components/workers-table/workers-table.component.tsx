@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TableComponet, typesFilter } from "@/common";
-import { Pagination, TableData } from "@/core";
+import { mockPaginationData, Pagination, TableData } from "@/core";
 import { useAppFunctions } from "@/hooks";
 import "./workers-table.styles.scss";
 
@@ -62,7 +62,16 @@ export const WorkersTable: React.FC = () => {
       key: "city",
       title: "City",
       tooltip: (item: string) => item,
-      typeFilter: typesFilter?.text,
+      typeFilter: typesFilter?.multiselect,
+      valuesFilter: [
+        ...(mockPaginationData && mockPaginationData?.products?.length > 0
+          ? Array.from(
+              new Set(
+                mockPaginationData?.products?.map((product) => product.city)
+              )
+            ).map((city) => ({ text: city, value: city }))
+          : []),
+      ],
       setFilter: setFilterCity,
       filter: filterCity,
     },

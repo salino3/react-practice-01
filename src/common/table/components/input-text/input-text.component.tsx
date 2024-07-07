@@ -46,6 +46,26 @@ export const CustomInputText: React.FC<PropsInput> = ({
         </select>
       );
       break;
+    case "multiselect":
+      input = (
+        <select
+          value={inputValue}
+          autoFocus
+          onChange={handleChange}
+          id={name}
+          className="table_x02_inputText"
+          name={name}
+        >
+          {valuesFilter &&
+            valuesFilter?.length &&
+            valuesFilter.map((item: ValuesFilter) => (
+              <option key={item?.value} value={item?.value}>
+                {item?.text}
+              </option>
+            ))}
+        </select>
+      );
+      break;
 
     default:
       input = (
