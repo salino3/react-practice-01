@@ -9,7 +9,7 @@ interface PropsInput {
     index: number
   ) => void;
   inputValue?: { min: number; max: number };
-  type: React.HTMLInputTypeAttribute | undefined;
+  //   type: React.HTMLInputTypeAttribute | undefined;
   name: string;
 }
 
@@ -18,7 +18,7 @@ export const InputRange: React.FC<PropsInput> = ({
   Styles,
   inputValue,
   handleChange,
-  type,
+  //   type,
   name,
 }) => {
   return (

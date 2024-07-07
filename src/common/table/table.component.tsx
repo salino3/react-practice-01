@@ -211,7 +211,7 @@ export const TableComponet: React.FC<TableProps> = ({
                               }
                               lbl={r?.typeFilter === "date" ? null : r?.title}
                               Styles="table_x02_inputFilter"
-                              type={r?.typeFilter || "text"}
+                              // type={r?.typeFilter || "text"}
                               inputValue={filtersTable[index]?.filter}
                               name={r?.title}
                             />
