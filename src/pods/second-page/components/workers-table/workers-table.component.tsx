@@ -178,7 +178,7 @@ export const WorkersTable: React.FC = () => {
       page,
       pageSize,
       body,
-      ["gender", "employee"],
+      ["gender", "employee", "city"],
       ["age", "birthDate"]
     )
       .then((res) => {

@@ -49,7 +49,8 @@ export const CustomInputText: React.FC<PropsInput> = ({
     case "multiselect":
       input = (
         <select
-          value={inputValue}
+          multiple
+          value={inputValue || []}
           autoFocus
           onChange={handleChange}
           id={name}

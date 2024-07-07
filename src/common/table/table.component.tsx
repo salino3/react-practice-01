@@ -144,6 +144,40 @@ export const TableComponet: React.FC<TableProps> = ({
     );
   };
 
+  const handleMultiselectChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+    index: number
+  ) => {
+    const selectedOptions = Array.from(
+      event.target.selectedOptions,
+      (option) => option.value
+    );
+
+    setFiltersTable((prevFilters: any[]) =>
+      prevFilters.map((filter, i) => {
+        if (i === index) {
+          const updatedFilter = { ...filter };
+          let currentFilters = updatedFilter.filter;
+
+          // Verificar si la opción seleccionada ya está en el array
+          selectedOptions.forEach((option: string) => {
+            const index = currentFilters.indexOf(option);
+            if (index !== -1) {
+              currentFilters = currentFilters.filter((item) => item !== option); // Eliminar el elemento del array
+            } else {
+              currentFilters = [...currentFilters, option]; // Agregar el nuevo elemento al array
+            }
+          });
+
+          updatedFilter.filter = currentFilters;
+
+          return updatedFilter;
+        }
+        return filter;
+      })
+    );
+  };
+
   const handleReset = (index: number) => {
     setFiltersTable((prevFilters: any[]) =>
       prevFilters.map((filter: any, i: number) =>
@@ -222,8 +256,10 @@ export const TableComponet: React.FC<TableProps> = ({
                           ) : (
                             <CustomInputText
                               valuesFilter={r?.valuesFilter || []}
-                              handleChange={(event) =>
-                                handleChange(event, index)
+                              handleChange={(event: any) =>
+                                r?.typeFilter === "multiselect"
+                                  ? handleMultiselectChange(event, index)
+                                  : handleChange(event, index)
                               }
                               lbl={r?.typeFilter == "date" ? null : r?.title}
                               Styles="table_x02_inputFilter"
