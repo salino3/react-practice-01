@@ -144,12 +144,19 @@ export const WorkersTable: React.FC = () => {
       name: filterName,
       city: filterCity,
       email: filterEmail,
+      birthDate: filterBirthDate,
       gender: filterGender,
       employee: filterEmployee,
     };
     console.log("here4", body);
 
-    fetchPaginatedData(page, pageSize, body, ["gender", "employee"], ["id"])
+    fetchPaginatedData(
+      page,
+      pageSize,
+      body,
+      ["gender", "employee"],
+      ["id", "birthDate"]
+    )
       .then((res) => {
         setTableData(res);
         console.log("Response: ", res);

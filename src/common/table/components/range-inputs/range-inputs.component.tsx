@@ -73,7 +73,7 @@ export const InputRange: React.FC<PropsInput> = ({
               inputValue?.min ? "table_x02_shrink" : ""
             }`}
           >
-            {lbl + " min"}
+            {"Date min"}
           </label>
           <input
             autoFocus
@@ -91,7 +91,7 @@ export const InputRange: React.FC<PropsInput> = ({
               inputValue?.max ? "table_x02_shrink_02" : ""
             }`}
           >
-            {lbl + " max"}
+            {"Date max"}
           </label>
           <input
             type={"date"}

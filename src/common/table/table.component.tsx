@@ -120,6 +120,7 @@ export const TableComponet: React.FC<TableProps> = ({
   //   );
   // };
 
+  // Version 2
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement> | any,
     index: number,
@@ -129,7 +130,7 @@ export const TableComponet: React.FC<TableProps> = ({
     setFiltersTable((prevFilters: any) =>
       prevFilters.map((filter: any, i: number) => {
         if (i === index) {
-          if (filter.typeFilter === "range") {
+          if (filter.typeFilter === "range" || filter.typeFilter === "date") {
             const newValue = {
               ...filter.filter,
               [inputIndex === 0 ? "min" : "max"]: value,

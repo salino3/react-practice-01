@@ -61,7 +61,7 @@ export const mockPaginationData: Pagination = {
       age: 39,
       gender: Gender.PreferNotSay,
       employee: false,
-      birthDate: "1985-10-20T00:00:00Z",
+      birthDate: "2023-10-20T00:00:00Z",
     },
     {
       id: 3,
@@ -291,7 +291,7 @@ export const mockPaginationData: Pagination = {
       age: 39,
       gender: Gender.Male,
       employee: true,
-      birthDate: "20012-07-22T00:00:00Z",
+      birthDate: "2012-07-22T00:00:00Z",
     },
     {
       id: 26,
