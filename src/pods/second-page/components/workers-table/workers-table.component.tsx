@@ -17,7 +17,7 @@ interface Row {
 
 export interface ValuesFilter {
   text: string;
-  value: string;
+  value: any;
 }
 
 export const WorkersTable: React.FC = () => {
@@ -33,6 +33,7 @@ export const WorkersTable: React.FC = () => {
   const [filterCity, setFilterCity] = useState<string>("");
   const [filterEmail, setFilterEmail] = useState<string>("");
   const [filterGender, setFilterGender] = useState<string>("");
+  const [filterEmployee, setFilterEmployee] = useState<string>("");
 
   const array: Row[] = [
     {
@@ -93,6 +94,19 @@ export const WorkersTable: React.FC = () => {
       filter: filterGender,
     },
     {
+      key: "employee",
+      title: "Employee",
+      render: (item: boolean) => (item ? "Yes" : "No"),
+      typeFilter: typesFilter?.select,
+      valuesFilter: [
+        { text: "", value: "" },
+        { text: "Yes", value: true },
+        { text: "No", value: false },
+      ],
+      setFilter: setFilterEmployee,
+      filter: filterEmployee,
+    },
+    {
       title: "Action",
       render: (_: any, row: TableData) => {
         return (
@@ -113,10 +127,11 @@ export const WorkersTable: React.FC = () => {
       city: filterCity,
       email: filterEmail,
       gender: filterGender,
+      employee: filterEmployee,
     };
     console.log("here4", body);
 
-    fetchPaginatedData(page, pageSize, body, ["gender"])
+    fetchPaginatedData(page, pageSize, body, ["gender", "employee"])
       .then((res) => {
         setTableData(res);
         console.log("Response: ", res);
