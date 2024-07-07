@@ -10,9 +10,14 @@ interface Row {
   tooltip?: (item: any, row: TableData) => any | string | undefined;
   render?: (item: any, row: TableData) => any | string | undefined;
   typeFilter?: any;
-  valuesFilter?: string[] | [];
+  valuesFilter?: ValuesFilter[] | [];
   filter?: any;
   setFilter?: any;
+}
+
+export interface ValuesFilter {
+  text: string;
+  value: any;
 }
 
 export const WorkersTable: React.FC = () => {
@@ -28,12 +33,13 @@ export const WorkersTable: React.FC = () => {
   const [filterCity, setFilterCity] = useState<string>("");
   const [filterEmail, setFilterEmail] = useState<string>("");
   const [filterGender, setFilterGender] = useState<string>("");
+  const [filterEmployee, setFilterEmployee] = useState<string>("");
 
   const array: Row[] = [
     {
       key: "id",
       title: "Id",
-      typeFilter: typesFilter?.number,
+      typeFilter: typesFilter?.range,
       setFilter: setFilterId,
       filter: filterId,
     },
@@ -78,9 +84,27 @@ export const WorkersTable: React.FC = () => {
           ? "female"
           : "prefer not say",
       typeFilter: typesFilter?.select,
-      valuesFilter: ["", "female", "male", "prefer_not_say"],
+      valuesFilter: [
+        { text: "", value: "" },
+        { text: "Female", value: "female" },
+        { text: "Male", value: "male" },
+        { text: "Prefer not say", value: "prefer_not_say" },
+      ],
       setFilter: setFilterGender,
       filter: filterGender,
+    },
+    {
+      key: "employee",
+      title: "Employee",
+      render: (item: boolean) => (item ? "Yes" : "No"),
+      typeFilter: typesFilter?.select,
+      valuesFilter: [
+        { text: "", value: "" },
+        { text: "Yes", value: true },
+        { text: "No", value: false },
+      ],
+      setFilter: setFilterEmployee,
+      filter: filterEmployee,
     },
     {
       title: "Action",
@@ -103,10 +127,11 @@ export const WorkersTable: React.FC = () => {
       city: filterCity,
       email: filterEmail,
       gender: filterGender,
+      employee: filterEmployee,
     };
     console.log("here4", body);
 
-    fetchPaginatedData(page, pageSize, body, ["gender"])
+    fetchPaginatedData(page, pageSize, body, ["gender", "employee"], ["id"])
       .then((res) => {
         setTableData(res);
         console.log("Response: ", res);
