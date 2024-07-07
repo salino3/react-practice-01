@@ -94,6 +94,20 @@ export const WorkersTable: React.FC = () => {
       filter: filterGender,
     },
     {
+      key: "birthDate",
+      title: "Birth Date",
+      render: (dateString: string) => {
+        const dateObject = new Date(dateString);
+        const formattedDate = dateObject.toLocaleDateString("es-ES", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        });
+        return formattedDate;
+      },
+    },
+
+    {
       key: "employee",
       title: "Employee",
       render: (item: boolean) => (item ? "Yes" : "No"),
