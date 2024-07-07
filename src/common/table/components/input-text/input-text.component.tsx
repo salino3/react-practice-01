@@ -54,13 +54,17 @@ export const CustomInputText: React.FC<PropsInput> = ({
           autoFocus
           onChange={handleChange}
           id={name}
-          className="table_x02_inputText"
+          className="table_x02_inputTextMultiselect"
           name={name}
         >
           {valuesFilter &&
             valuesFilter?.length &&
             valuesFilter.map((item: ValuesFilter) => (
-              <option key={item?.value} value={item?.value}>
+              <option
+                className="table_x02_option"
+                key={item?.value}
+                value={item?.value}
+              >
                 {item?.text}
               </option>
             ))}
