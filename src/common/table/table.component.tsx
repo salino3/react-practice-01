@@ -105,6 +105,7 @@ export const TableComponet: React.FC<TableProps> = ({
         filter?.setFilter(filter.filter);
       }
     });
+    setPage && setPage(1);
     setFlag && setFlag((prev) => !prev);
   };
 
