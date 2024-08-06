@@ -64,6 +64,7 @@ export const WorkersTable: React.FC = () => {
       tooltip: (item: string) => item,
       typeFilter: typesFilter?.multiselect,
       valuesFilter: [
+        ...[{ text: "Spain", value: "spain" }],
         ...(mockPaginationData && mockPaginationData?.products?.length > 0
           ? Array.from(
               new Set(
