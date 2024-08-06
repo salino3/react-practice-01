@@ -255,6 +255,12 @@ export const useAppFunctions = () => {
     rangeFilters: string[]
   ): Promise<Pagination> => {
     return new Promise((resolve) => {
+      if (body?.city.includes("spain")) {
+        ["Madrid", "Barcelona", "Málaga"].map((city: string) => {
+          body?.city.push(city);
+        });
+      }
+
       setTimeout(() => {
         const filters = Object.keys(body).reduce((acc, key) => {
           if (rangeFilters.includes(key)) {
